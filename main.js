@@ -93,7 +93,7 @@ function StartGameTitleCmd(){
 
 function AuthorPageDivInitialize(){
 	
-	AuthorPageDiv = createElement('h1','資工雙主資工的159公分料魚')
+	AuthorPageDiv = createElement('h1','41247024S 廖妤恩\n41247001S	盧昱安\n41247057S 陳育渝\n41211011E 鐘珮甄\n41211016E 羅崇愷\n41241121S 李亞倫\n41272002H 鄭鈺樺')
 	AuthorPageDiv.position(windowWidth/2-200* wWidth,windowHeight/2-50* wHeight)
 	AuthorPageDiv.size(600 * wWidth,50 * wHeight)
 	AuthorPageDiv.hide()

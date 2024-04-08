@@ -9,7 +9,10 @@
 ```
 p5.js (html + css + js)
 ```
-
+### Local Deployment
+```
+Download the responsitory and run index.html
+```
 
 ### 作者 / 小組組員
 ```

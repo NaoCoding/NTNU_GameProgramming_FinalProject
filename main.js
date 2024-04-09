@@ -6,12 +6,17 @@ let AuthorPageDiv
 let WindowSizeSlider 
 let ScreenCanvas 
 let setting_github
+let GameSettingDoneButton
 let backGroundColor = "rgb(251,229,220)"
 let StartGameTitleColor = "rgb(196,165,0)"
 let windowSize = 1.0
 let FullScreen
 let wWidth = 1440 
 let wHeight = 739 
+let player_count = 0
+let bot_count = 0
+let titleLabel
+
 
 function setup() {
 	
@@ -25,7 +30,17 @@ function setup() {
 }
 
 
+function GameSettingCmd(){
 
+	GameSettingDoneButton.show()
+
+
+}
+
+function GameSettingDoneCmd(){
+
+
+}
 
 
 
@@ -78,6 +93,7 @@ function StartGameCmd(){
 	BackToMenuButton.hide()
 	setting_github.hide()
 	background(backGroundColor)
+	GameSettingCmd()
 	
 	
 }
@@ -92,7 +108,26 @@ function StartGameTitleCmd(){
 	AuthorPageDivInitialize()
 	SettingButtonInitialize()
 	setting_githubINI()
+	GameSettingDoneButtonINI()
 	
+}
+
+function GameSettingDoneButtonINI(){
+	GameSettingDoneButton = createButton('開始冒險')
+	GameSettingDoneButton.style("left",'50%')
+	GameSettingDoneButton.style("top",'85%')
+	GameSettingDoneButton.style("position",'absolute')
+	GameSettingDoneButton.style("transform","translate(-50%,-85%)")
+	GameSettingDoneButton.style('width','20%')
+	GameSettingDoneButton.style('height','7.5%')
+	GameSettingDoneButton.style("font-size", "36px");
+	GameSettingDoneButton.style("font-family", "Times New Roman");
+	GameSettingDoneButton.mouseClicked(GameSettingDoneCmd)
+	GameSettingDoneButton.style("background-color","rgb(255,255,255)")
+	GameSettingDoneButton.style("color","rgb(9,107,249)")
+	GameSettingDoneButton.style('border-color','gold')
+	GameSettingDoneButton.style("border-radius","1em")
+	GameSettingDoneButton.hide()
 }
 
 function setting_githubINI(){
@@ -205,7 +240,20 @@ function StartGameBackGroundInitialize(){
 	fill('white')
 	strokeWeight(4*wWidth)
 	stroke(StartGameTitleColor)
-	text("知識大富翁",400*wWidth,250*wHeight)
+	//text("知識大富翁",400*wWidth,250*wHeight)
+	titleLabel = createElement("div")
+	titleLabel.style("position","absolute")
+	titleLabel.style("left","0px")
+	titleLabel.style("top","0px")
+	titleLabel.style("width","100%")
+	titleLabel.style("height","100%")
+	titleLabel_innerhtml = "<h1 style=position:absolute;"
+	titleLabel_innerhtml += "top:15%;left:50%;transform:translate(-50%,-15%);"
+	titleLabel_innerhtml += "font-size:88px;color:#e77508;"
+
+	titleLabel_innerhtml += ">日式居酒大富翁</h1>"
+	titleLabel.html(titleLabel_innerhtml)
+	titleLabel.show()
 }
 
 function SettingButtonInitialize(){

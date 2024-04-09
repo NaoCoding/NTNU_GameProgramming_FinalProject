@@ -69,6 +69,7 @@ function BackToMenuCmd(){
 	background(backGroundColor);
 	StartGameBackGroundInitialize()
 	StartGameBackGroundFrame.show()
+	titleLabel.show()
 	AuthorButton.show()
 	AuthorPageDiv.hide()
 	StartGameButton.show()
@@ -111,6 +112,23 @@ function StartGameTitleCmd(){
 	SettingButtonInitialize()
 	setting_githubINI()
 	GameSettingDoneButtonINI()
+	StartGameTitleINI()
+	
+}
+function StartGameTitleINI(){
+	titleLabel = createElement("div")
+	titleLabel.style("position","absolute")
+	titleLabel.style("left","0px")
+	titleLabel.style("top","0px")
+	titleLabel.style("width","100%")
+	titleLabel.style("height","100%")
+	titleLabel.style("z-index","-1")	
+	titleLabel_innerhtml = "<h1 style=position:absolute;"
+	titleLabel_innerhtml += "top:15%;left:50%;transform:translate(-50%,-15%);"
+	titleLabel_innerhtml += "font-size:88px;color:#e77508;"
+
+	titleLabel_innerhtml += ">日式居酒大富翁</h1>"
+	titleLabel.html(titleLabel_innerhtml)
 	
 }
 
@@ -243,20 +261,7 @@ function StartGameBackGroundInitialize(){
 	strokeWeight(4*wWidth)
 	stroke(StartGameTitleColor)
 	//text("知識大富翁",400*wWidth,250*wHeight)
-	titleLabel = createElement("div")
-	titleLabel.style("position","absolute")
-	titleLabel.style("left","0px")
-	titleLabel.style("top","0px")
-	titleLabel.style("width","100%")
-	titleLabel.style("height","100%")
-	titleLabel.style("z-index","-1")	
-	titleLabel_innerhtml = "<h1 style=position:absolute;"
-	titleLabel_innerhtml += "top:15%;left:50%;transform:translate(-50%,-15%);"
-	titleLabel_innerhtml += "font-size:88px;color:#e77508;"
-
-	titleLabel_innerhtml += ">日式居酒大富翁</h1>"
-	titleLabel.html(titleLabel_innerhtml)
-	titleLabel.show()
+	
 }
 
 function SettingButtonInitialize(){

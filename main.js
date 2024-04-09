@@ -50,6 +50,7 @@ function LeaveStartGameMenuCmd(){
 	SettingButton.hide()
 	AuthorButton.hide()
 	BackToMenuButton.show()
+	titleLabel.hide()
 	background(backGroundColor);
 	
 }
@@ -92,6 +93,7 @@ function StartGameCmd(){
 	SettingButton.hide()
 	BackToMenuButton.hide()
 	setting_github.hide()
+	titleLabel.hide()
 	background(backGroundColor)
 	GameSettingCmd()
 	
@@ -247,6 +249,7 @@ function StartGameBackGroundInitialize(){
 	titleLabel.style("top","0px")
 	titleLabel.style("width","100%")
 	titleLabel.style("height","100%")
+	titleLabel.style("z-index","-1")	
 	titleLabel_innerhtml = "<h1 style=position:absolute;"
 	titleLabel_innerhtml += "top:15%;left:50%;transform:translate(-50%,-15%);"
 	titleLabel_innerhtml += "font-size:88px;color:#e77508;"

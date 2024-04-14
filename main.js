@@ -1,12 +1,13 @@
+
+
 let scene = 0
-let StartGameButton, StartGameBackGroundFrame
+let StartGameButton
 let SettingButton,BackToMenuButton
 let AuthorButton
-let AuthorPageDiv
+let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
-let ScreenCanvas 
 let setting_github
-let GameSettingDoneButton
+let GameSettingDoneButton , CharacterSelectBg
 let backGroundColor = "rgb(251,229,220)"
 let StartGameTitleColor = "rgb(196,165,0)"
 let windowSize = 1.0
@@ -15,7 +16,8 @@ let wWidth = 1440
 let wHeight = 739 
 let player_count = 0
 let bot_count = 0
-let titleLabel
+let CharacterSelectDiv
+
 
 
 function setup() {
@@ -32,13 +34,33 @@ function setup() {
 
 function GameSettingCmd(){
 
-	GameSettingDoneButton.show()
+	
+	CharacterSelectDiv.show()
+	BackToMenuButton.show()
+	
 
 
 }
 
 function GameSettingDoneCmd(){
 
+
+}
+
+function CharacterSelectBgini(){
+
+	CharacterSelectDiv = createElement("div")
+	CharacterSelectDiv.style("width","100%")
+	CharacterSelectDiv.style("height","100%")
+	CharacterSelectDiv.style("position","absolute")
+	CharacterSelectDiv.style("top","0px")
+	CharacterSelectDiv.style("left","0px")
+	CharacterSelectDiv.style("z-index","-1")
+	CharacterSelectStyle = "style=height:100%;width:100%;"
+	CharacterSelectStyle += 'position:absolute;top:0%;left:0%;'
+	CharacterSelectDiv.html("<image src='image/characterSelect.png'"+CharacterSelectStyle+">",1)
+	CharacterSelectDiv.html("</image>",1)
+	CharacterSelectDiv.hide()
 
 }
 
@@ -50,8 +72,7 @@ function LeaveStartGameMenuCmd(){
 	SettingButton.hide()
 	AuthorButton.hide()
 	BackToMenuButton.show()
-	titleLabel.hide()
-	background(backGroundColor);
+	titleDiv.hide()
 	
 }
 
@@ -60,16 +81,16 @@ function AuthorPageCmd(){
 	LeaveStartGameMenuCmd()
 	AuthorPageDiv.show()
 	BackToMenuButton.show()
+
 	
 	
 }
 
 function BackToMenuCmd(){
 	
-	background(backGroundColor);
-	StartGameBackGroundInitialize()
-	StartGameBackGroundFrame.show()
-	titleLabel.show()
+	CharacterSelectDiv.hide()
+	titleDiv.show()
+	settingDiv.hide()
 	AuthorButton.show()
 	AuthorPageDiv.hide()
 	StartGameButton.show()
@@ -84,6 +105,7 @@ function SettingPageCmd(){
 	BackToMenuButton.show()
 	setting_github.show()
 	LeaveStartGameMenuCmd()
+	settingDiv.show()
 	
 }
 
@@ -94,60 +116,49 @@ function StartGameCmd(){
 	SettingButton.hide()
 	BackToMenuButton.hide()
 	setting_github.hide()
-	titleLabel.hide()
-	background(backGroundColor)
+
+
 	GameSettingCmd()
 	
 	
 }
 
 function StartGameTitleCmd(){
-	ScreenCanvasInitialize()
-	StartGameBackGroundFrameInitialize()
-	StartGameBackGroundInitialize()
+
 	StartGameButtonInitialize()
 	BackToMenuButtonInitialize()
 	AuthorButtonInitialize()
 	AuthorPageDivInitialize()
 	SettingButtonInitialize()
 	setting_githubINI()
-	GameSettingDoneButtonINI()
 	StartGameTitleINI()
+	CharacterSelectBgini()
 	
 }
+
 function StartGameTitleINI(){
-	titleLabel = createElement("div")
-	titleLabel.style("position","absolute")
-	titleLabel.style("left","0px")
-	titleLabel.style("top","0px")
-	titleLabel.style("width","100%")
-	titleLabel.style("height","100%")
-	titleLabel.style("z-index","-1")	
+
+	
+	titleDiv = createElement('div')
+
+	titleDiv.style("width","100%")
+	titleDiv.style("height","100%")
+	titleDiv.style("position","absolute")
+	titleDiv.style("top","0px")
+	titleDiv.style("left","0px")
+	titleDiv.style("z-index","-1")
+	titleDivStyle = "style=height:100%;width:100%;"
+	titleDivStyle += 'position:absolute;top:0%;left:0%;'
+	titleDiv.html("<image src='image/titlebg.jpg'"+titleDivStyle+">",1)
+	titleDiv.html("</image>",1)
 	titleLabel_innerhtml = "<h1 style=position:absolute;"
 	titleLabel_innerhtml += "top:15%;left:50%;transform:translate(-50%,-15%);"
 	titleLabel_innerhtml += "font-size:88px;color:#e77508;"
 
 	titleLabel_innerhtml += ">日式居酒大富翁</h1>"
-	titleLabel.html(titleLabel_innerhtml)
+	titleDiv.html(titleLabel_innerhtml,1)
+	titleDiv.show()
 	
-}
-
-function GameSettingDoneButtonINI(){
-	GameSettingDoneButton = createButton('開始冒險')
-	GameSettingDoneButton.style("left",'50%')
-	GameSettingDoneButton.style("top",'85%')
-	GameSettingDoneButton.style("position",'absolute')
-	GameSettingDoneButton.style("transform","translate(-50%,-85%)")
-	GameSettingDoneButton.style('width','20%')
-	GameSettingDoneButton.style('height','7.5%')
-	GameSettingDoneButton.style("font-size", "36px");
-	GameSettingDoneButton.style("font-family", "Times New Roman");
-	GameSettingDoneButton.mouseClicked(GameSettingDoneCmd)
-	GameSettingDoneButton.style("background-color","rgb(255,255,255)")
-	GameSettingDoneButton.style("color","rgb(9,107,249)")
-	GameSettingDoneButton.style('border-color','gold')
-	GameSettingDoneButton.style("border-radius","1em")
-	GameSettingDoneButton.hide()
 }
 
 function setting_githubINI(){
@@ -159,6 +170,19 @@ function setting_githubINI(){
 	setting_github.style("background-color",'transparent')
 	setting_github.style("border-color",'transparent')
 	setting_github.mouseClicked(redirectToGithub)
+	settingDiv = createElement('div')
+
+	settingDiv.style("width","100%")
+	settingDiv.style("height","100%")
+	settingDiv.style("position","absolute")
+	settingDiv.style("top","0px")
+	settingDiv.style("left","0px")
+	settingDiv.style("z-index","-1")
+	settingDivStyle = "style=height:100%;width:100%;"
+	settingDivStyle += 'position:absolute;top:0%;left:0%;'
+	settingDiv.html("<image src='image/settingbg.jpg'"+settingDivStyle+">",1)
+	settingDiv.html("</image>",1)
+	settingDiv.hide()
 
 
 	setting_github.hide()
@@ -170,22 +194,18 @@ function redirectToGithub(){
 
 function AuthorPageDivInitialize(){
 	
-	AuthorPageDiv = createElement('h1','41247024S&emsp;&emsp;廖妤恩')
-	AuthorPageDiv.html("<br>41247001S&emsp;&emsp;盧昱安",1)
-	AuthorPageDiv.html("<br>41247057S&emsp;&emsp;陳育渝",1)
-	AuthorPageDiv.html("<br>41211011E&emsp;&emsp;鐘珮甄",1)
-	AuthorPageDiv.html("<br>41211016E&emsp;&emsp;羅崇愷",1)
-	AuthorPageDiv.html("<br>41241121S&emsp;&emsp;李亞倫",1)
-	AuthorPageDiv.html("<br>41272002H&emsp;&emsp;鄭鈺樺",1)
+	AuthorPageDiv = createElement('div')
 
-	AuthorPageDiv.style('text-align','center')
-	AuthorPageDiv.style('top','45%')
-	AuthorPageDiv.style('left','50%')
-	//AuthorPageDiv.style("font-weight",'bold')
-	AuthorPageDiv.style("transform","translate(-50%,-45%)")
-	AuthorPageDiv.style('position','absolute')
-	AuthorPageDiv.style('font-size','36px')
-	AuthorPageDiv.style('line-height','1.8')
+	AuthorPageDiv.style("width","100%")
+	AuthorPageDiv.style("height","100%")
+	AuthorPageDiv.style("position","absolute")
+	AuthorPageDiv.style("top","0px")
+	AuthorPageDiv.style("left","0px")
+	AuthorPageDiv.style("z-index","-1")
+	AuthorPageDivStyle = "style=height:100%;width:100%;"
+	AuthorPageDivStyle += 'position:absolute;top:0%;left:0%;'
+	AuthorPageDiv.html("<image src='image/authorbg.jpg'"+AuthorPageDivStyle+">",1)
+	AuthorPageDiv.html("</image>",1)
 	AuthorPageDiv.hide()
 	
 	
@@ -193,17 +213,21 @@ function AuthorPageDivInitialize(){
 
 function BackToMenuButtonInitialize(){
 	
-	BackToMenuButton = createButton("返回")
+	BackToMenuButton = createElement("button")
 	BackToMenuButton.hide()
 	BackToMenuButton.mouseClicked(BackToMenuCmd)
-	BackToMenuButton.position(135* wWidth,500* wHeight)	
-	BackToMenuButton.size(200* wWidth,93* wHeight)
-	BackToMenuButton.style("font-size", "28px");
-	BackToMenuButton.style("font-family", "Times New Roman");
-	BackToMenuButton.style("background-color","rgb(255,255,255)")
-	BackToMenuButton.style("color","rgb(9,107,249)")
-	BackToMenuButton.style('border-color','gold')
-	BackToMenuButton.style("border-radius","1em")
+	BackToMenuButton.style("width", "12%");
+	BackToMenuButton.style("height", "17%");
+	BackToMenuButton.style("position","absolute");
+	BackToMenuButton.style("left","7%")
+	BackToMenuButton.style("top","75%")
+	BackToMenuButton.style("background-color","transparent")
+	BackToMenuButton.style("border-color","black")
+	BackToMenuButtonStyle = "style=height:100%;width:100%;"
+	BackToMenuButtonStyle += 'position:absolute;top:0px;left:0px;'
+	BackToMenuButton.html("<image src='image/back.png'"+BackToMenuButtonStyle+">",1)
+	BackToMenuButton.html("</image>",1)
+
 }
 
 function AuthorButtonInitialize(){
@@ -244,25 +268,7 @@ function StartGameButtonInitialize(){
 	StartGameButton.style("border-radius","1em")
 }
 
-function StartGameBackGroundFrameInitialize(){
-	StartGameBackGroundFrame = createElement('h5')
-	StartGameBackGroundFrame.position(70* wWidth,45* wHeight)
-	StartGameBackGroundFrame.size((windowWidth-150*wWidth) ,windowHeight-150*wHeight)
-	
-	StartGameBackGroundFrame.style("border","solid")
-	StartGameBackGroundFrame.style("border-color",'rgb(141,120,7)')
-	StartGameBackGroundFrame.style("border-radius","1em")
-}
 
-function StartGameBackGroundInitialize(){
-	textSize(125*wWidth)
-	//textFont('標楷體')
-	fill('white')
-	strokeWeight(4*wWidth)
-	stroke(StartGameTitleColor)
-	//text("知識大富翁",400*wWidth,250*wHeight)
-	
-}
 
 function SettingButtonInitialize(){
 	
@@ -284,13 +290,6 @@ function SettingButtonInitialize(){
 	
 }
 
-function ScreenCanvasInitialize(){
-	ScreenCanvas = createCanvas(windowWidth*wWidth, windowHeight*wHeight)
-	ScreenCanvas.id("ScreenCanvas")
-	ScreenCanvas.position(0*wWidth,0*wHeight)
-	ScreenCanvas.style('z-index',-1)
-	background(backGroundColor)
-}
 
 function keyTyped(){
 	

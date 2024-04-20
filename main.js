@@ -1,8 +1,7 @@
-
-
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
+
 let AuthorButton
 let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
@@ -18,6 +17,8 @@ let player_count = 0
 let bot_count = 0
 let CharacterSelectDiv
 
+let Character01SelectButton,Character02SelectButton,Character03SelectButton,Character04SelectButton
+let Character05SelectButton,Character06SelectButton,Character07SelectButton,Character08SelectButton
 
 
 function setup() {
@@ -34,7 +35,7 @@ function setup() {
 
 function GameSettingCmd(){
 
-	
+	CharacterSelectButtonshowall()
 	CharacterSelectDiv.show()
 	BackToMenuButton.show()
 	
@@ -62,6 +63,108 @@ function CharacterSelectBgini(){
 	CharacterSelectDiv.html("</image>",1)
 	CharacterSelectDiv.hide()
 
+	Character01SelectButton = createImg("image/character.png","character.png")
+	Character01SelectButton.style("height","27.06%");
+	Character01SelectButton.style("width","13.888%");
+	Character01SelectButton.style("left","28.95%");
+	Character01SelectButton.style("top","16.779%");
+	Character01SelectButton.style("background","transparent");
+	Character01SelectButton.style("color","transparent");
+	Character01SelectButton.style("position","absolute")
+
+	Character02SelectButton = createImg("image/character.png","character.png")
+	Character02SelectButton.style("height","27.06%");
+	Character02SelectButton.style("width","13.888%");
+	Character02SelectButton.style("left","43.88%");
+	Character02SelectButton.style("top","16.779%");
+	Character02SelectButton.style("background","transparent");
+	Character02SelectButton.style("color","transparent");
+	Character02SelectButton.style("position","absolute")
+
+	Character03SelectButton = createImg("image/character.png","character.png")
+	Character03SelectButton.style("height","27.06%");
+	Character03SelectButton.style("width","13.888%");
+	Character03SelectButton.style("left","58.54%");
+	Character03SelectButton.style("top","16.779%");
+	Character03SelectButton.style("background","transparent");
+	Character03SelectButton.style("color","transparent");
+	Character03SelectButton.style("position","absolute")
+
+	Character04SelectButton = createImg("image/character.png","character.png")
+	Character04SelectButton.style("height","27.06%");
+	Character04SelectButton.style("width","13.888%");
+	Character04SelectButton.style("left","28.95%");
+	Character04SelectButton.style("top","43.16%");
+	Character04SelectButton.style("background","transparent");
+	Character04SelectButton.style("color","transparent");
+	Character04SelectButton.style("position","absolute")
+
+	Character05SelectButton = createImg("image/character.png","character.png")
+	Character05SelectButton.style("height","27.06%");
+	Character05SelectButton.style("width","13.888%");
+	Character05SelectButton.style("left","58.54%");
+	Character05SelectButton.style("top","43.16%");
+	Character05SelectButton.style("background","transparent");
+	Character05SelectButton.style("color","transparent");
+	Character05SelectButton.style("position","absolute")
+
+	Character06SelectButton = createImg("image/character.png","character.png")
+	Character06SelectButton.style("height","27.06%");
+	Character06SelectButton.style("width","13.888%");
+	Character06SelectButton.style("left","28.95%");
+	Character06SelectButton.style("top","68.74%");
+	Character06SelectButton.style("background","transparent");
+	Character06SelectButton.style("color","transparent");
+	Character06SelectButton.style("position","absolute")
+
+	Character07SelectButton = createImg("image/character.png","character.png")
+	Character07SelectButton.style("height","27.06%");
+	Character07SelectButton.style("width","13.888%");
+	Character07SelectButton.style("left","43.88%");
+	Character07SelectButton.style("top","68.74%");
+	Character07SelectButton.style("background","transparent");
+	Character07SelectButton.style("color","transparent");
+	Character07SelectButton.style("position","absolute")
+
+	Character08SelectButton = createImg("image/character.png","character.png")
+	Character08SelectButton.style("height","27.06%");
+	Character08SelectButton.style("width","13.888%");
+	Character08SelectButton.style("left","58.54%");
+	Character08SelectButton.style("top","68.74%");
+	Character08SelectButton.style("background","transparent");
+	Character08SelectButton.style("color","transparent");
+	Character08SelectButton.style("position","absolute")
+
+	CharacterSelectButtonhideall()
+
+
+
+}
+
+function CharacterSelectButtonshowall(){
+
+	Character01SelectButton.show()
+	Character02SelectButton.show()
+	Character03SelectButton.show()
+	Character04SelectButton.show()
+	Character05SelectButton.show()
+	Character06SelectButton.show()
+	Character07SelectButton.show()
+	Character08SelectButton.show()
+}
+
+function CharacterSelectButtonhideall(){
+
+	Character01SelectButton.hide()
+	Character02SelectButton.hide()
+	Character03SelectButton.hide()
+	Character04SelectButton.hide()
+	Character05SelectButton.hide()
+	Character06SelectButton.hide()
+	Character07SelectButton.hide()
+	Character08SelectButton.hide()
+
+
 }
 
 
@@ -88,6 +191,7 @@ function AuthorPageCmd(){
 
 function BackToMenuCmd(){
 	
+	CharacterSelectButtonhideall()
 	CharacterSelectDiv.hide()
 	titleDiv.show()
 	settingDiv.hide()

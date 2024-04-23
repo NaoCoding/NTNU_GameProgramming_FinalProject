@@ -51,6 +51,12 @@ function GameSettingCmd(){
 
 function GameSettingDoneCmd(){
 
+	if(CharacterAmount >= 2){
+		CharacterSelectButtonhideall()
+		CharacterSelectDiv.hide()
+		CharacterSelectBackButton.hide()
+		GameSettingDoneButton.hide()
+	}
 
 }
 
@@ -82,6 +88,7 @@ function AuthorPageCmd(){
 }
 
 function BackToMenuCmd(){
+	GameSettingDoneButton.hide()
 	CharacterSelectBackButton.hide()
 	CharacterSelectButtonhideall()
 	CharacterSelectDiv.hide()
@@ -208,17 +215,27 @@ function BackToMenuButtonInitialize(){
 	BackToMenuButton = createElement("button")
 	BackToMenuButton.hide()
 	BackToMenuButton.mouseClicked(BackToMenuCmd)
-	BackToMenuButton.style("width", "12%");
-	BackToMenuButton.style("height", "17%");
+
+	BackToMenuButton.style("width", "16%");
+	BackToMenuButton.style("height", "13%");
 	BackToMenuButton.style("position","absolute");
 	BackToMenuButton.style("left","7%")
 	BackToMenuButton.style("top","75%")
 	BackToMenuButton.style("background-color","transparent")
-	BackToMenuButton.style("border-color","black")
+	BackToMenuButton.style("border-color","transparent")
 	BackToMenuButtonStyle = "style=height:100%;width:100%;"
 	BackToMenuButtonStyle += 'position:absolute;top:0px;left:0px;'
 	BackToMenuButton.html("<image src='image/back.png'"+BackToMenuButtonStyle+">",1)
 	BackToMenuButton.html("</image>",1)
+	GameSettingDoneButton = createImg("image/startbutton.png")
+	GameSettingDoneButton.hide()
+	GameSettingDoneButton.mouseClicked(GameSettingDoneCmd)
+	GameSettingDoneButton.style("width", "20%");
+	GameSettingDoneButton.style("height", "10%");
+	GameSettingDoneButton.style("position","absolute");
+	GameSettingDoneButton.style("left","77%")
+	GameSettingDoneButton.style("top","78%")
+	GameSettingDoneButton.style("background-color","transparent")
 
 }
 
@@ -391,13 +408,13 @@ function CharacterSelectBgini(){
 	CharacterSelectBackButton = createElement("button")
 	CharacterSelectBackButton.hide()
 	CharacterSelectBackButton.mouseClicked(CharacterSelectBackButtonFn)
-	CharacterSelectBackButton.style("width", "12%");
-	CharacterSelectBackButton.style("height", "17%");
+	CharacterSelectBackButton.style("width", "16%");
+	CharacterSelectBackButton.style("height", "13%");
 	CharacterSelectBackButton.style("position","absolute");
 	CharacterSelectBackButton.style("left","7%")
 	CharacterSelectBackButton.style("top","75%")
 	CharacterSelectBackButton.style("background-color","transparent")
-	CharacterSelectBackButton.style("border-color","black")
+	CharacterSelectBackButton.style("border-color","transparent")
 	CharacterSelectBackButtonStyle = "style=height:100%;width:100%;"
 	CharacterSelectBackButtonStyle += 'position:absolute;top:0px;left:0px;'
 	CharacterSelectBackButton.html("<image src='image/back.png'"+CharacterSelectBackButtonStyle+">",1)
@@ -568,11 +585,12 @@ function updateCharacterAmountScreen(){
 		CharacterChoosenLabel01.hide()
 	}
 	if(CharacterAmount >= 2){
+		GameSettingDoneButton.show()
 		CharacterChoosenLabelChange(CharacterChoosenLabel02,CharacterID[1])
 		CharacterChoosenLabel02.show()
 	}
 	else{
-		
+		GameSettingDoneButton.hide()
 		CharacterChoosenLabel02.hide()
 	}
 	if(CharacterAmount >= 3){

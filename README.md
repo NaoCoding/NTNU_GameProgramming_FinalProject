@@ -8,7 +8,7 @@
 ```
 ### Lang
 ```
-p5.js (html + css + js)
+p5.js (html + css + js) 
 ```
 ### Local Deployment
 ```

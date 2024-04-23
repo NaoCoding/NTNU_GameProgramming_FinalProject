@@ -145,14 +145,10 @@ function StartGameTitleINI(){
 	titleDiv.style("z-index","-1")
 	titleDivStyle = "style=height:100%;width:100%;"
 	titleDivStyle += 'position:absolute;top:0%;left:0%;'
-	titleDiv.html("<image src='image/menu_bg.png'"+titleDivStyle+">",1)
+	titleDiv.html("<image src='image/menu_bg.jpg'"+titleDivStyle+">",1)
 	titleDiv.html("</image>",1)
-	titleLabel_innerhtml = "<button style=position:absolute;"
-	titleLabel_innerhtml += "top:10%;left:15%;transform:translate(-15%,-10%);"
-	titleLabel_innerhtml += "width:55%;height:13%;font-size:88px;color:rgb(0,0,0);background-color:rgba(255,255,255,0.55);"
-	titleLabel_innerhtml += "border-color:transparent;border-radius:1em;"
-	titleLabel_innerhtml += ">日式居酒大富翁</button>"
-	titleDiv.html(titleLabel_innerhtml,1)
+
+
 	titleDiv.show()
 	
 }
@@ -227,60 +223,45 @@ function BackToMenuButtonInitialize(){
 }
 
 function AuthorButtonInitialize(){
-	AuthorButton = createButton('小組名單')
-	//AuthorButton.parent("ScreenCanvas")
-	AuthorButton.style("left",'12%')
-	AuthorButton.style("top",'70%')
-	AuthorButton.style('width','25%')
-	AuthorButton.style('height','10%')
+	AuthorButton = createImg('image/authorbutton.png')
+	AuthorButton.style("left",'6%')
+	AuthorButton.style("top",'58.3%')
+	AuthorButton.style('width','23%')
+	AuthorButton.style('height','17%')
 	AuthorButton.style("position",'absolute')
-	AuthorButton.style("transform","translate(-12%,-70%)")
-	AuthorButton.style("font-size", "48px");
-	AuthorButton.style("font-family", "Times New Roman");
+
+
 	AuthorButton.mouseClicked(AuthorPageCmd)
-	AuthorButton.style("background-color","rgba(255,255,255,0.55)")
-	AuthorButton.style("color","rgb(0,0,0)")
-	AuthorButton.style('border-color','transparent')
-	AuthorButton.style("border-radius","1em")
+
+
 	
 	
 }
 
 function StartGameButtonInitialize(){
-	StartGameButton = createButton('開始遊戲')
-	StartGameButton.style("left",'12%')
-	StartGameButton.style("top",'55%')
+	StartGameButton = createImg('image/startgamebutton.png')
+	StartGameButton.style("left",'6%')
+	StartGameButton.style("top",'47.5%')
+	StartGameButton.style('width','23%')
+	StartGameButton.style('height','17%')
 	StartGameButton.style("position",'absolute')
-	StartGameButton.style("transform","translate(-12%,-55%)")
-	StartGameButton.style('width','25%')
-	StartGameButton.style('height','10%')
-	StartGameButton.style("font-size", "48px");
-	StartGameButton.style("font-family", "Times New Roman");
+
+
 	StartGameButton.mouseClicked(StartGameCmd)
-	StartGameButton.style("background-color","rgba(255,255,255,0.55)")
-	StartGameButton.style("color","rgb(0,0,0)")
-	StartGameButton.style('border-color','transparent')
-	StartGameButton.style("border-radius","1em")
 }
 
 
 
 function SettingButtonInitialize(){
 	
-	SettingButton = createButton("設定")
-	SettingButton.style("left",'12%')
-	SettingButton.style("top",'85%')
+	SettingButton = createImg('image/settingbutton.png')
+	SettingButton.style("left",'6%')
+	SettingButton.style("top",'69%')
+	SettingButton.style('width','23%')
+	SettingButton.style('height','17%')
 	SettingButton.style("position",'absolute')
-	SettingButton.style("transform","translate(-12%,-85%)")
-	SettingButton.style('width','25%')
-	SettingButton.style('height','10%')
-	SettingButton.style("font-size", "48px");	
-	SettingButton.style("font-family", "Times New Roman");
+
 	SettingButton.mouseClicked(SettingPageCmd)
-	SettingButton.style("background-color","rgba(255,255,255,0.55)")
-	SettingButton.style("color","rgb(0,0,0)")
-	SettingButton.style('border-color','transparent')
-	SettingButton.style("border-radius","1em")
 	
 	
 }

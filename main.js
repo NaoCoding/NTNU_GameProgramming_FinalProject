@@ -16,6 +16,7 @@ let wHeight = 739
 let player_count = 0
 let bot_count = 0
 let CharacterSelectDiv
+let CharacterSelectBox
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 
@@ -25,6 +26,7 @@ let Character01SelectButton,Character02SelectButton,Character03SelectButton,Char
 let Character05SelectButton,Character06SelectButton,Character07SelectButton,Character08SelectButton
 
 let CharacterChoosenLabel01,CharacterChoosenLabel02,CharacterChoosenLabel03,CharacterChoosenLabel04
+let CharacterChoosenLabelbg01,CharacterChoosenLabelbg02,CharacterChoosenLabelbg03,CharacterChoosenLabelbg04
 
 
 function setup() {
@@ -44,7 +46,7 @@ function GameSettingCmd(){
 	CharacterSelectButtonshowall()
 	CharacterSelectDiv.show()
 	CharacterSelectBackButton.show()
-	
+	LeaveStartGameMenuCmd()
 
 
 }
@@ -69,6 +71,7 @@ function CharacterChoosenLabelChange(a,b){
 
 function LeaveStartGameMenuCmd(){
 	
+
 	StartGameButton.hide()
 	SettingButton.hide()
 	AuthorButton.hide()
@@ -219,8 +222,8 @@ function BackToMenuButtonInitialize(){
 	BackToMenuButton.style("width", "16%");
 	BackToMenuButton.style("height", "13%");
 	BackToMenuButton.style("position","absolute");
-	BackToMenuButton.style("left","7%")
-	BackToMenuButton.style("top","75%")
+	BackToMenuButton.style("left","5%")
+	BackToMenuButton.style("top","80%")
 	BackToMenuButton.style("background-color","transparent")
 	BackToMenuButton.style("border-color","transparent")
 	BackToMenuButtonStyle = "style=height:100%;width:100%;"
@@ -398,10 +401,22 @@ function CharacterSelectBgini(){
 	CharacterSelectDiv.style("position","absolute")
 	CharacterSelectDiv.style("top","0px")
 	CharacterSelectDiv.style("left","0px")
-	CharacterSelectDiv.style("z-index","-1")
+	CharacterSelectDiv.style("z-index","-2")
+	//CharacterSelectDiv.style("background-color","transparent")
+
+	CharacterSelectBox = createImg("image/characterSelect.jpg","png")
+	CharacterSelectBox.style("height","80%")
+	CharacterSelectBox.style("width","46%")
+	CharacterSelectBox.style("position","absolute")
+	CharacterSelectBox.style("top","17%")
+	CharacterSelectBox.style("left","27.5%")
+	CharacterSelectBox.style("z-index","-1")
+	CharacterSelectBox.style("opacity","0.3")
+	CharacterSelectBox.hide()
+
 	CharacterSelectStyle = "style=height:100%;width:100%;"
-	CharacterSelectStyle += 'position:absolute;top:0%;left:0%;'
-	CharacterSelectDiv.html("<image src='image/characterSelect.png'"+CharacterSelectStyle+">",1)
+	CharacterSelectStyle += 'position:absolute;top:0%;left:0%;opacity:0.8;'
+	CharacterSelectDiv.html("<image src='image/choosebg.png'"+CharacterSelectStyle+">",1)
 	CharacterSelectDiv.html("</image>",1)
 	CharacterSelectDiv.hide()
 
@@ -411,8 +426,8 @@ function CharacterSelectBgini(){
 	CharacterSelectBackButton.style("width", "16%");
 	CharacterSelectBackButton.style("height", "13%");
 	CharacterSelectBackButton.style("position","absolute");
-	CharacterSelectBackButton.style("left","7%")
-	CharacterSelectBackButton.style("top","75%")
+	CharacterSelectBackButton.style("left","5%")
+	CharacterSelectBackButton.style("top","80%")
 	CharacterSelectBackButton.style("background-color","transparent")
 	CharacterSelectBackButton.style("border-color","transparent")
 	CharacterSelectBackButtonStyle = "style=height:100%;width:100%;"
@@ -500,6 +515,46 @@ function CharacterSelectBgini(){
 	Character08SelectButton.style("position","absolute")
 	Character08SelectButton.mouseClicked(CharacterSelectSelectFn8)
 
+	CharacterChoosenLabelbg01 = createImg("image/choosered.png","png")
+	CharacterChoosenLabelbg01.style("height","27.06%");
+	CharacterChoosenLabelbg01.style("width","13.888%");
+	CharacterChoosenLabelbg01.style("left","1.319%");
+	CharacterChoosenLabelbg01.style("top","16.779%");
+	CharacterChoosenLabelbg01.style("background","transparent");
+	CharacterChoosenLabelbg01.style("color","transparent");
+	CharacterChoosenLabelbg01.style("position","absolute")
+	CharacterChoosenLabelbg01.hide()
+
+	CharacterChoosenLabelbg02 = createImg("image/chooseblue.png","png")
+	CharacterChoosenLabelbg02.style("height","27.06%");
+	CharacterChoosenLabelbg02.style("width","13.888%");
+	CharacterChoosenLabelbg02.style("left","74.305%");
+	CharacterChoosenLabelbg02.style("top","16.779%");
+	CharacterChoosenLabelbg02.style("background","transparent");
+	CharacterChoosenLabelbg02.style("color","transparent");
+	CharacterChoosenLabelbg02.style("position","absolute")
+	CharacterChoosenLabelbg02.hide()
+
+	CharacterChoosenLabelbg03 = createImg("image/chooseyellow.png","png")
+	CharacterChoosenLabelbg03.style("height","27.06%");
+	CharacterChoosenLabelbg03.style("width","13.888%");
+	CharacterChoosenLabelbg03.style("left","12.23%");
+	CharacterChoosenLabelbg03.style("top","41.13%");
+	CharacterChoosenLabelbg03.style("background","transparent");
+	CharacterChoosenLabelbg03.style("color","transparent");
+	CharacterChoosenLabelbg03.style("position","absolute")
+	CharacterChoosenLabelbg03.hide()
+
+	CharacterChoosenLabelbg04 = createImg("image/choosegreen.png","png")
+	CharacterChoosenLabelbg04.style("height","27.06%");
+	CharacterChoosenLabelbg04.style("width","13.888%");
+	CharacterChoosenLabelbg04.style("left","82.513%");
+	CharacterChoosenLabelbg04.style("top","41.13%");
+	CharacterChoosenLabelbg04.style("background","transparent");
+	CharacterChoosenLabelbg04.style("color","transparent");
+	CharacterChoosenLabelbg04.style("position","absolute")
+	CharacterChoosenLabelbg04.hide()
+	
 	CharacterChoosenLabel01 = createImg("image/character.png","png")
 		CharacterChoosenLabel01.style("height","27.06%");
 		CharacterChoosenLabel01.style("width","13.888%");
@@ -557,11 +612,17 @@ function CharacterSelectButtonshowall(){
 	Character05SelectButton.show()
 	Character06SelectButton.show()
 	Character07SelectButton.show()
+	CharacterSelectBox.show()
 	Character08SelectButton.show()
+	CharacterChoosenLabelbg01.show()
+	CharacterChoosenLabelbg02.show()
+	CharacterChoosenLabelbg03.show()
+	CharacterChoosenLabelbg04.show()
 }
 
 function CharacterSelectButtonhideall(){
 
+	CharacterSelectBox.hide()
 	Character01SelectButton.hide()
 	Character02SelectButton.hide()
 	Character03SelectButton.hide()
@@ -570,6 +631,10 @@ function CharacterSelectButtonhideall(){
 	Character06SelectButton.hide()
 	Character07SelectButton.hide()
 	Character08SelectButton.hide()
+	CharacterChoosenLabelbg01.hide()
+	CharacterChoosenLabelbg02.hide()
+	CharacterChoosenLabelbg03.hide()
+	CharacterChoosenLabelbg04.hide()
 
 
 }

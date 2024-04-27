@@ -438,8 +438,8 @@ function CharacterSelectBgini(){
 	Character01SelectButton = createImg("image/character.png","character.png")
 	Character01SelectButton.style("height","27.06%");
 	Character01SelectButton.style("width","13.888%");
-	Character01SelectButton.style("left","28.95%");
-	Character01SelectButton.style("top","16.779%");
+	Character01SelectButton.style("left","28.2%");
+	Character01SelectButton.style("top","18.779%");
 	Character01SelectButton.style("background","transparent");
 	Character01SelectButton.style("color","transparent");
 	Character01SelectButton.style("position","absolute")

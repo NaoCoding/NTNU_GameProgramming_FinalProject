@@ -237,7 +237,7 @@ function BackToMenuButtonInitialize(){
 	GameSettingDoneButton.style("height", "10%");
 	GameSettingDoneButton.style("position","absolute");
 	GameSettingDoneButton.style("left","77%")
-	GameSettingDoneButton.style("top","78%")
+	GameSettingDoneButton.style("top","85%")
 	GameSettingDoneButton.style("background-color","transparent")
 
 }
@@ -516,80 +516,80 @@ function CharacterSelectBgini(){
 	Character08SelectButton.mouseClicked(CharacterSelectSelectFn8)
 
 	CharacterChoosenLabelbg01 = createImg("image/choosered.png","png")
-	CharacterChoosenLabelbg01.style("height","27.06%");
-	CharacterChoosenLabelbg01.style("width","13.888%");
-	CharacterChoosenLabelbg01.style("left","1.319%");
-	CharacterChoosenLabelbg01.style("top","16.779%");
+	CharacterChoosenLabelbg01.style("height","42%");
+	CharacterChoosenLabelbg01.style("width","20%");
+	CharacterChoosenLabelbg01.style("left","3.23%");
+	CharacterChoosenLabelbg01.style("top","3%");
 	CharacterChoosenLabelbg01.style("background","transparent");
 	CharacterChoosenLabelbg01.style("color","transparent");
 	CharacterChoosenLabelbg01.style("position","absolute")
 	CharacterChoosenLabelbg01.hide()
 
 	CharacterChoosenLabelbg02 = createImg("image/chooseblue.png","png")
-	CharacterChoosenLabelbg02.style("height","27.06%");
-	CharacterChoosenLabelbg02.style("width","13.888%");
-	CharacterChoosenLabelbg02.style("left","74.305%");
-	CharacterChoosenLabelbg02.style("top","16.779%");
+	CharacterChoosenLabelbg02.style("height","42%");
+	CharacterChoosenLabelbg02.style("width","20%");
+	CharacterChoosenLabelbg02.style("left","75%");
+	CharacterChoosenLabelbg02.style("top","3%");
 	CharacterChoosenLabelbg02.style("background","transparent");
 	CharacterChoosenLabelbg02.style("color","transparent");
 	CharacterChoosenLabelbg02.style("position","absolute")
 	CharacterChoosenLabelbg02.hide()
 
 	CharacterChoosenLabelbg03 = createImg("image/chooseyellow.png","png")
-	CharacterChoosenLabelbg03.style("height","27.06%");
-	CharacterChoosenLabelbg03.style("width","13.888%");
-	CharacterChoosenLabelbg03.style("left","12.23%");
-	CharacterChoosenLabelbg03.style("top","41.13%");
+	CharacterChoosenLabelbg03.style("height","42%");
+	CharacterChoosenLabelbg03.style("width","20%");
+	CharacterChoosenLabelbg03.style("left","3.23%");
+	CharacterChoosenLabelbg03.style("top","37.13%");
 	CharacterChoosenLabelbg03.style("background","transparent");
 	CharacterChoosenLabelbg03.style("color","transparent");
 	CharacterChoosenLabelbg03.style("position","absolute")
 	CharacterChoosenLabelbg03.hide()
 
 	CharacterChoosenLabelbg04 = createImg("image/choosegreen.png","png")
-	CharacterChoosenLabelbg04.style("height","27.06%");
-	CharacterChoosenLabelbg04.style("width","13.888%");
-	CharacterChoosenLabelbg04.style("left","82.513%");
-	CharacterChoosenLabelbg04.style("top","41.13%");
+	CharacterChoosenLabelbg04.style("height","42%");
+	CharacterChoosenLabelbg04.style("width","20%");
+	CharacterChoosenLabelbg04.style("left","75%");
+	CharacterChoosenLabelbg04.style("top","37.13%");
 	CharacterChoosenLabelbg04.style("background","transparent");
 	CharacterChoosenLabelbg04.style("color","transparent");
 	CharacterChoosenLabelbg04.style("position","absolute")
 	CharacterChoosenLabelbg04.hide()
 	
 	CharacterChoosenLabel01 = createImg("image/character.png","png")
-		CharacterChoosenLabel01.style("height","27.06%");
-		CharacterChoosenLabel01.style("width","13.888%");
+		CharacterChoosenLabel01.style("height","29%");
+		CharacterChoosenLabel01.style("width","15%");
 		CharacterChoosenLabel01.style("left","1.319%");
-		CharacterChoosenLabel01.style("top","16.779%");
+		CharacterChoosenLabel01.style("top","10.779%");
 		CharacterChoosenLabel01.style("background","transparent");
 		CharacterChoosenLabel01.style("color","transparent");
 		CharacterChoosenLabel01.style("position","absolute")
 		CharacterChoosenLabel01.hide()
 
 		CharacterChoosenLabel02 = createImg("image/character.png","png")
-		CharacterChoosenLabel02.style("height","27.06%");
-		CharacterChoosenLabel02.style("width","13.888%");
-		CharacterChoosenLabel02.style("left","74.305%");
-		CharacterChoosenLabel02.style("top","16.779%");
+		CharacterChoosenLabel02.style("height","29%");
+		CharacterChoosenLabel02.style("width","15%");
+		CharacterChoosenLabel02.style("left","73.305%");
+		CharacterChoosenLabel02.style("top","10.779%");
 		CharacterChoosenLabel02.style("background","transparent");
 		CharacterChoosenLabel02.style("color","transparent");
 		CharacterChoosenLabel02.style("position","absolute")
 		CharacterChoosenLabel02.hide()
 
 		CharacterChoosenLabel03 = createImg("image/character.png","png")
-		CharacterChoosenLabel03.style("height","27.06%");
-		CharacterChoosenLabel03.style("width","13.888%");
-		CharacterChoosenLabel03.style("left","14.23%");
-		CharacterChoosenLabel03.style("top","41.13%");
+		CharacterChoosenLabel03.style("height","29%");
+		CharacterChoosenLabel03.style("width","15%");
+		CharacterChoosenLabel03.style("left","10%");
+		CharacterChoosenLabel03.style("top","43%");
 		CharacterChoosenLabel03.style("background","transparent");
 		CharacterChoosenLabel03.style("color","transparent");
 		CharacterChoosenLabel03.style("position","absolute")
 		CharacterChoosenLabel03.hide()
 
 		CharacterChoosenLabel04 = createImg("image/character.png","png")
-		CharacterChoosenLabel04.style("height","27.06%");
-		CharacterChoosenLabel04.style("width","13.888%");
-		CharacterChoosenLabel04.style("left","84.513%");
-		CharacterChoosenLabel04.style("top","41.13%");
+		CharacterChoosenLabel04.style("height","29%");
+		CharacterChoosenLabel04.style("width","15%");
+		CharacterChoosenLabel04.style("left","82%");
+		CharacterChoosenLabel04.style("top","43%");
 		CharacterChoosenLabel04.style("background","transparent");
 		CharacterChoosenLabel04.style("color","transparent");
 		CharacterChoosenLabel04.style("position","absolute")

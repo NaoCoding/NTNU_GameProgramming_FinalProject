@@ -1,5 +1,7 @@
 ## 遊戲程式設計 期末專題 
 [Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/)
+[Questions Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json)
+
 ### 主題
 ```
 台師大 112 學年度第二學期

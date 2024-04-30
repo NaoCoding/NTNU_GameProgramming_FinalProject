@@ -556,40 +556,40 @@ function CharacterSelectBgini(){
 	CharacterChoosenLabelbg04.hide()
 	
 	CharacterChoosenLabel01 = createImg("image/character.png","png")
-		CharacterChoosenLabel01.style("height","29%");
-		CharacterChoosenLabel01.style("width","15%");
-		CharacterChoosenLabel01.style("left","1.319%");
-		CharacterChoosenLabel01.style("top","10.779%");
+		CharacterChoosenLabel01.style("height","40%");
+		CharacterChoosenLabel01.style("width","23%");
+		CharacterChoosenLabel01.style("left","-1.5%");
+		CharacterChoosenLabel01.style("top","5.779%");
 		CharacterChoosenLabel01.style("background","transparent");
 		CharacterChoosenLabel01.style("color","transparent");
 		CharacterChoosenLabel01.style("position","absolute")
 		CharacterChoosenLabel01.hide()
 
 		CharacterChoosenLabel02 = createImg("image/character.png","png")
-		CharacterChoosenLabel02.style("height","29%");
-		CharacterChoosenLabel02.style("width","15%");
-		CharacterChoosenLabel02.style("left","73.305%");
-		CharacterChoosenLabel02.style("top","10.779%");
+		CharacterChoosenLabel02.style("height","40%");
+		CharacterChoosenLabel02.style("width","23%");
+		CharacterChoosenLabel02.style("left","70.305%");
+		CharacterChoosenLabel02.style("top","5.779%");
 		CharacterChoosenLabel02.style("background","transparent");
 		CharacterChoosenLabel02.style("color","transparent");
 		CharacterChoosenLabel02.style("position","absolute")
 		CharacterChoosenLabel02.hide()
 
 		CharacterChoosenLabel03 = createImg("image/character.png","png")
-		CharacterChoosenLabel03.style("height","29%");
-		CharacterChoosenLabel03.style("width","15%");
-		CharacterChoosenLabel03.style("left","10%");
-		CharacterChoosenLabel03.style("top","43%");
+		CharacterChoosenLabel03.style("height","40%");
+		CharacterChoosenLabel03.style("width","23%");
+		CharacterChoosenLabel03.style("left","3%");
+		CharacterChoosenLabel03.style("top","38%");
 		CharacterChoosenLabel03.style("background","transparent");
 		CharacterChoosenLabel03.style("color","transparent");
 		CharacterChoosenLabel03.style("position","absolute")
 		CharacterChoosenLabel03.hide()
 
 		CharacterChoosenLabel04 = createImg("image/character.png","png")
-		CharacterChoosenLabel04.style("height","29%");
-		CharacterChoosenLabel04.style("width","15%");
-		CharacterChoosenLabel04.style("left","82%");
-		CharacterChoosenLabel04.style("top","43%");
+		CharacterChoosenLabel04.style("height","40%");
+		CharacterChoosenLabel04.style("width","23%");
+		CharacterChoosenLabel04.style("left","75%");
+		CharacterChoosenLabel04.style("top","38%");
 		CharacterChoosenLabel04.style("background","transparent");
 		CharacterChoosenLabel04.style("color","transparent");
 		CharacterChoosenLabel04.style("position","absolute")

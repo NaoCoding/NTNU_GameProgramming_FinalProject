@@ -19,7 +19,8 @@ let CharacterSelectDiv
 let CharacterSelectBox
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
-
+CharacterBeer = [0,0,0,0]
+CharacterPlace = [0,0,0,0]
 let CharacterSelectBackButton
 
 let Character01SelectButton,Character02SelectButton,Character03SelectButton,Character04SelectButton

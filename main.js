@@ -22,6 +22,7 @@ let CharacterSelectBox
 let chance_fateQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
+CharacterWait = [0,0,0,0]
 CharacterBeer = [0,0,0,0]
 CharacterPlace = [0,0,0,0]
 CharacterRound = [0,0,0,0]
@@ -31,6 +32,7 @@ CharacterPlaceStyle = [[9.1,90],[9.1,80],[9.1,70],[9.1,60],[9.1,50],[9.1,40],[9.
 [87.4,20],[87.4,30],[87.4,40],[87.4,50],[87.4,60],[87.4,70],[87.4,80],[87.4,90],
 [81.8,90],[76.2,90],[70.6,90],[65,90],[59.4,90],[53.8,90],[48.2,90],
 [42.6,90],[37,90],[31.4,90],[25.8,90],[20.2,90],[14.7,90]]
+// 8 22 30 
 let CharacterSelectBackButton
 diceCanClick = 0
 diceAnimationDone = 1
@@ -69,6 +71,7 @@ async function roll_the_dice(){
 	if(diceCanClick == 0) return 
 	diceCanClick = 0
 	dice_result = 0
+	
 
 	if(player_now==1) chess1.style("z-index","100")
 	else chess1.style("z-index","3")
@@ -100,28 +103,39 @@ async function roll_the_dice(){
 			CharacterRound[player_now-1] += 1
 			if(CharacterRound[player_now-1] == 2) return;
 		}
-		if(player_now==1){
-			chess1.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
-			chess1.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
-		}
-		if(player_now==2){
-			chess2.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
-			chess2.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
-		}
-		if(player_now==3){
-			chess3.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
-			chess3.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
-		}
-		if(player_now==4){
-			chess4.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
-			chess4.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
-		}
+		update_place()
 		dice_result -= 1
 		await delay(0.6)
 	}
+
+
+
+
+	
+	if(CharacterPlace[player_now-1] == 22){
+		CharacterPlace[player_now-1] = 0
+		update_place()
+		await delay(0.6)
+	}
+
+	else if(CharacterPlace[player_now-1] == 8){
+		CharacterPlace[player_now-1] = 22
+		update_place()
+		await delay(0.6)
+	}
+
+	else if(CharacterPlace[player_now-1] == 30){
+		CharacterWait[player_now-1] = 1
+	}
+
 	
 
 	player_now += 1
+	while(CharacterWait[player_now-1] > 0){
+		CharacterWait[player_now-1] -= 1
+		player_now += 1
+		if(player_now > CharacterAmount) player_now = 1
+	}
 	if(player_now > CharacterAmount) player_now = 1
 	dice_value_div.style("background-color",color_now())
 	dice_value_div.html("<br>",0)
@@ -139,6 +153,8 @@ function moveAnimation(a){
 		}
 	}
 }
+
+
 
 
 
@@ -820,6 +836,24 @@ function AuthorPageCmd(){
 
 	
 	
+}
+function update_place(){
+	if(player_now==1){
+		chess1.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+		chess1.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+	}
+	if(player_now==2){
+		chess2.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+		chess2.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+	}
+	if(player_now==3){
+		chess3.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+		chess3.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+	}
+	if(player_now==4){
+		chess4.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+		chess4.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+	}
 }
 
 function delay(n) {

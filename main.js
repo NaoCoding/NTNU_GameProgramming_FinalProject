@@ -33,7 +33,7 @@ let CharacterChoosenLabelbg01,CharacterChoosenLabelbg02,CharacterChoosenLabelbg0
 
 function setup() {
 	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
-	console.log(chance_fateQuestion.question[0][1])
+
 	//createCanvas(windowWidth, windowHeight)
 	wWidth = windowWidth / wWidth
 	wHeight = windowHeight / wHeight

@@ -19,7 +19,7 @@ let player_count = 0
 let bot_count = 0
 let CharacterSelectDiv
 let CharacterSelectBox
-let Game_movingdoll
+let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
 let chance_fateQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
@@ -72,25 +72,29 @@ async function roll_the_dice(){
 	if(diceCanClick == 0) return 
 	diceCanClick = 0
 	dice_result = 0
-	Game_movingdoll.show()
+	
 	
 	
 
 	if(player_now==1){
 		chess1.style("z-index","100")
-		
 	}
-	else chess1.style("z-index","3")
-	if(player_now==2) chess2.style("z-index","100")
-	else chess2.style("z-index","3")
-	if(player_now==3) chess3.style("z-index","100")
-	else chess3.style("z-index","3")
-	if(player_now==4) chess4.style("z-index","100")
-	else chess4.style("z-index","3")
+	else{chess1.style("z-index","3")}
+	if(player_now==2){
+		chess2.style("z-index","100")
+	}
+	else{chess2.style("z-index","3")}
+	if(player_now==3){
+		chess3.style("z-index","100")
+	}
+	else{chess3.style("z-index","3")}
+	if(player_now==4){
+		chess4.style("z-index","100")
+	}
+	else{chess4.style("z-index","3")}
 
-	CharacterChoosenLabelChange(Game_movingdoll,CharacterID[player_now-1])
-	Game_movingdoll.style("top",(CharacterPlaceStyle[CharacterPlace[player_now-1]][1]-3).toString() + '%')
-	Game_movingdoll.style("left",(CharacterPlaceStyle[CharacterPlace[player_now-1]][0]).toString() + '%')
+
+
 	
 
 
@@ -177,13 +181,51 @@ function GameStart(){
 	game_bg_div.html("</image>",1)
 	game_bg_div.show()
 
-	Game_movingdoll = createImg("image/character01.png","png")
+	Game_movingdoll1 = createImg("image/character01.png","png")
 
-	Game_movingdoll.style("width","5%")
-	Game_movingdoll.style("height","auto")
-	Game_movingdoll.style("position","absolute")
-	Game_movingdoll.hide()
-	Game_movingdoll.style("z-index","101")
+	Game_movingdoll1.style("width","5%")
+	Game_movingdoll1.style("height","auto")
+	Game_movingdoll1.style("position","absolute")
+	Game_movingdoll1.show()
+	Game_movingdoll1.style("z-index","101")
+
+	Game_movingdoll2 = createImg("image/character01.png","png")
+
+	Game_movingdoll2.style("width","5%")
+	Game_movingdoll2.style("height","auto")
+	Game_movingdoll2.style("position","absolute")
+	Game_movingdoll2.show()
+	Game_movingdoll2.style("z-index","101")
+
+	Game_movingdoll3 = createImg("image/character01.png","png")
+
+	Game_movingdoll3.style("width","5%")
+	Game_movingdoll3.style("height","auto")
+	Game_movingdoll3.style("position","absolute")
+	Game_movingdoll3.show()
+	Game_movingdoll3.style("z-index","101")
+
+	Game_movingdoll4 = createImg("image/character01.png","png")
+
+	Game_movingdoll4.style("width","5%")
+	Game_movingdoll4.style("height","auto")
+	Game_movingdoll4.style("position","absolute")
+	Game_movingdoll4.show()
+	Game_movingdoll4.style("z-index","101")
+
+	CharacterChoosenLabelChange(Game_movingdoll1,CharacterID[0])
+	CharacterChoosenLabelChange(Game_movingdoll2,CharacterID[1])
+	CharacterChoosenLabelChange(Game_movingdoll3,CharacterID[2])
+	CharacterChoosenLabelChange(Game_movingdoll4,CharacterID[3])
+
+	Game_movingdoll1.style("top",(CharacterPlaceStyle[CharacterPlace[0]][1]-7.8).toString() + '%')
+	Game_movingdoll1.style("left",(CharacterPlaceStyle[CharacterPlace[0]][0]-1).toString() + '%')
+	Game_movingdoll2.style("top",(CharacterPlaceStyle[CharacterPlace[1]][1]-7.8).toString() + '%')
+	Game_movingdoll2.style("left",(CharacterPlaceStyle[CharacterPlace[1]][0]-1).toString() + '%')
+	Game_movingdoll3.style("top",(CharacterPlaceStyle[CharacterPlace[2]][1]-7.8).toString() + '%')
+	Game_movingdoll3.style("left",(CharacterPlaceStyle[CharacterPlace[2]][0]-1).toString() + '%')
+	Game_movingdoll4.style("top",(CharacterPlaceStyle[CharacterPlace[3]][1]-7.8).toString() + '%')
+	Game_movingdoll4.style("left",(CharacterPlaceStyle[CharacterPlace[3]][0]-1).toString() + '%')
 
 	dice_value_div = createElement('div')
 
@@ -259,8 +301,15 @@ function GameStart(){
 	if(CharacterAmount > 3)chess4.show()
 	else chess4.hide()
 
+	if(CharacterAmount > 0) Game_movingdoll1.show()
+	else Game_movingdoll1.hide()
 
-
+	if(CharacterAmount > 1) Game_movingdoll2.show()
+	else Game_movingdoll2.hide()
+	if(CharacterAmount > 2) Game_movingdoll3.show()
+	else Game_movingdoll3.hide()
+	if(CharacterAmount > 3) Game_movingdoll4.show()
+	else Game_movingdoll4.hide()
 }
 
 
@@ -520,7 +569,7 @@ function CharacterSRCINI(){
 	Character07SelectButton.removeAttribute("src")
 	Character08SelectButton.removeAttribute("src")
 	Character01SelectButton.attribute("src","image/character01_neck.png")
-	Character02SelectButton.attribute("src","image/character02.png")
+	Character02SelectButton.attribute("src","image/character02_neck.png")
 	Character03SelectButton.attribute("src","image/character03.png")
 	Character04SelectButton.attribute("src","image/character04.png")
 	Character05SelectButton.attribute("src","image/character05.png")
@@ -582,10 +631,10 @@ function CharacterSelectBgini(){
 	Character01SelectButton.mouseClicked(CharacterSelectSelectFn1)
 
 	Character02SelectButton = createImg("image/character.png","character.png")
-	Character02SelectButton.style("height","36%");
-	Character02SelectButton.style("width","20%");
-	Character02SelectButton.style("left","43.88%");
-	Character02SelectButton.style("top","5.779%");
+	Character02SelectButton.style("height","45%");
+	Character02SelectButton.style("width","auto");
+	Character02SelectButton.style("left","39%");
+	Character02SelectButton.style("top","0%");
 	Character02SelectButton.style("background","transparent");
 	Character02SelectButton.style("color","transparent");
 	Character02SelectButton.style("position","absolute")
@@ -849,6 +898,7 @@ function update_place(){
 	if(player_now==1){
 		chess1.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
 		chess1.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+		
 	}
 	if(player_now==2){
 		chess2.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
@@ -862,6 +912,14 @@ function update_place(){
 		chess4.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
 		chess4.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
 	}
+	Game_movingdoll1.style("top",(CharacterPlaceStyle[CharacterPlace[0]][1]-7.8).toString() + '%')
+	Game_movingdoll1.style("left",(CharacterPlaceStyle[CharacterPlace[0]][0]-1).toString() + '%')
+	Game_movingdoll2.style("top",(CharacterPlaceStyle[CharacterPlace[1]][1]-7.8).toString() + '%')
+	Game_movingdoll2.style("left",(CharacterPlaceStyle[CharacterPlace[1]][0]-1).toString() + '%')
+	Game_movingdoll3.style("top",(CharacterPlaceStyle[CharacterPlace[2]][1]-7.8).toString() + '%')
+	Game_movingdoll3.style("left",(CharacterPlaceStyle[CharacterPlace[2]][0]-1).toString() + '%')
+	Game_movingdoll4.style("top",(CharacterPlaceStyle[CharacterPlace[3]][1]-7.8).toString() + '%')
+	Game_movingdoll4.style("left",(CharacterPlaceStyle[CharacterPlace[3]][0]-1).toString() + '%')
 }
 
 function delay(n) {

@@ -14,6 +14,10 @@ Game Programming is a general course for NTNU's students
 learn how to code and how to create your own game.
 This repo is the final project we made when we took the course.
 ```
+
+![image](https://github.com/NaoCoding/NTNU_GameProgramming_FinalProject/assets/86964895/5aec87df-01bd-4a8f-b682-cd9bb517af28)
+
+
 ### Lang
 ```
 p5.js (html + css + js) 

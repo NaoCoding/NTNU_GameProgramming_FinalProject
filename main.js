@@ -1,7 +1,7 @@
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
-print
+
 let AuthorButton
 let AuthorPageDiv,settingDiv
 let WindowSizeSlider 

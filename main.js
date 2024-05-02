@@ -363,6 +363,7 @@ function AuthorButtonInitialize(){
 function StartGameButtonInitialize(){
 	StartGameButton = createImg('image/startgamebutton.png')
 	StartGameButton.style("left",'6%')
+	StartGameButton.style("z-index","10")
 	StartGameButton.style("top",'47.5%')
 	StartGameButton.style('width','23%')
 	StartGameButton.style('height','17%')

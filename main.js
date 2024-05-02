@@ -1,3 +1,5 @@
+
+
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
@@ -22,127 +24,225 @@ CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterBeer = [0,0,0,0]
 CharacterPlace = [0,0,0,0]
+CharacterRound = [0,0,0,0]
+CharacterPlaceStyle = [[9.1,90],[9.1,80],[9.1,70],[9.1,60],[9.1,50],[9.1,40],[9.1,30],[9.1,20],[9.1,10],
+[14.7,10],[20.2,10],[25.8,10],[31.4,10],[37,10],[42.6,10],[48.2,10],
+[53.8,10],[59.4,10],[65,10],[70.6,10],[76.2,10],[81.8,10],[87.4,10],
+[87.4,20],[87.4,30],[87.4,40],[87.4,50],[87.4,60],[87.4,70],[87.4,80],[87.4,90],
+[81.8,90],[76.2,90],[70.6,90],[65,90],[59.4,90],[53.8,90],[48.2,90],
+[42.6,90],[37,90],[31.4,90],[25.8,90],[20.2,90],[14.7,90],]
 let CharacterSelectBackButton
+diceCanClick = 0
+diceAnimationDone = 1
 
 let Character01SelectButton,Character02SelectButton,Character03SelectButton,Character04SelectButton
 let Character05SelectButton,Character06SelectButton,Character07SelectButton,Character08SelectButton
 
 let CharacterChoosenLabel01,CharacterChoosenLabel02,CharacterChoosenLabel03,CharacterChoosenLabel04
 let CharacterChoosenLabelbg01,CharacterChoosenLabelbg02,CharacterChoosenLabelbg03,CharacterChoosenLabelbg04
+let chess1,chess2,chess3,chess4
+let game_bg_div
+let dice_roll_button,status_bar_div
+let dice_value_div
+player_now = 1
 
+function preload(){
+
+	//chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
+}
+//chance_fateQuestion.question[1][0]
 
 function setup() {
-	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
-
+	
+	
 	//createCanvas(windowWidth, windowHeight)
 	wWidth = windowWidth / wWidth
 	wHeight = windowHeight / wHeight
 	FullScreen = fullscreen()
 	StartGameTitleCmd()
 	
-}
-
-
-function GameSettingCmd(){
-
-	CharacterSelectButtonshowall()
-	CharacterSelectDiv.show()
-	CharacterSelectBackButton.show()
-	LeaveStartGameMenuCmd()
-	BackToMenuButton.hide()
-
-
-}
-
-function GameSettingDoneCmd(){
-
-	CharacterSelectButtonhideall()
-	CharacterSelectDiv.hide()
-	GameSettingDoneButton.hide()
-	CharacterSelectBackButton.hide()
-	BackToMenuButton.hide()
-
-}
-
-function CharacterChoosenLabelChange(a,b){
-	a.removeAttribute("src")
-	a.attribute("src","./image/character0" + b+".png")
-}
-
-
-
-function LeaveStartGameMenuCmd(){
-	
-
-	StartGameButton.hide()
-	SettingButton.hide()
-	AuthorButton.hide()
-	BackToMenuButton.show()
-	titleDiv.hide()
 	
 }
 
-function AuthorPageCmd(){
+async function roll_the_dice(){
 	
-	LeaveStartGameMenuCmd()
-	AuthorPageDiv.show()
-	BackToMenuButton.show()
+	if(diceCanClick == 0) return 
+	diceCanClick = 0
+	dice_result = 0
 
+	if(player_now==1) chess1.style("z-index","100")
+	else chess1.style("z-index","3")
+	if(player_now==2) chess2.style("z-index","100")
+	else chess2.style("z-index","3")
+	if(player_now==3) chess3.style("z-index","100")
+	else chess3.style("z-index","3")
+	if(player_now==4) chess4.style("z-index","100")
+	else chess4.style("z-index","3")
+
+	t = 0
+
+	var q = setInterval(() => {
+		t += 1
+		
+		if(t==20)clearInterval(q)
+
+		dice_result = Math.floor(Math.random() * 11) + 1
+		dice_value_div.html("<br>"+dice_result.toString(),0)
+
+	}, 50);
+
+	await delay(1.05)
+
+	while(dice_result > 0){
+		CharacterPlace[player_now-1] += 1
+		if(CharacterPlace[player_now-1] > 43){
+			CharacterPlace[player_now-1] = 0
+			CharacterRound[player_now-1] += 1
+		}
+		if(player_now==1){
+			chess1.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+			chess1.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+		}
+		if(player_now==2){
+			chess2.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+			chess2.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+		}
+		if(player_now==3){
+			chess3.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+			chess3.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+		}
+		if(player_now==4){
+			chess4.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
+			chess4.style("top",CharacterPlaceStyle[CharacterPlace[player_now-1]][1].toString() + "%")
+		}
+		dice_result -= 1
+		await delay(0.6)
+	}
 	
-	
+	if(CharacterRound[player_now-1] == 2) return
+
+	player_now += 1
+	if(player_now > CharacterAmount) player_now = 1
+	dice_value_div.style("background-color",color_now())
+	dice_value_div.html("<br>",0)
+	diceCanClick = 1
+
 }
 
-function BackToMenuCmd(){
-	GameSettingDoneButton.hide()
-	CharacterSelectBackButton.hide()
-	CharacterSelectButtonhideall()
-	CharacterSelectDiv.hide()
-	titleDiv.show()
-	settingDiv.hide()
-	AuthorButton.show()
-	AuthorPageDiv.hide()
-	StartGameButton.show()
-	SettingButton.show()
-	BackToMenuButton.hide()
-	setting_github.hide()
-	
+
+
+function moveAnimation(a){
+	if(a==1){
+		if(player_now==1){
+			CharacterPlaceStyle[0][1] -= 9.2
+			chess1.style("top",CharacterPlaceStyle[0][1].toString() + "%")
+		}
+	}
 }
 
-function SettingPageCmd(){
+
+
+function GameStart(){
+ //rbyg
+	game_bg_div = createElement('div')
+	diceCanClick = 1
+
+	game_bg_div.style("width","100%")
+	game_bg_div.style("height","100%")
+	game_bg_div.style("position","absolute")
+	game_bg_div.style("top","0px")
+	game_bg_div.style("left","0px")
+	game_bg_div.style("z-index","-1")
+	game_bg_div_style = "style=height:100%;width:100%;"
+	game_bg_div_style += 'position:absolute;top:0%;left:0%;'
+	game_bg_div.html("<image src='image/game_bg.jpg'"+game_bg_div_style+">",1)
+	game_bg_div.html("</image>",1)
+	game_bg_div.show()
+
 	
-	BackToMenuButton.show()
-	setting_github.show()
-	LeaveStartGameMenuCmd()
-	settingDiv.show()
-	
+
+	dice_value_div = createElement('div')
+
+	dice_value_div.style("width","20%")
+	dice_value_div.style("height","25%")
+	dice_value_div.style("position","absolute")
+	dice_value_div.style("top","50%")
+	dice_value_div.style("left","50%")
+	dice_value_div.style("transform","translate(-50%,-50%)")
+	dice_value_div.style("background-color",color_now())
+	dice_value_div.style("border-radius","50%")
+	dice_value_div.style("font-size","60px")
+	dice_value_div.style("font-family","Arial, sans-serif")
+	dice_value_div.style("text-align","center")
+	//dice_value_div.html("<br>1",0)
+	dice_value_div.show()
+
+	dice_roll_button = createImg('image/dice.png')
+	dice_roll_button.style("left",'63%')
+	dice_roll_button.style("top",'60%')
+	dice_roll_button.style('width','20%')
+	dice_roll_button.style('height','20%')
+	dice_roll_button.style("position",'absolute')
+	dice_roll_button.show()
+	dice_roll_button.mouseClicked(roll_the_dice)
+
+	status_bar_div = createImg('image/status_bar.png')
+	status_bar_div.style("left",'15%')
+	status_bar_div.style("top",'50%')
+	status_bar_div.style('width','20%')
+	status_bar_div.style('height','35%')
+	status_bar_div.style("position",'absolute')
+	status_bar_div.show()
+
+	chess1 = createImg('image/red_place.png')
+	chess1.style("left","9.1%")
+	chess1.style("top",'90%')
+	chess1.style('width','2.8%')
+	chess1.style('height','2.8%')
+	chess1.style("position",'absolute')
+	//chess1.style("opacity","0.3")
+	if(CharacterAmount > 0)chess1.show()
+	else chess1.hide()
+	chess1.style("z-index","100")
+
+	chess2 = createImg('image/blue_place.png')
+	chess2.style("left","9.1%")
+	chess2.style("top",'90%')
+	chess2.style('width','2.8%')
+	chess2.style('height','2.8%')
+	chess2.style("position",'absolute')
+	//chess2.style("opacity","0.3")
+	if(CharacterAmount > 1)chess2.show()
+	else chess2.hide()
+
+	chess3 = createImg('image/yellow_place.png')
+	chess3.style("left","9.1%")
+	chess3.style("top",'90%')
+	chess3.style('width','2.8%')
+	chess3.style('height','2.8%')
+	chess3.style("position",'absolute')
+	//chess3.style("opacity","0.3")
+	if(CharacterAmount > 2)chess3.show()
+	else chess3.hide()
+
+	chess4 = createImg('image/green_place.png')
+	chess4.style("left","9.1%")
+	chess4.style("top",'90%')
+	chess4.style('width','2.8%')
+	chess4.style('height','2.8%')
+	chess4.style("position",'absolute')
+	//chess4.style("opacity","0.3")
+	if(CharacterAmount > 3)chess4.show()
+	else chess4.hide()
+
+
+
 }
 
-function StartGameCmd(){
-	
-	StartGameButton.hide()
-	AuthorButton.hide()
-	SettingButton.hide()
-	BackToMenuButton.hide()
-	setting_github.hide()
 
 
-	GameSettingCmd()
-	
-	
-}
 
-function StartGameTitleCmd(){
 
-	StartGameButtonInitialize()
-	BackToMenuButtonInitialize()
-	AuthorButtonInitialize()
-	AuthorPageDivInitialize()
-	SettingButtonInitialize()
-	setting_githubINI()
-	StartGameTitleINI()
-	CharacterSelectBgini()
-	
-}
 
 function StartGameTitleINI(){
 
@@ -286,6 +386,15 @@ function SettingButtonInitialize(){
 	SettingButton.mouseClicked(SettingPageCmd)
 	
 	
+}
+
+function color_now(){
+
+	if(player_now==1)return "rgba(190,0,1,0.7)"
+	else if(player_now==3) return "rgba(254,255,1,0.7)"
+	else if(player_now==2) return "rgba(91,154,213,0.7)"
+	else return "rgba(112,172,70,0.7)"
+
 }
 
 function CharacterSelectBackButtonFn(){
@@ -682,4 +791,114 @@ function updateCharacterAmountScreen(){
 		CharacterChoosenLabel04.hide()
 	}
 
+}
+
+function CharacterChoosenLabelChange(a,b){
+	a.removeAttribute("src")
+	a.attribute("src","./image/character0" + b+".png")
+}
+
+
+
+function LeaveStartGameMenuCmd(){
+	
+
+	StartGameButton.hide()
+	SettingButton.hide()
+	AuthorButton.hide()
+	BackToMenuButton.show()
+	titleDiv.hide()
+	
+}
+
+function AuthorPageCmd(){
+	
+	LeaveStartGameMenuCmd()
+	AuthorPageDiv.show()
+	BackToMenuButton.show()
+
+	
+	
+}
+
+function delay(n) {
+	return new Promise(function(resolve) {
+	  setTimeout(resolve, n * 1000);
+	});
+  }
+
+function BackToMenuCmd(){
+	GameSettingDoneButton.hide()
+	CharacterSelectBackButton.hide()
+	CharacterSelectButtonhideall()
+	CharacterSelectDiv.hide()
+	titleDiv.show()
+	settingDiv.hide()
+	AuthorButton.show()
+	AuthorPageDiv.hide()
+	StartGameButton.show()
+	SettingButton.show()
+	BackToMenuButton.hide()
+	setting_github.hide()
+	
+}
+
+function SettingPageCmd(){
+	
+	BackToMenuButton.show()
+	setting_github.show()
+	LeaveStartGameMenuCmd()
+	settingDiv.show()
+	
+}
+
+function StartGameCmd(){
+	
+	
+	StartGameButton.hide()
+	AuthorButton.hide()
+	SettingButton.hide()
+	BackToMenuButton.hide()
+	setting_github.hide()
+
+
+	GameSettingCmd()
+	
+	
+}
+
+
+function GameSettingCmd(){
+
+	CharacterSelectButtonshowall()
+	CharacterSelectDiv.show()
+	CharacterSelectBackButton.show()
+	LeaveStartGameMenuCmd()
+	BackToMenuButton.hide()
+
+
+}
+
+function GameSettingDoneCmd(){
+
+	CharacterSelectButtonhideall()
+	CharacterSelectDiv.hide()
+	GameSettingDoneButton.hide()
+	CharacterSelectBackButton.hide()
+	BackToMenuButton.hide()
+	GameStart()
+}
+
+
+function StartGameTitleCmd(){
+
+	StartGameButtonInitialize()
+	BackToMenuButtonInitialize()
+	AuthorButtonInitialize()
+	AuthorPageDivInitialize()
+	SettingButtonInitialize()
+	setting_githubINI()
+	StartGameTitleINI()
+	CharacterSelectBgini()
+	
 }

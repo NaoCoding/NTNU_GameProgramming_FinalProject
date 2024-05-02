@@ -30,7 +30,7 @@ CharacterPlaceStyle = [[9.1,90],[9.1,80],[9.1,70],[9.1,60],[9.1,50],[9.1,40],[9.
 [53.8,10],[59.4,10],[65,10],[70.6,10],[76.2,10],[81.8,10],[87.4,10],
 [87.4,20],[87.4,30],[87.4,40],[87.4,50],[87.4,60],[87.4,70],[87.4,80],[87.4,90],
 [81.8,90],[76.2,90],[70.6,90],[65,90],[59.4,90],[53.8,90],[48.2,90],
-[42.6,90],[37,90],[31.4,90],[25.8,90],[20.2,90],[14.7,90],]
+[42.6,90],[37,90],[31.4,90],[25.8,90],[20.2,90],[14.7,90]]
 let CharacterSelectBackButton
 diceCanClick = 0
 diceAnimationDone = 1
@@ -98,6 +98,7 @@ async function roll_the_dice(){
 		if(CharacterPlace[player_now-1] > 43){
 			CharacterPlace[player_now-1] = 0
 			CharacterRound[player_now-1] += 1
+			if(CharacterRound[player_now-1] == 2) return;
 		}
 		if(player_now==1){
 			chess1.style("left",CharacterPlaceStyle[CharacterPlace[player_now-1]][0].toString() + "%")
@@ -119,7 +120,6 @@ async function roll_the_dice(){
 		await delay(0.6)
 	}
 	
-	if(CharacterRound[player_now-1] == 2) return
 
 	player_now += 1
 	if(player_now > CharacterAmount) player_now = 1

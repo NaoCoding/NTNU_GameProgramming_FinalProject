@@ -1,4 +1,7 @@
 ## Game Programming Final Project
+
+* The course haven't ended so this repo may still update frequently
+
 [Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/) <br>
 [Random Events Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json)
 

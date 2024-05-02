@@ -1,12 +1,12 @@
-## 遊戲程式設計 期末專題 
+## Game Programming Final Project
 [Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/) <br>
-[Chance and Fate Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json)
+[Random Events Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json)
 
-### 主題
+### Overview
 ```
-台師大 112 學年度第二學期
-通識課程：遊戲程式設計
-期末專題：日式居酒屋大富翁
+Game Programming is a general course for NTNU's students
+learn how to code and how to create your own game.
+This repo is the final project we made when we took the course.
 ```
 ### Lang
 ```
@@ -16,16 +16,34 @@ p5.js (html + css + js)
 ```
 Download the responsitory and run index.html
 ```
+### Map Setting 
 
-### 作者 / 小組組員
+```
+Green : minigames
+Yellow : Random events
+Blue : Knowledge supplyment
+Orange : Quiz
+
+(The color may be different from the usual game, however, the setting remain the same)
+```
+
+![image](https://github.com/NaoCoding/NTNU_GameProgramming_FinalProject/assets/86964895/f94387dd-8f93-438f-93ea-8634c1501158)
+
+
+### Contributors
 ```
 Contributor List：
 
+Coding Group:
 41247001S 盧昱安  GitHub : NaoCoding
 41247024S 廖妤恩  Team Leader
+
+Content Creator:
 41247057S 陳育渝
 41211011E 鐘珮甄
 41211016E 羅崇愷
+
+Art Design:
 41241121S 李亞倫
 41272002H 鄭鈺樺
 ```

@@ -17,6 +17,7 @@ let player_count = 0
 let bot_count = 0
 let CharacterSelectDiv
 let CharacterSelectBox
+let chance_fateQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterBeer = [0,0,0,0]
@@ -31,7 +32,7 @@ let CharacterChoosenLabelbg01,CharacterChoosenLabelbg02,CharacterChoosenLabelbg0
 
 
 function setup() {
-	
+	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
 
 	//createCanvas(windowWidth, windowHeight)
 	wWidth = windowWidth / wWidth
@@ -48,18 +49,18 @@ function GameSettingCmd(){
 	CharacterSelectDiv.show()
 	CharacterSelectBackButton.show()
 	LeaveStartGameMenuCmd()
+	BackToMenuButton.hide()
 
 
 }
 
 function GameSettingDoneCmd(){
 
-	if(CharacterAmount >= 2){
-		CharacterSelectButtonhideall()
-		CharacterSelectDiv.hide()
-		CharacterSelectBackButton.hide()
-		GameSettingDoneButton.hide()
-	}
+	CharacterSelectButtonhideall()
+	CharacterSelectDiv.hide()
+	GameSettingDoneButton.hide()
+	CharacterSelectBackButton.hide()
+	BackToMenuButton.hide()
 
 }
 
@@ -619,6 +620,7 @@ function CharacterSelectButtonshowall(){
 	CharacterChoosenLabelbg02.show()
 	CharacterChoosenLabelbg03.show()
 	CharacterChoosenLabelbg04.show()
+
 }
 
 function CharacterSelectButtonhideall(){
@@ -636,6 +638,10 @@ function CharacterSelectButtonhideall(){
 	CharacterChoosenLabelbg02.hide()
 	CharacterChoosenLabelbg03.hide()
 	CharacterChoosenLabelbg04.hide()
+	CharacterChoosenLabel01.hide()
+	CharacterChoosenLabel02.hide()
+	CharacterChoosenLabel03.hide()
+	CharacterChoosenLabel04.hide()
 
 
 }

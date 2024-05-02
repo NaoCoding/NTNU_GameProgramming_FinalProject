@@ -19,6 +19,7 @@ let player_count = 0
 let bot_count = 0
 let CharacterSelectDiv
 let CharacterSelectBox
+let Game_movingdoll
 let chance_fateQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
@@ -50,7 +51,7 @@ player_now = 1
 
 function preload(){
 
-	//chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
+	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
 }
 //chance_fateQuestion.question[1][0]
 
@@ -71,9 +72,14 @@ async function roll_the_dice(){
 	if(diceCanClick == 0) return 
 	diceCanClick = 0
 	dice_result = 0
+	Game_movingdoll.show()
+	
 	
 
-	if(player_now==1) chess1.style("z-index","100")
+	if(player_now==1){
+		chess1.style("z-index","100")
+		
+	}
 	else chess1.style("z-index","3")
 	if(player_now==2) chess2.style("z-index","100")
 	else chess2.style("z-index","3")
@@ -81,6 +87,12 @@ async function roll_the_dice(){
 	else chess3.style("z-index","3")
 	if(player_now==4) chess4.style("z-index","100")
 	else chess4.style("z-index","3")
+
+	CharacterChoosenLabelChange(Game_movingdoll,CharacterID[player_now-1])
+	Game_movingdoll.style("top",(CharacterPlaceStyle[CharacterPlace[player_now-1]][1]-3).toString() + '%')
+	Game_movingdoll.style("left",(CharacterPlaceStyle[CharacterPlace[player_now-1]][0]).toString() + '%')
+	
+
 
 	t = 0
 
@@ -147,18 +159,6 @@ async function roll_the_dice(){
 
 
 
-function moveAnimation(a){
-	if(a==1){
-		if(player_now==1){
-			CharacterPlaceStyle[0][1] -= 9.2
-			chess1.style("top",CharacterPlaceStyle[0][1].toString() + "%")
-		}
-	}
-}
-
-
-
-
 
 function GameStart(){
  //rbyg
@@ -177,7 +177,13 @@ function GameStart(){
 	game_bg_div.html("</image>",1)
 	game_bg_div.show()
 
-	
+	Game_movingdoll = createImg("image/character01.png","png")
+
+	Game_movingdoll.style("width","5%")
+	Game_movingdoll.style("height","auto")
+	Game_movingdoll.style("position","absolute")
+	Game_movingdoll.hide()
+	Game_movingdoll.style("z-index","101")
 
 	dice_value_div = createElement('div')
 
@@ -513,7 +519,7 @@ function CharacterSRCINI(){
 	Character06SelectButton.removeAttribute("src")
 	Character07SelectButton.removeAttribute("src")
 	Character08SelectButton.removeAttribute("src")
-	Character01SelectButton.attribute("src","image/character01_head.png")
+	Character01SelectButton.attribute("src","image/character01_neck.png")
 	Character02SelectButton.attribute("src","image/character02.png")
 	Character03SelectButton.attribute("src","image/character03.png")
 	Character04SelectButton.attribute("src","image/character04.png")
@@ -566,10 +572,10 @@ function CharacterSelectBgini(){
 	CharacterSelectBackButton.html("</image>",1)
 
 	Character01SelectButton = createImg("image/character.png","character.png")
-	Character01SelectButton.style("height","36%");
-	Character01SelectButton.style("width","20%");
-	Character01SelectButton.style("left","25.2%");
-	Character01SelectButton.style("top","5.779%");
+	Character01SelectButton.style("height","45%");
+	Character01SelectButton.style("width","auto");
+	Character01SelectButton.style("left","24.2%");
+	Character01SelectButton.style("top","0%");
 	Character01SelectButton.style("background","transparent");
 	Character01SelectButton.style("color","transparent");
 	Character01SelectButton.style("position","absolute")

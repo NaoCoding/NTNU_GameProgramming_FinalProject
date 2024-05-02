@@ -113,12 +113,14 @@ async function roll_the_dice(){
 
 	
 	if(CharacterPlace[player_now-1] == 22){
+		await delay(0.6)
 		CharacterPlace[player_now-1] = 0
 		update_place()
 		await delay(0.6)
 	}
 
 	else if(CharacterPlace[player_now-1] == 8){
+		await delay(0.6)
 		CharacterPlace[player_now-1] = 22
 		update_place()
 		await delay(0.6)

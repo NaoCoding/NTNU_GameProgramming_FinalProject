@@ -647,7 +647,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg01 = createImg("image/choosered.png","png")
 	CharacterChoosenLabelbg01.style("height","42%");
-	CharacterChoosenLabelbg01.style("width","20%");
+	CharacterChoosenLabelbg01.style("width","auto");
 	CharacterChoosenLabelbg01.style("left","3.23%");
 	CharacterChoosenLabelbg01.style("top","3%");
 	CharacterChoosenLabelbg01.style("background","transparent");
@@ -657,7 +657,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg02 = createImg("image/chooseblue.png","png")
 	CharacterChoosenLabelbg02.style("height","42%");
-	CharacterChoosenLabelbg02.style("width","20%");
+	CharacterChoosenLabelbg02.style("width","auto");
 	CharacterChoosenLabelbg02.style("left","75%");
 	CharacterChoosenLabelbg02.style("top","3%");
 	CharacterChoosenLabelbg02.style("background","transparent");
@@ -667,7 +667,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg03 = createImg("image/chooseyellow.png","png")
 	CharacterChoosenLabelbg03.style("height","42%");
-	CharacterChoosenLabelbg03.style("width","20%");
+	CharacterChoosenLabelbg03.style("width","auto");
 	CharacterChoosenLabelbg03.style("left","3.23%");
 	CharacterChoosenLabelbg03.style("top","37.13%");
 	CharacterChoosenLabelbg03.style("background","transparent");
@@ -677,7 +677,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg04 = createImg("image/choosegreen.png","png")
 	CharacterChoosenLabelbg04.style("height","42%");
-	CharacterChoosenLabelbg04.style("width","20%");
+	CharacterChoosenLabelbg04.style("width","auto");
 	CharacterChoosenLabelbg04.style("left","75%");
 	CharacterChoosenLabelbg04.style("top","37.13%");
 	CharacterChoosenLabelbg04.style("background","transparent");

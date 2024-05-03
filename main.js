@@ -184,7 +184,7 @@ function GameStart(){
 	Game_movingdoll1 = createImg("image/character01.png","png")
 
 	Game_movingdoll1.style("width","5%")
-	Game_movingdoll1.style("height","auto")
+	Game_movingdoll1.style("height","2")
 	Game_movingdoll1.style("position","absolute")
 	Game_movingdoll1.show()
 	Game_movingdoll1.style("z-index","101")
@@ -192,7 +192,7 @@ function GameStart(){
 	Game_movingdoll2 = createImg("image/character01.png","png")
 
 	Game_movingdoll2.style("width","5%")
-	Game_movingdoll2.style("height","auto")
+	Game_movingdoll2.style("height","2")
 	Game_movingdoll2.style("position","absolute")
 	Game_movingdoll2.show()
 	Game_movingdoll2.style("z-index","101")
@@ -200,7 +200,7 @@ function GameStart(){
 	Game_movingdoll3 = createImg("image/character01.png","png")
 
 	Game_movingdoll3.style("width","5%")
-	Game_movingdoll3.style("height","auto")
+	Game_movingdoll3.style("height","2")
 	Game_movingdoll3.style("position","absolute")
 	Game_movingdoll3.show()
 	Game_movingdoll3.style("z-index","101")
@@ -208,7 +208,7 @@ function GameStart(){
 	Game_movingdoll4 = createImg("image/character01.png","png")
 
 	Game_movingdoll4.style("width","5%")
-	Game_movingdoll4.style("height","auto")
+	Game_movingdoll4.style("height","2")
 	Game_movingdoll4.style("position","absolute")
 	Game_movingdoll4.show()
 	Game_movingdoll4.style("z-index","101")
@@ -340,7 +340,7 @@ function StartGameTitleINI(){
 
 function setting_githubINI(){
 	setting_github = createElement('button')
-	githubpngstyle = "style=height:15%;width:auto;"
+	githubpngstyle = "style=height:15%;width:8%;"
 	githubpngstyle += 'position:absolute;top:77%;left:85%;transform:translate(-85%,-77%)'
 	setting_github.html("<image src='image/github.png'"+githubpngstyle+">",1)
 	setting_github.html("</image>",1)
@@ -622,7 +622,7 @@ function CharacterSelectBgini(){
 
 	Character01SelectButton = createImg("image/character.png","character.png")
 	Character01SelectButton.style("height","45%");
-	Character01SelectButton.style("width","auto");
+	Character01SelectButton.style("width","20");
 	Character01SelectButton.style("left","24.2%");
 	Character01SelectButton.style("top","0%");
 	Character01SelectButton.style("background","transparent");
@@ -632,7 +632,7 @@ function CharacterSelectBgini(){
 
 	Character02SelectButton = createImg("image/character.png","character.png")
 	Character02SelectButton.style("height","45%");
-	Character02SelectButton.style("width","auto");
+	Character02SelectButton.style("width","20");
 	Character02SelectButton.style("left","39%");
 	Character02SelectButton.style("top","0%");
 	Character02SelectButton.style("background","transparent");
@@ -702,7 +702,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg01 = createImg("image/choosered.png","png")
 	CharacterChoosenLabelbg01.style("height","42%");
-	CharacterChoosenLabelbg01.style("width","auto");
+	CharacterChoosenLabelbg01.style("width","22%");
 	CharacterChoosenLabelbg01.style("left","3.23%");
 	CharacterChoosenLabelbg01.style("top","3%");
 	CharacterChoosenLabelbg01.style("background","transparent");
@@ -712,7 +712,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg02 = createImg("image/chooseblue.png","png")
 	CharacterChoosenLabelbg02.style("height","42%");
-	CharacterChoosenLabelbg02.style("width","auto");
+	CharacterChoosenLabelbg02.style("width","22%");
 	CharacterChoosenLabelbg02.style("left","75%");
 	CharacterChoosenLabelbg02.style("top","3%");
 	CharacterChoosenLabelbg02.style("background","transparent");
@@ -722,7 +722,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg03 = createImg("image/chooseyellow.png","png")
 	CharacterChoosenLabelbg03.style("height","42%");
-	CharacterChoosenLabelbg03.style("width","auto");
+	CharacterChoosenLabelbg03.style("width","22%");
 	CharacterChoosenLabelbg03.style("left","3.23%");
 	CharacterChoosenLabelbg03.style("top","37.13%");
 	CharacterChoosenLabelbg03.style("background","transparent");
@@ -732,7 +732,7 @@ function CharacterSelectBgini(){
 
 	CharacterChoosenLabelbg04 = createImg("image/choosegreen.png","png")
 	CharacterChoosenLabelbg04.style("height","42%");
-	CharacterChoosenLabelbg04.style("width","auto");
+	CharacterChoosenLabelbg04.style("width","22%");
 	CharacterChoosenLabelbg04.style("left","75%");
 	CharacterChoosenLabelbg04.style("top","37.13%");
 	CharacterChoosenLabelbg04.style("background","transparent");
@@ -763,7 +763,7 @@ function CharacterSelectBgini(){
 		CharacterChoosenLabel03 = createImg("image/character.png","png")
 		CharacterChoosenLabel03.style("height","40%");
 		CharacterChoosenLabel03.style("width","23%");
-		CharacterChoosenLabel03.style("left","3%");
+		CharacterChoosenLabel03.style("left","5%");
 		CharacterChoosenLabel03.style("top","38%");
 		CharacterChoosenLabel03.style("background","transparent");
 		CharacterChoosenLabel03.style("color","transparent");
@@ -773,7 +773,7 @@ function CharacterSelectBgini(){
 		CharacterChoosenLabel04 = createImg("image/character.png","png")
 		CharacterChoosenLabel04.style("height","40%");
 		CharacterChoosenLabel04.style("width","23%");
-		CharacterChoosenLabel04.style("left","75%");
+		CharacterChoosenLabel04.style("left","76.805%");
 		CharacterChoosenLabel04.style("top","38%");
 		CharacterChoosenLabel04.style("background","transparent");
 		CharacterChoosenLabel04.style("color","transparent");

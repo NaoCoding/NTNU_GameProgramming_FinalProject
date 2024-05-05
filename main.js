@@ -570,7 +570,7 @@ function CharacterSRCINI(){
 	Character08SelectButton.removeAttribute("src")
 	Character01SelectButton.attribute("src","image/character01_neck.png")
 	Character02SelectButton.attribute("src","image/character02_neck.png")
-	Character03SelectButton.attribute("src","image/character03.png")
+	Character03SelectButton.attribute("src","image/character03_neck.png")
 	Character04SelectButton.attribute("src","image/character04.png")
 	Character05SelectButton.attribute("src","image/character05.png")
 	Character06SelectButton.attribute("src","image/character06.png")
@@ -641,10 +641,10 @@ function CharacterSelectBgini(){
 	Character02SelectButton.mouseClicked(CharacterSelectSelectFn2)
 
 	Character03SelectButton = createImg("image/character.png","character.png")
-	Character03SelectButton.style("height","36%");
-	Character03SelectButton.style("width","20%");
-	Character03SelectButton.style("left","58.54%");
-	Character03SelectButton.style("top","5.779%");
+	Character03SelectButton.style("height","45%");
+	Character03SelectButton.style("width","20");
+	Character03SelectButton.style("left","54.2%");
+	Character03SelectButton.style("top","0%");
 	Character03SelectButton.style("background","transparent");
 	Character03SelectButton.style("color","transparent");
 	Character03SelectButton.style("position","absolute")

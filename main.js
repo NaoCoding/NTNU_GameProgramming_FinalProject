@@ -571,7 +571,7 @@ function CharacterSRCINI(){
 	Character01SelectButton.attribute("src","image/character01_neck.png")
 	Character02SelectButton.attribute("src","image/character02_neck.png")
 	Character03SelectButton.attribute("src","image/character03_neck.png")
-	Character04SelectButton.attribute("src","image/character04.png")
+	Character04SelectButton.attribute("src","image/character04_neck.png")
 	Character05SelectButton.attribute("src","image/character05.png")
 	Character06SelectButton.attribute("src","image/character06.png")
 	Character07SelectButton.attribute("src","image/character07.png")
@@ -622,7 +622,7 @@ function CharacterSelectBgini(){
 
 	Character01SelectButton = createImg("image/character.png","character.png")
 	Character01SelectButton.style("height","45%");
-	Character01SelectButton.style("width","20");
+	Character01SelectButton.style("width","22%");
 	Character01SelectButton.style("left","24.2%");
 	Character01SelectButton.style("top","0%");
 	Character01SelectButton.style("background","transparent");
@@ -632,7 +632,7 @@ function CharacterSelectBgini(){
 
 	Character02SelectButton = createImg("image/character.png","character.png")
 	Character02SelectButton.style("height","45%");
-	Character02SelectButton.style("width","20");
+	Character02SelectButton.style("width","22%");
 	Character02SelectButton.style("left","39%");
 	Character02SelectButton.style("top","0%");
 	Character02SelectButton.style("background","transparent");
@@ -642,7 +642,7 @@ function CharacterSelectBgini(){
 
 	Character03SelectButton = createImg("image/character.png","character.png")
 	Character03SelectButton.style("height","45%");
-	Character03SelectButton.style("width","20");
+	Character03SelectButton.style("width","22%");
 	Character03SelectButton.style("left","54.2%");
 	Character03SelectButton.style("top","0%");
 	Character03SelectButton.style("background","transparent");
@@ -651,10 +651,10 @@ function CharacterSelectBgini(){
 	Character03SelectButton.mouseClicked(CharacterSelectSelectFn3)
 
 	Character04SelectButton = createImg("image/character.png","character.png")
-	Character04SelectButton.style("height","36%");
-	Character04SelectButton.style("width","20%");
-	Character04SelectButton.style("left","25.2%");
-	Character04SelectButton.style("top","43.16%");
+	Character04SelectButton.style("height","45%");
+	Character04SelectButton.style("width","22%");
+	Character04SelectButton.style("left","24.2%");
+	Character04SelectButton.style("top","25.7%");
 	Character04SelectButton.style("background","transparent");
 	Character04SelectButton.style("color","transparent");
 	Character04SelectButton.style("position","absolute")

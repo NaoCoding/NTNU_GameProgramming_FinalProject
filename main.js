@@ -199,7 +199,7 @@ async function roll_the_dice(){
 		await delay(0.35)
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
-		await delay(2.5)
+		await delay(3)
 		eventPOPword.hide()
 		eventPOPdiv.hide()
 	}
@@ -216,7 +216,7 @@ async function roll_the_dice(){
 		await delay(0.35)
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
-		await delay(2.5)
+		await delay(3)
 		eventPOPword.hide()
 		eventPOPdiv.hide()
 	}

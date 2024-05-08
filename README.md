@@ -6,7 +6,7 @@
 * No Commercial Use 
 
 [Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/) <br>
-[Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/)
+
 
 ### Overview
 ```

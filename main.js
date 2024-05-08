@@ -1,8 +1,10 @@
 
+
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
-
+let beerd1,beerd2,beerd3,beerd4
+let head1,head2,head3,head4
 let AuthorButton
 let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
@@ -20,7 +22,7 @@ let bot_count = 0
 let CharacterSelectDiv
 let CharacterSelectBox
 let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
-let chance_fateQuestion, knowledgeQuestion
+let chance_fateQuestion, knowledgeQuestion, questionQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterWait = [0,0,0,0]
@@ -52,6 +54,7 @@ player_now = 1
 function preload(){
 
 	knowledgeQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/knowledge.json")
+	questionQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/question.json")
 	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
 }
 //chance_fateQuestion.question[1][0]
@@ -128,7 +131,76 @@ async function roll_the_dice(){
 	}
 
 
-	if([1,5,10,13,17,19,25,29,32,35,39,41].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+	if([2,7,14,18,21,26,36,40].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/fateappear.jpg")
+		eventPOPdiv.show()
+		await delay(1)
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/fateui.jpg")
+		var ge = Math.floor(Math.random() * 15) + 1
+		eventPOPword.html(chance_fateQuestion['question'][(ge).toString()][0],0)
+		eventPOPword.show()
+		if(ge==1){
+			CharacterBeer[player_now-1] += 1;
+			CharacterWait[player_now-1] += 1;
+		}
+		else if(ge==2){
+			CharacterWait[player_now-1] += 2;
+		}
+		else if(ge==3){
+			CharacterBeer[player_now-1] += 1;
+			player_now -= 1;
+		}
+		else if(ge==4){
+			CharacterWait[player_now-1] += 1;
+		}
+		else if(ge==5){
+			CharacterBeer[player_now-1] += 1;
+		}
+		else if(ge==6){
+			CharacterBeer[player_now-1] -= 2;
+		}
+		else if(ge==7){
+			CharacterBeer[player_now-1] += 2;
+		}
+		else if(ge==8){
+			CharacterBeer[player_now-1] -= 1;
+		}
+		else if(ge==9){
+			CharacterBeer[player_now-1] += 1;
+		}
+		else if(ge==10){
+			CharacterPlace[player_now-1] -= 3;
+		}
+		else if(ge==11){
+			for (let index = 0; index < 4; index++) {
+				CharacterPlace[index] += 5;
+			}
+		}
+		else if(ge==12){
+			for (let index = 0; index < 4; index++) {
+				CharacterPlace[index] -= 3;
+			}
+		}
+		else if(ge==13){
+			CharacterPlace[player_now-1] -= 5;
+		}
+		else if(ge==14){
+			CharacterPlace[player_now-1] -= 8;
+			for (let index = 0; index < 4; index++) {
+				CharacterPlace[index] += 3;
+			}
+		}
+		else if(ge==15){
+			CharacterWait[player_now-1] += 1;
+		}
+		await delay(0.35)
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
+	}
+
+	else if([1,5,10,13,17,19,25,29,32,35,39,41].find((e) => e == CharacterPlace[player_now-1]) != undefined){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/knowledgeappear.jpg")
 		eventPOPdiv.show()
@@ -140,14 +212,6 @@ async function roll_the_dice(){
 		await delay(0.35)
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
-	}
-
-	else if([2,7,14,18,21,26,36,40].find((e) => e == CharacterPlace[player_now-1]) != undefined){
-		eventPOPdiv.removeAttribute("src")
-		eventPOPdiv.attribute("src","image/fateappear.jpg")
-		eventPOPdiv.show()
-		await delay(1)
-		eventPOPdiv.hide()
 	}
 
 	else if([3,12,16,24,28,34,38,43].find((e) => e == CharacterPlace[player_now-1]) != undefined){
@@ -185,15 +249,49 @@ async function roll_the_dice(){
 		CharacterWait[player_now-1] = 1
 	}
 
+	for (let index = 0; index < 3; index++) {
+		if(CharacterPlace[index] < 0){
+			CharacterPlace[index] += 43;
+			CharacterRound[index] -= 1;
+		}
+	}
 	
+	chess1.style("left",CharacterPlaceStyle[CharacterPlace[0]][0].toString() + "%")
+	chess1.style("top",CharacterPlaceStyle[CharacterPlace[0]][1].toString() + "%")
+	chess2.style("left",CharacterPlaceStyle[CharacterPlace[1]][0].toString() + "%")
+	chess2.style("top",CharacterPlaceStyle[CharacterPlace[1]][1].toString() + "%")
+	chess3.style("left",CharacterPlaceStyle[CharacterPlace[2]][0].toString() + "%")
+	chess3.style("top",CharacterPlaceStyle[CharacterPlace[2]][1].toString() + "%")
+	chess4.style("left",CharacterPlaceStyle[CharacterPlace[3]][0].toString() + "%")
+	chess4.style("top",CharacterPlaceStyle[CharacterPlace[3]][1].toString() + "%")
+	Game_movingdoll1.style("top",(CharacterPlaceStyle[CharacterPlace[0]][1]-7.8).toString() + '%')
+	Game_movingdoll1.style("left",(CharacterPlaceStyle[CharacterPlace[0]][0]-1).toString() + '%')
+	Game_movingdoll2.style("top",(CharacterPlaceStyle[CharacterPlace[1]][1]-7.8).toString() + '%')
+	Game_movingdoll2.style("left",(CharacterPlaceStyle[CharacterPlace[1]][0]-1).toString() + '%')
+	Game_movingdoll3.style("top",(CharacterPlaceStyle[CharacterPlace[2]][1]-7.8).toString() + '%')
+	Game_movingdoll3.style("left",(CharacterPlaceStyle[CharacterPlace[2]][0]-1).toString() + '%')
+	Game_movingdoll4.style("top",(CharacterPlaceStyle[CharacterPlace[3]][1]-7.8).toString() + '%')
+	Game_movingdoll4.style("left",(CharacterPlaceStyle[CharacterPlace[3]][0]-1).toString() + '%')
+
+	if(CharacterBeer[0] < 0) CharacterBeer[0] = 0
+	if(CharacterBeer[1] < 0) CharacterBeer[1] = 0
+	if(CharacterBeer[2] < 0) CharacterBeer[2] = 0
+	if(CharacterBeer[3] < 0) CharacterBeer[3] = 0
+
+	beerd1.html((CharacterBeer[0]).toString(),0)
+	beerd2.html((CharacterBeer[1]).toString(),0)
+	beerd3.html((CharacterBeer[2]).toString(),0)
+	beerd4.html((CharacterBeer[3]).toString(),0)
 
 	player_now += 1
+	if(player_now > CharacterAmount) player_now = 1
+
 	while(CharacterWait[player_now-1] > 0){
 		CharacterWait[player_now-1] -= 1
 		player_now += 1
 		if(player_now > CharacterAmount) player_now = 1
 	}
-	if(player_now > CharacterAmount) player_now = 1
+	
 	dice_value_div.style("background-color",color_now())
 	dice_value_div.html("<br>",0)
 	diceCanClick = 1
@@ -221,7 +319,7 @@ function GameStart(){
 	eventPOPword = createElement("h1")
 	eventPOPword.attribute("id","eventPOPword")
 	eventPOPword.style("width","80%")
-	eventPOPword.style("height","25%")
+	eventPOPword.style("height","15%")
 	eventPOPword.style("position","absolute")
 	eventPOPword.style("top","50%")
 	eventPOPword.style("fontSize","36px")
@@ -289,6 +387,7 @@ function GameStart(){
 	Game_movingdoll3.style("left",(CharacterPlaceStyle[CharacterPlace[2]][0]-1).toString() + '%')
 	Game_movingdoll4.style("top",(CharacterPlaceStyle[CharacterPlace[3]][1]-7.8).toString() + '%')
 	Game_movingdoll4.style("left",(CharacterPlaceStyle[CharacterPlace[3]][0]-1).toString() + '%')
+
 
 	dice_value_div = createElement('div')
 
@@ -373,6 +472,161 @@ function GameStart(){
 	else Game_movingdoll3.hide()
 	if(CharacterAmount > 3) Game_movingdoll4.show()
 	else Game_movingdoll4.hide()
+
+	head1 = createImg("image/character0"+(CharacterID[0]).toString()+"_head.png")
+	head1.style("left","15%")
+	head1.style("top",'48%')
+	head1.style('width','7%')
+	head1.style('height','11%')
+	head1.style("position",'absolute')
+
+	head2 = createImg("image/character0"+(CharacterID[1]).toString()+"_head.png")
+	head2.style("left","15%")
+	head2.style("top",'56%')
+	head2.style('width','7%')
+	head2.style('height','11%')
+	head2.style("position",'absolute')
+
+	head3 = createImg("image/character0"+(CharacterID[2]).toString()+"_head.png")
+	head3.style("left","15%")
+	head3.style("top",'64%')
+	head3.style('width','7%')
+	head3.style('height','11%')
+	head3.style("position",'absolute')
+	if(CharacterAmount<3) head3.hide()
+
+	head4 = createImg("image/character0"+(CharacterID[3]).toString()+"_head.png")
+	head4.style("left","15%")
+	head4.style("top",'72%')
+	head4.style('width','7%')
+	head4.style('height','11%')
+	head4.style("position",'absolute')
+	if(CharacterAmount<4) head4.hide()
+
+	beer1 = createImg("image/beer.png")
+	beer1.style("left","27%")
+	beer1.style("top",'53.9%')
+	beer1.style('width','3.5%')
+	beer1.style('height','5%')
+	beer1.style("position",'absolute')
+
+	beer2 = createImg("image/beer.png")
+	beer2.style("left","27%")
+	beer2.style("top",'61.6%')
+	beer2.style('width','3.5%')
+	beer2.style('height','5%')
+	beer2.style("position",'absolute')
+
+	beer3 = createImg("image/beer.png")
+	beer3.style("left","27%")
+	beer3.style("top",'69.3%')
+	beer3.style('width','3.5%')
+	beer3.style('height','5%')
+	beer3.style("position",'absolute')
+
+	beer4 = createImg("image/beer.png")
+	beer4.style("left","27%")
+	beer4.style("top",'77%')
+	beer4.style('width','3.5%')
+	beer4.style('height','5%')
+	beer4.style("position",'absolute')
+
+	beer11 = createImg("image/beer.png")
+	beer11.style("left","29%")
+	beer11.style("top",'53.9%')
+	beer11.style('width','3.5%')
+	beer11.style('height','5%')
+	beer11.style("position",'absolute')
+
+	beer22 = createImg("image/beer.png")
+	beer22.style("left","29%")
+	beer22.style("top",'61.6%')
+	beer22.style('width','3.5%')
+	beer22.style('height','5%')
+	beer22.style("position",'absolute')
+
+	beer33 = createImg("image/beer.png")
+	beer33.style("left","29%")
+	beer33.style("top",'69.3%')
+	beer33.style('width','3.5%')
+	beer33.style('height','5%')
+	beer33.style("position",'absolute')
+
+	beer44 = createImg("image/beer.png")
+	beer44.style("left","29%")
+	beer44.style("top",'77%')
+	beer44.style('width','3.5%')
+	beer44.style('height','5%')
+	beer44.style("position",'absolute')
+
+	beer111 = createImg("image/beer.png")
+	beer111.style("left","31%")
+	beer111.style("top",'53.9%')
+	beer111.style('width','3.5%')
+	beer111.style('height','5%')
+	beer111.style("position",'absolute')
+
+	beer222 = createImg("image/beer.png")
+	beer222.style("left","31%")
+	beer222.style("top",'61.6%')
+	beer222.style('width','3.5%')
+	beer222.style('height','5%')
+	beer222.style("position",'absolute')
+
+	beer333 = createImg("image/beer.png")
+	beer333.style("left","31%")
+	beer333.style("top",'69.3%')
+	beer333.style('width','3.5%')
+	beer333.style('height','5%')
+	beer333.style("position",'absolute')
+
+	beer444 = createImg("image/beer.png")
+	beer444.style("left","31%")
+	beer444.style("top",'77%')
+	beer444.style('width','3.5%')
+	beer444.style('height','5%')
+	beer444.style("position",'absolute')
+
+	beerd1 = createElement("h2")
+	beerd1.style("left","22%")
+	beerd1.style("top",'52.5%')
+	beerd1.style('width','3%')
+	beerd1.style('height','3%')
+	beerd1.style("color","#EBEBFF")
+	beerd1.style('textAlign','center')
+	beerd1.style("position",'absolute')
+	beerd1.html((CharacterBeer[0]).toString(),0)
+
+	beerd2 = createElement("h2")
+	beerd2.style("left","22%")
+	beerd2.style("top",'60.4%')
+	beerd2.style('width','3%')
+	beerd2.style('height','3%')
+	beerd2.style("color","#EBEBFF")
+	beerd2.style('textAlign','center')
+	beerd2.style("position",'absolute')
+	beerd2.html((CharacterBeer[1]).toString(),0)
+
+	beerd3 = createElement("h2")
+	beerd3.style("left","22%")
+	beerd3.style("top",'68.3%')
+	beerd3.style('width','3%')
+	beerd3.style('height','3%')
+	beerd3.style("color","#EBEBFF")
+	beerd3.style('textAlign','center')
+	beerd3.style("position",'absolute')
+	beerd3.html((CharacterBeer[1]).toString(),0)
+
+	beerd4 = createElement("h2")
+	beerd4.style("left","22%")
+	beerd4.style("top",'76.2%')
+	beerd4.style('width','3%')
+	beerd4.style('height','3%')
+	beerd4.style("color","#EBEBFF")
+	beerd4.style('textAlign','center')
+	beerd4.style("position",'absolute')
+	beerd4.html((CharacterBeer[1]).toString(),0)
+
 }
 
 

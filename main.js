@@ -1,5 +1,3 @@
-
-
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
@@ -201,6 +199,9 @@ async function roll_the_dice(){
 		await delay(0.35)
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
+		await delay(2.5)
+		eventPOPword.hide()
+		eventPOPdiv.hide()
 	}
 
 	else if([1,5,10,13,17,19,25,29,32,35,39,41].find((e) => e == CharacterPlace[player_now-1]) != undefined){
@@ -215,6 +216,9 @@ async function roll_the_dice(){
 		await delay(0.35)
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
+		await delay(2.5)
+		eventPOPword.hide()
+		eventPOPdiv.hide()
 	}
 
 	else if([3,12,16,24,28,34,38,43].find((e) => e == CharacterPlace[player_now-1]) != undefined){
@@ -749,10 +753,10 @@ function CharacterSRCINI(){
 	Character02SelectButton.attribute("src","image/character02_neck.png")
 	Character03SelectButton.attribute("src","image/character03_neck.png")
 	Character04SelectButton.attribute("src","image/character04_neck.png")
-	Character05SelectButton.attribute("src","image/character05.png")
-	Character06SelectButton.attribute("src","image/character06.png")
-	Character07SelectButton.attribute("src","image/character07.png")
-	Character08SelectButton.attribute("src","image/character08.png")
+	Character05SelectButton.attribute("src","image/character05_neck.png")
+	Character06SelectButton.attribute("src","image/character06_neck.png")
+	Character07SelectButton.attribute("src","image/character07_neck.png")
+	Character08SelectButton.attribute("src","image/character08_neck.png")
 }
 
 function CharacterSelectBgini(){
@@ -842,10 +846,10 @@ function CharacterSelectBgini(){
 	Character04SelectButton.mouseClicked(CharacterSelectSelectFn4)
 
 	Character05SelectButton = createImg("image/character.png","character.png")
-	Character05SelectButton.style("height","36%");
-	Character05SelectButton.style("width","20%");
-	Character05SelectButton.style("left","58.54%");
-	Character05SelectButton.style("top","43.16%");
+	Character05SelectButton.style("height","45%");
+	Character05SelectButton.style("width","22%");
+	Character05SelectButton.style("left","54.2%");
+	Character05SelectButton.style("top","25.7%");
 	Character05SelectButton.style("zIndex","4");
 	Character05SelectButton.style("background","transparent");
 	Character05SelectButton.style("color","transparent");
@@ -853,34 +857,38 @@ function CharacterSelectBgini(){
 	Character05SelectButton.mouseClicked(CharacterSelectSelectFn5)
 
 	Character06SelectButton = createImg("image/character.png","character.png")
-	Character06SelectButton.style("height","36%");
-	Character06SelectButton.style("width","20%");
-	Character06SelectButton.style("left","25.2%");
-	Character06SelectButton.style("top","68.74%");
+	Character06SelectButton.style("height","45%");
+	Character06SelectButton.style("width","22%");
+	Character06SelectButton.style("left","24.2%");
+	Character06SelectButton.style("top","51.4%");
 	Character06SelectButton.style("background","transparent");
 	Character06SelectButton.style("color","transparent");
 	Character06SelectButton.style("position","absolute")
 	Character06SelectButton.mouseClicked(CharacterSelectSelectFn6)
 
 	Character07SelectButton = createImg("image/character.png","character.png")
-	Character07SelectButton.style("height","36%");
-	Character07SelectButton.style("width","20%");
+	Character07SelectButton.style("height","45%");
+	Character07SelectButton.style("width","39%");
 	Character07SelectButton.style("left","43.88%");
-	Character07SelectButton.style("top","68.74%");
+	Character07SelectButton.style("top","51.4%");
 	Character07SelectButton.style("background","transparent");
 	Character07SelectButton.style("color","transparent");
 	Character07SelectButton.style("position","absolute")
 	Character07SelectButton.mouseClicked(CharacterSelectSelectFn7)
 
+	
+
 	Character08SelectButton = createImg("image/character.png","character.png")
-	Character08SelectButton.style("height","36%");
-	Character08SelectButton.style("width","20%");
+	Character08SelectButton.style("height","45%");
+	Character08SelectButton.style("width","54.2%");
 	Character08SelectButton.style("left","58.54%");
-	Character08SelectButton.style("top","68.74%");
+	Character08SelectButton.style("top","51.4%");
 	Character08SelectButton.style("background","transparent");
 	Character08SelectButton.style("color","transparent");
 	Character08SelectButton.style("position","absolute")
 	Character08SelectButton.mouseClicked(CharacterSelectSelectFn8)
+
+
 
 	CharacterChoosenLabelbg01 = createImg("image/choosered.png","png")
 	CharacterChoosenLabelbg01.style("height","42%");
@@ -985,6 +993,10 @@ function CharacterSelectButtonshowall(){
 	CharacterChoosenLabelbg02.show()
 	CharacterChoosenLabelbg03.show()
 	CharacterChoosenLabelbg04.show()
+
+
+	Character07SelectButton.hide()
+	Character08SelectButton.hide()
 
 }
 

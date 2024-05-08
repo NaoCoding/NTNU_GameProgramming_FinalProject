@@ -7,6 +7,7 @@ let AuthorButton
 let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
 let setting_github
+idleTime = 0
 let GameSettingDoneButton , CharacterSelectBg
 let backGroundColor = "rgb(251,229,220)"
 let StartGameTitleColor = "rgb(196,165,0)"
@@ -197,11 +198,18 @@ async function roll_the_dice(){
 			CharacterWait[player_now-1] += 1;
 		}
 		await delay(0.35)
+		idleTime = 1;
 		eventPOPdiv.removeAttribute("onclick")
-		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
-		await delay(3)
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
 		eventPOPword.hide()
 		eventPOPdiv.hide()
+		idleTime = 0;
+		
 	}
 
 	else if([1,5,10,13,17,19,25,29,32,35,39,41].find((e) => e == CharacterPlace[player_now-1]) != undefined){
@@ -214,11 +222,17 @@ async function roll_the_dice(){
 		eventPOPword.html(knowledgeQuestion['question'][(Math.floor(Math.random() * 39) + 1).toString()],0)
 		eventPOPword.show()
 		await delay(0.35)
+		idleTime = 1;
 		eventPOPdiv.removeAttribute("onclick")
-		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
-		await delay(3)
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
 		eventPOPword.hide()
 		eventPOPdiv.hide()
+		idleTime = 0;
 	}
 
 	else if([3,12,16,24,28,34,38,43].find((e) => e == CharacterPlace[player_now-1]) != undefined){
@@ -531,6 +545,20 @@ function GameStart(){
 	beer3.style('height','5%')
 	beer3.style("position",'absolute')
 
+	beer33 = createImg("image/beer.png")
+	beer33.style("left","29%")
+	beer33.style("top",'69.3%')
+	beer33.style('width','3.5%')
+	beer33.style('height','5%')
+	beer33.style("position",'absolute')
+
+	beer333 = createImg("image/beer.png")
+	beer333.style("left","31%")
+	beer333.style("top",'69.3%')
+	beer333.style('width','3.5%')
+	beer333.style('height','5%')
+	beer333.style("position",'absolute')
+
 	beer4 = createImg("image/beer.png")
 	beer4.style("left","27%")
 	beer4.style("top",'77%')
@@ -552,12 +580,7 @@ function GameStart(){
 	beer22.style('height','5%')
 	beer22.style("position",'absolute')
 
-	beer33 = createImg("image/beer.png")
-	beer33.style("left","29%")
-	beer33.style("top",'69.3%')
-	beer33.style('width','3.5%')
-	beer33.style('height','5%')
-	beer33.style("position",'absolute')
+	
 
 	beer44 = createImg("image/beer.png")
 	beer44.style("left","29%")
@@ -580,12 +603,7 @@ function GameStart(){
 	beer222.style('height','5%')
 	beer222.style("position",'absolute')
 
-	beer333 = createImg("image/beer.png")
-	beer333.style("left","31%")
-	beer333.style("top",'69.3%')
-	beer333.style('width','3.5%')
-	beer333.style('height','5%')
-	beer333.style("position",'absolute')
+	
 
 	beer444 = createImg("image/beer.png")
 	beer444.style("left","31%")
@@ -633,6 +651,20 @@ function GameStart(){
 	beerd4.style('textAlign','center')
 	beerd4.style("position",'absolute')
 	beerd4.html((CharacterBeer[1]).toString(),0)
+
+	if(CharacterAmount < 3){
+		beer3.hide()
+		beer33.hide()
+		beer333.hide()
+		beerd3.hide()
+	}
+
+	if(CharacterAmount < 4){
+		beer4.hide()
+		beer44.hide()
+		beer444.hide()
+		beerd4.hide()
+	}
 
 }
 

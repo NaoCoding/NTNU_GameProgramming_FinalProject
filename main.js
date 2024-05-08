@@ -220,7 +220,7 @@ function GameStart(){
 	eventPOPword = createElement("h1")
 	eventPOPword.attribute("id","eventPOPword")
 	eventPOPword.style("width","80%")
-	eventPOPword.style("height","30%")
+	eventPOPword.style("height","25%")
 	eventPOPword.style("position","absolute")
 	eventPOPword.style("top","50%")
 	eventPOPword.style("fontSize","36px")

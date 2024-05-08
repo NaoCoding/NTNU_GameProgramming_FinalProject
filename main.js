@@ -1,6 +1,4 @@
 
-
-
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
@@ -70,6 +68,8 @@ function setup() {
 	
 }
 
+
+
 async function roll_the_dice(){
 	
 	if(diceCanClick == 0) return 
@@ -132,15 +132,20 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/knowledgeappear.jpg")
 		eventPOPdiv.show()
-		await delay(1.5)
-		eventPOPdiv.hide()
+		await delay(1)
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/knowledgeui.jpg")
+		eventPOPword.html(knowledgeQuestion['question'][(Math.floor(Math.random() * 39) + 1).toString()],0)
+		eventPOPword.show()
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
 	}
 
 	else if([2,7,14,18,21,26,36,40].find((e) => e == CharacterPlace[player_now-1]) != undefined){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/fateappear.jpg")
 		eventPOPdiv.show()
-		await delay(1.5)
+		await delay(1)
 		eventPOPdiv.hide()
 	}
 
@@ -148,7 +153,7 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/smallgameappear.jpg")
 		eventPOPdiv.show()
-		await delay(1.5)
+		await delay(1)
 		eventPOPdiv.hide()
 	}
 
@@ -156,7 +161,7 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/questionappear.jpg")
 		eventPOPdiv.show()
-		await delay(1.5)
+		await delay(1)
 		eventPOPdiv.hide()
 	}
 
@@ -210,6 +215,19 @@ function GameStart(){
 	eventPOPdiv.style("left","0px")
 	eventPOPdiv.style("z-index","1000")
 	eventPOPdiv.hide()
+	eventPOPdiv.attribute("id","eventPOPdiv")
+	
+	eventPOPword = createElement("h1")
+	eventPOPword.attribute("id","eventPOPword")
+	eventPOPword.style("width","80%")
+	eventPOPword.style("height","30%")
+	eventPOPword.style("position","absolute")
+	eventPOPword.style("top","50%")
+	eventPOPword.style("fontSize","36px")
+	eventPOPword.style("left","10%")
+	eventPOPword.style("textAlign","center")
+	eventPOPword.style("z-index","1001")
+	eventPOPword.hide()
 
 	game_bg_div = createElement('div')
 
@@ -526,6 +544,7 @@ function CharacterSelectBgini(){
 	Character01SelectButton.style("width","22%");
 	Character01SelectButton.style("left","24.2%");
 	Character01SelectButton.style("top","0%");
+	Character01SelectButton.style("zIndex","5");
 	Character01SelectButton.style("background","transparent");
 	Character01SelectButton.style("color","transparent");
 	Character01SelectButton.style("position","absolute")
@@ -536,6 +555,7 @@ function CharacterSelectBgini(){
 	Character02SelectButton.style("width","22%");
 	Character02SelectButton.style("left","39%");
 	Character02SelectButton.style("top","0%");
+	Character02SelectButton.style("zIndex","5");
 	Character02SelectButton.style("background","transparent");
 	Character02SelectButton.style("color","transparent");
 	Character02SelectButton.style("position","absolute")
@@ -546,6 +566,7 @@ function CharacterSelectBgini(){
 	Character03SelectButton.style("width","22%");
 	Character03SelectButton.style("left","54.2%");
 	Character03SelectButton.style("top","0%");
+	Character03SelectButton.style("zIndex","5");
 	Character03SelectButton.style("background","transparent");
 	Character03SelectButton.style("color","transparent");
 	Character03SelectButton.style("position","absolute")
@@ -556,6 +577,7 @@ function CharacterSelectBgini(){
 	Character04SelectButton.style("width","22%");
 	Character04SelectButton.style("left","24.2%");
 	Character04SelectButton.style("top","25.7%");
+	Character04SelectButton.style("zIndex","4");
 	Character04SelectButton.style("background","transparent");
 	Character04SelectButton.style("color","transparent");
 	Character04SelectButton.style("position","absolute")
@@ -566,6 +588,7 @@ function CharacterSelectBgini(){
 	Character05SelectButton.style("width","20%");
 	Character05SelectButton.style("left","58.54%");
 	Character05SelectButton.style("top","43.16%");
+	Character05SelectButton.style("zIndex","4");
 	Character05SelectButton.style("background","transparent");
 	Character05SelectButton.style("color","transparent");
 	Character05SelectButton.style("position","absolute")

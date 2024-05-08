@@ -23,6 +23,7 @@ let CharacterSelectDiv
 let CharacterSelectBox
 let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
 let chance_fateQuestion, knowledgeQuestion, questionQuestion
+let wordleQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterWait = [0,0,0,0]
@@ -56,6 +57,8 @@ function preload(){
 	knowledgeQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/knowledge.json")
 	questionQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/question.json")
 	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
+	wordleQuestion = loadStrings("https://raw.githubusercontent.com/tabatkins/wordle-list/main/words")
+
 }
 //chance_fateQuestion.question[1][0]
 

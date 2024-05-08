@@ -6,7 +6,7 @@
 * No Commercial Use 
 
 [Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/) <br>
-[Random Events Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json)
+[Database](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/)
 
 ### Overview
 ```

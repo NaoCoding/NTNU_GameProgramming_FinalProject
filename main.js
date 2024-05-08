@@ -137,6 +137,7 @@ async function roll_the_dice(){
 		eventPOPdiv.attribute("src","image/knowledgeui.jpg")
 		eventPOPword.html(knowledgeQuestion['question'][(Math.floor(Math.random() * 39) + 1).toString()],0)
 		eventPOPword.show()
+		await delay(0.35)
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\"")
 	}

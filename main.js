@@ -20,7 +20,7 @@ let bot_count = 0
 let CharacterSelectDiv
 let CharacterSelectBox
 let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
-let chance_fateQuestion
+let chance_fateQuestion,knowledgeQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterWait = [0,0,0,0]
@@ -51,6 +51,7 @@ player_now = 1
 
 function preload(){
 
+	knowledgeQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/knowledge.json")
 	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
 }
 //chance_fateQuestion.question[1][0]

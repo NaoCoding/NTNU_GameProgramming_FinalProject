@@ -1,5 +1,6 @@
 
 
+
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
@@ -16,11 +17,12 @@ let FullScreen
 let wWidth = 1440 
 let wHeight = 739 
 let player_count = 0
+let eventPOPdiv
 let bot_count = 0
 let CharacterSelectDiv
 let CharacterSelectBox
 let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
-let chance_fateQuestion,knowledgeQuestion
+let chance_fateQuestion, knowledgeQuestion
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterWait = [0,0,0,0]
@@ -126,10 +128,40 @@ async function roll_the_dice(){
 	}
 
 
+	if([1,5,10,13,17,19,25,29,32,35,39,41].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/knowledgeappear.jpg")
+		eventPOPdiv.show()
+		await delay(1.5)
+		eventPOPdiv.hide()
+	}
 
+	else if([2,7,14,18,21,26,36,40].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/fateappear.jpg")
+		eventPOPdiv.show()
+		await delay(1.5)
+		eventPOPdiv.hide()
+	}
+
+	else if([3,12,16,24,28,34,38,43].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/smallgameappear.jpg")
+		eventPOPdiv.show()
+		await delay(1.5)
+		eventPOPdiv.hide()
+	}
+
+	else if([4,6,9,11,15,20,23,27,31,33,37,42].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/questionappear.jpg")
+		eventPOPdiv.show()
+		await delay(1.5)
+		eventPOPdiv.hide()
+	}
 
 	
-	if(CharacterPlace[player_now-1] == 22){
+	else if(CharacterPlace[player_now-1] == 22){
 		await delay(0.6)
 		CharacterPlace[player_now-1] = 0
 		update_place()
@@ -167,8 +199,19 @@ async function roll_the_dice(){
 
 function GameStart(){
  //rbyg
-	game_bg_div = createElement('div')
+	
 	diceCanClick = 1
+
+	eventPOPdiv = createImg("image/game_bg.jpg","jpg");
+	eventPOPdiv.style("width","100%")
+	eventPOPdiv.style("height","100%")
+	eventPOPdiv.style("position","absolute")
+	eventPOPdiv.style("top","0px")
+	eventPOPdiv.style("left","0px")
+	eventPOPdiv.style("z-index","1000")
+	eventPOPdiv.hide()
+
+	game_bg_div = createElement('div')
 
 	game_bg_div.style("width","100%")
 	game_bg_div.style("height","100%")
@@ -318,150 +361,7 @@ function GameStart(){
 
 
 
-function StartGameTitleINI(){
 
-	
-	titleDiv = createElement('div')
-
-	titleDiv.style("width","100%")
-	titleDiv.style("height","100%")
-	titleDiv.style("position","absolute")
-	titleDiv.style("top","0px")
-	titleDiv.style("left","0px")
-	titleDiv.style("z-index","-1")
-	titleDivStyle = "style=height:100%;width:100%;"
-	titleDivStyle += 'position:absolute;top:0%;left:0%;'
-	titleDiv.html("<image src='image/menu_bg.jpg'"+titleDivStyle+">",1)
-	titleDiv.html("</image>",1)
-
-
-	titleDiv.show()
-	
-}
-
-function setting_githubINI(){
-	setting_github = createElement('button')
-	githubpngstyle = "style=height:15%;width:8%;"
-	githubpngstyle += 'position:absolute;top:77%;left:85%;transform:translate(-85%,-77%)'
-	setting_github.html("<image src='image/github.png'"+githubpngstyle+">",1)
-	setting_github.html("</image>",1)
-	setting_github.style("background-color",'transparent')
-	setting_github.style("border-color",'transparent')
-	setting_github.mouseClicked(redirectToGithub)
-	settingDiv = createElement('div')
-
-	settingDiv.style("width","100%")
-	settingDiv.style("height","100%")
-	settingDiv.style("position","absolute")
-	settingDiv.style("top","0px")
-	settingDiv.style("left","0px")
-	settingDiv.style("z-index","-1")
-	settingDivStyle = "style=height:100%;width:100%;"
-	settingDivStyle += 'position:absolute;top:0%;left:0%;'
-	settingDiv.html("<image src='image/settingbg.jpg'"+settingDivStyle+">",1)
-	settingDiv.html("</image>",1)
-	settingDiv.hide()
-
-
-	setting_github.hide()
-}
-function redirectToGithub(){
-	window.open("https://github.com/NaoCoding/NTNU_GameProgramming_FinalProject",'')
-}
-
-
-function AuthorPageDivInitialize(){
-	
-	AuthorPageDiv = createElement('div')
-
-	AuthorPageDiv.style("width","100%")
-	AuthorPageDiv.style("height","100%")
-	AuthorPageDiv.style("position","absolute")
-	AuthorPageDiv.style("top","0px")
-	AuthorPageDiv.style("left","0px")
-	AuthorPageDiv.style("z-index","-1")
-	AuthorPageDivStyle = "style=height:100%;width:100%;"
-	AuthorPageDivStyle += 'position:absolute;top:0%;left:0%;'
-	AuthorPageDiv.html("<image src='image/authorbg.jpg'"+AuthorPageDivStyle+">",1)
-	AuthorPageDiv.html("</image>",1)
-	AuthorPageDiv.hide()
-	
-	
-}
-
-function BackToMenuButtonInitialize(){
-	
-	BackToMenuButton = createElement("button")
-	BackToMenuButton.hide()
-	BackToMenuButton.mouseClicked(BackToMenuCmd)
-
-	BackToMenuButton.style("width", "16%");
-	BackToMenuButton.style("height", "13%");
-	BackToMenuButton.style("position","absolute");
-	BackToMenuButton.style("left","5%")
-	BackToMenuButton.style("top","80%")
-	BackToMenuButton.style("background-color","transparent")
-	BackToMenuButton.style("border-color","transparent")
-	BackToMenuButtonStyle = "style=height:100%;width:100%;"
-	BackToMenuButtonStyle += 'position:absolute;top:0px;left:0px;'
-	BackToMenuButton.html("<image src='image/back.png'"+BackToMenuButtonStyle+">",1)
-	BackToMenuButton.html("</image>",1)
-	GameSettingDoneButton = createImg("image/startbutton.png")
-	GameSettingDoneButton.hide()
-	GameSettingDoneButton.mouseClicked(GameSettingDoneCmd)
-	GameSettingDoneButton.style("width", "20%");
-	GameSettingDoneButton.style("height", "10%");
-	GameSettingDoneButton.style("position","absolute");
-	GameSettingDoneButton.style("left","77%")
-	GameSettingDoneButton.style("top","85%")
-	GameSettingDoneButton.style("background-color","transparent")
-
-}
-
-function AuthorButtonInitialize(){
-	AuthorButton = createImg('image/authorbutton.png')
-	AuthorButton.style("left",'6%')
-	AuthorButton.style("top",'58.3%')
-	AuthorButton.style('width','23%')
-	AuthorButton.style('height','17%')
-	AuthorButton.style("position",'absolute')
-
-
-	AuthorButton.mouseClicked(AuthorPageCmd)
-
-
-	
-	
-}
-
-function StartGameButtonInitialize(){
-	StartGameButton = createImg('image/startgamebutton.png')
-	StartGameButton.style("left",'6%')
-	StartGameButton.style("z-index","10")
-	StartGameButton.style("top",'47.5%')
-	StartGameButton.style('width','23%')
-	StartGameButton.style('height','17%')
-	StartGameButton.style("position",'absolute')
-
-
-	StartGameButton.mouseClicked(StartGameCmd)
-}
-
-
-
-function SettingButtonInitialize(){
-	
-	SettingButton = createImg('image/settingbutton.png')
-	SettingButton.style("left",'6%')
-	SettingButton.style("top",'69%')
-	SettingButton.style('width','23%')
-	SettingButton.style('height','17%')
-	SettingButton.style("position",'absolute')
-
-	SettingButton.mouseClicked(SettingPageCmd)
-	
-	
-}
 
 function color_now(){
 
@@ -1002,5 +902,150 @@ function StartGameTitleCmd(){
 	setting_githubINI()
 	StartGameTitleINI()
 	CharacterSelectBgini()
+	
+}
+
+function StartGameTitleINI(){
+
+	
+	titleDiv = createElement('div')
+
+	titleDiv.style("width","100%")
+	titleDiv.style("height","100%")
+	titleDiv.style("position","absolute")
+	titleDiv.style("top","0px")
+	titleDiv.style("left","0px")
+	titleDiv.style("z-index","-1")
+	titleDivStyle = "style=height:100%;width:100%;"
+	titleDivStyle += 'position:absolute;top:0%;left:0%;'
+	titleDiv.html("<image src='image/menu_bg.jpg'"+titleDivStyle+">",1)
+	titleDiv.html("</image>",1)
+
+
+	titleDiv.show()
+	
+}
+
+function setting_githubINI(){
+	setting_github = createElement('button')
+	githubpngstyle = "style=height:15%;width:8%;"
+	githubpngstyle += 'position:absolute;top:77%;left:85%;transform:translate(-85%,-77%)'
+	setting_github.html("<image src='image/github.png'"+githubpngstyle+">",1)
+	setting_github.html("</image>",1)
+	setting_github.style("background-color",'transparent')
+	setting_github.style("border-color",'transparent')
+	setting_github.mouseClicked(redirectToGithub)
+	settingDiv = createElement('div')
+
+	settingDiv.style("width","100%")
+	settingDiv.style("height","100%")
+	settingDiv.style("position","absolute")
+	settingDiv.style("top","0px")
+	settingDiv.style("left","0px")
+	settingDiv.style("z-index","-1")
+	settingDivStyle = "style=height:100%;width:100%;"
+	settingDivStyle += 'position:absolute;top:0%;left:0%;'
+	settingDiv.html("<image src='image/settingbg.jpg'"+settingDivStyle+">",1)
+	settingDiv.html("</image>",1)
+	settingDiv.hide()
+
+
+	setting_github.hide()
+}
+function redirectToGithub(){
+	window.open("https://github.com/NaoCoding/NTNU_GameProgramming_FinalProject",'')
+}
+
+
+function AuthorPageDivInitialize(){
+	
+	AuthorPageDiv = createElement('div')
+
+	AuthorPageDiv.style("width","100%")
+	AuthorPageDiv.style("height","100%")
+	AuthorPageDiv.style("position","absolute")
+	AuthorPageDiv.style("top","0px")
+	AuthorPageDiv.style("left","0px")
+	AuthorPageDiv.style("z-index","-1")
+	AuthorPageDivStyle = "style=height:100%;width:100%;"
+	AuthorPageDivStyle += 'position:absolute;top:0%;left:0%;'
+	AuthorPageDiv.html("<image src='image/authorbg.jpg'"+AuthorPageDivStyle+">",1)
+	AuthorPageDiv.html("</image>",1)
+	AuthorPageDiv.hide()
+	
+	
+}
+
+function BackToMenuButtonInitialize(){
+	
+	BackToMenuButton = createElement("button")
+	BackToMenuButton.hide()
+	BackToMenuButton.mouseClicked(BackToMenuCmd)
+
+	BackToMenuButton.style("width", "16%");
+	BackToMenuButton.style("height", "13%");
+	BackToMenuButton.style("position","absolute");
+	BackToMenuButton.style("left","5%")
+	BackToMenuButton.style("top","80%")
+	BackToMenuButton.style("background-color","transparent")
+	BackToMenuButton.style("border-color","transparent")
+	BackToMenuButtonStyle = "style=height:100%;width:100%;"
+	BackToMenuButtonStyle += 'position:absolute;top:0px;left:0px;'
+	BackToMenuButton.html("<image src='image/back.png'"+BackToMenuButtonStyle+">",1)
+	BackToMenuButton.html("</image>",1)
+	GameSettingDoneButton = createImg("image/startbutton.png")
+	GameSettingDoneButton.hide()
+	GameSettingDoneButton.mouseClicked(GameSettingDoneCmd)
+	GameSettingDoneButton.style("width", "20%");
+	GameSettingDoneButton.style("height", "10%");
+	GameSettingDoneButton.style("position","absolute");
+	GameSettingDoneButton.style("left","77%")
+	GameSettingDoneButton.style("top","85%")
+	GameSettingDoneButton.style("background-color","transparent")
+
+}
+
+function AuthorButtonInitialize(){
+	AuthorButton = createImg('image/authorbutton.png')
+	AuthorButton.style("left",'6%')
+	AuthorButton.style("top",'58.3%')
+	AuthorButton.style('width','23%')
+	AuthorButton.style('height','17%')
+	AuthorButton.style("position",'absolute')
+
+
+	AuthorButton.mouseClicked(AuthorPageCmd)
+
+
+	
+	
+}
+
+function StartGameButtonInitialize(){
+	StartGameButton = createImg('image/startgamebutton.png')
+	StartGameButton.style("left",'6%')
+	StartGameButton.style("z-index","10")
+	StartGameButton.style("top",'47.5%')
+	StartGameButton.style('width','23%')
+	StartGameButton.style('height','17%')
+	StartGameButton.style("position",'absolute')
+
+
+	StartGameButton.mouseClicked(StartGameCmd)
+}
+
+
+
+function SettingButtonInitialize(){
+	
+	SettingButton = createImg('image/settingbutton.png')
+	SettingButton.style("left",'6%')
+	SettingButton.style("top",'69%')
+	SettingButton.style('width','23%')
+	SettingButton.style('height','17%')
+	SettingButton.style("position",'absolute')
+
+	SettingButton.mouseClicked(SettingPageCmd)
+	
 	
 }

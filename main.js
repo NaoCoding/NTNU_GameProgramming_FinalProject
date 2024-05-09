@@ -148,7 +148,7 @@ async function roll_the_dice(){
 		eventPOPword.html(chance_fateQuestion['question'][(ge).toString()][0],0)
 		eventPOPword.show()
 		if(ge==1){
-			CharacterBeer[player_now-1] += 1;
+			CharacterBeer[player_now-1] -= 1;
 			CharacterWait[player_now-1] += 1;
 		}
 		else if(ge==2){

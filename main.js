@@ -156,7 +156,11 @@ async function roll_the_dice(){
 		}
 		else if(ge==3){
 			CharacterBeer[player_now-1] += 1;
-			player_now -= 1;
+			CharacterWait[player_now-1] -= 1;
+			for (let index = 0; index < 4; index++) {
+				CharacterWait[index] += 1
+				
+			}
 		}
 		else if(ge==4){
 			CharacterWait[player_now-1] += 1;
@@ -212,6 +216,7 @@ async function roll_the_dice(){
 		}
 		eventPOPword.hide()
 		eventPOPdiv.hide()
+		eventPOPdiv.removeAttribute("onclick")
 		idleTime = 0;
 		
 	}
@@ -237,6 +242,7 @@ async function roll_the_dice(){
 		}
 		eventPOPword.hide()
 		eventPOPdiv.hide()
+		eventPOPdiv.removeAttribute("onclick")
 		idleTime = 0;
 	}
 
@@ -314,6 +320,24 @@ async function roll_the_dice(){
 	
 	else if(CharacterPlace[player_now-1] == 22){
 		await delay(0.6)
+		eventPOPdiv.show()
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/settingbg.jpg")
+		eventPOPword.style("top","50%")
+		eventPOPword.html("踩到特殊格子：<br>回到起點（不增加圈數）",0)
+		eventPOPword.show()
+		await delay(0.35)
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.hide()
+		eventPOPdiv.hide()
+		idleTime = 0;
 		CharacterPlace[player_now-1] = 0
 		update_place()
 		await delay(0.6)
@@ -321,6 +345,24 @@ async function roll_the_dice(){
 
 	else if(CharacterPlace[player_now-1] == 8){
 		await delay(0.6)
+		eventPOPdiv.show()
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/settingbg.jpg")
+		eventPOPword.style("top","50%")
+		eventPOPword.html("踩到特殊格子：<br>移動到右上角",0)
+		eventPOPword.show()
+		await delay(0.35)
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.hide()
+		eventPOPdiv.hide()
+		idleTime = 0;
 		CharacterPlace[player_now-1] = 22
 		update_place()
 		await delay(0.6)
@@ -328,6 +370,25 @@ async function roll_the_dice(){
 
 	else if(CharacterPlace[player_now-1] == 30){
 		CharacterWait[player_now-1] = 1
+		await delay(0.6)
+		eventPOPdiv.show()
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/settingbg.jpg")
+		eventPOPword.style("top","50%")
+		eventPOPword.html("踩到特殊格子：休息一回合",0)
+		eventPOPword.show()
+		await delay(0.35)
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.hide()
+		eventPOPdiv.hide()
+		idleTime = 0;
 	}
 
 	for (let index = 0; index < 4; index++) {
@@ -368,6 +429,24 @@ async function roll_the_dice(){
 	if(player_now > CharacterAmount) player_now = 1
 
 	while(CharacterWait[player_now-1] > 0){
+		eventPOPdiv.show()
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/settingbg.jpg")
+		eventPOPword.style("top","50%")
+		eventPOPword.html("玩家 "+(player_now).toString() +"休息一回合",0)
+		eventPOPword.show()
+		await delay(0.35)
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.hide()
+		eventPOPdiv.hide()
+		idleTime = 0;
 		CharacterWait[player_now-1] -= 1
 		player_now += 1
 		if(player_now > CharacterAmount) player_now = 1
@@ -376,6 +455,7 @@ async function roll_the_dice(){
 	dice_value_div.style("background-color",color_now())
 	dice_value_div.html("<br>",0)
 	diceCanClick = 1
+	eventPOPdiv.removeAttribute("onclick")
 
 }
 

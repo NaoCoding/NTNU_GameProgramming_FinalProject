@@ -1,3 +1,5 @@
+
+
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
@@ -7,6 +9,7 @@ let AuthorButton
 let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
 let setting_github
+let questiond1,questiond2,questiond3,questiond4
 idleTime = 0
 let GameSettingDoneButton , CharacterSelectBg
 let backGroundColor = "rgb(251,229,220)"
@@ -139,6 +142,7 @@ async function roll_the_dice(){
 		eventPOPdiv.show()
 		await delay(1)
 		eventPOPdiv.removeAttribute("src")
+		eventPOPword.style("top","50%")
 		eventPOPdiv.attribute("src","image/fateui.jpg")
 		var ge = Math.floor(Math.random() * 15) + 1
 		eventPOPword.html(chance_fateQuestion['question'][(ge).toString()][0],0)
@@ -219,6 +223,7 @@ async function roll_the_dice(){
 		await delay(1)
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/knowledgeui.jpg")
+		eventPOPword.style("top","50%")
 		eventPOPword.html(knowledgeQuestion['question'][(Math.floor(Math.random() * 39) + 1).toString()],0)
 		eventPOPword.show()
 		await delay(0.35)
@@ -248,7 +253,62 @@ async function roll_the_dice(){
 		eventPOPdiv.attribute("src","image/questionappear.jpg")
 		eventPOPdiv.show()
 		await delay(1)
+		eventPOPdiv.removeAttribute("src")
+		eventPOPword.style("top","30%")
+		eventPOPword.show()
+		eventPOPword.removeAttribute("onclick")
+		eventPOPdiv.attribute("src","image/questionui.jpg")
+		eventPOPdiv.removeAttribute("onclick")
+		choosed = 0
+		questiond1.show()
+		questiond2.show()
+		questiond3.show()
+		questiond4.show()
+		var q = (Math.floor(Math.random() * 39) + 1)
+		eventPOPword.html(questionQuestion['question'][(q).toString()][0],0)
+		questiond1.html("<br><br>",0)
+		questiond2.html("<br><br>",0)
+		questiond3.html("<br><br>",0)
+		questiond4.html("<br><br>",0)
+		questiond1.attribute("onclick","choosed=1;selectedans=0;")
+		questiond2.attribute("onclick","choosed=1;selectedans=1;")
+		questiond3.attribute("onclick","choosed=1;selectedans=2;")
+		questiond4.attribute("onclick","choosed=1;selectedans=3;")
+		questiond1.html(questionQuestion['question'][(q).toString()][1],1)
+		questiond2.html(questionQuestion['question'][(q).toString()][2],1)
+		if(questionQuestion['question'][(q).toString()][3].length < 1)questiond3.hide()
+		if(questionQuestion['question'][(q).toString()][4].length < 1)questiond4.hide()
+		questiond3.html(questionQuestion['question'][(q).toString()][3],1)
+		questiond4.html(questionQuestion['question'][(q).toString()][4],1)
+		while(choosed == 0){
+			await delay(0.003)
+		}
+		questiond1.hide()
+		questiond2.hide()
+		questiond3.hide()
+		eventPOPword.style("top","50%")
+		questiond4.hide()
+		if(selectedans == questionQuestion['question'][(q).toString()][5]){
+			eventPOPword.html("恭喜答對！ 酒醉值 - 1",0)
+			CharacterBeer[player_now-1] -= 1;
+		}
+		else{
+			eventPOPword.html("答錯了！ 酒醉值 + 1<br>正確答案為：",0)
+			CharacterBeer[player_now-1] += 1;
+			eventPOPword.html(questionQuestion['question'][(q).toString()][questionQuestion['question'][(q).toString()][5] + 1],1)
+		}
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.hide()
 		eventPOPdiv.hide()
+		idleTime = 0;
+
 	}
 
 	
@@ -270,9 +330,9 @@ async function roll_the_dice(){
 		CharacterWait[player_now-1] = 1
 	}
 
-	for (let index = 0; index < 3; index++) {
+	for (let index = 0; index < 4; index++) {
 		if(CharacterPlace[index] < 0){
-			CharacterPlace[index] += 43;
+			CharacterPlace[index] += 44;
 			CharacterRound[index] -= 1;
 		}
 	}
@@ -665,6 +725,56 @@ function GameStart(){
 		beer444.hide()
 		beerd4.hide()
 	}
+
+	questiond1 = createElement("h2")
+	questiond1.hide()
+	questiond1.style("backgroundColor","rgba(255,255,255,0.5)")
+	questiond1.style("left","7%")
+	questiond1.style("top",'56.2%')
+	questiond1.style('width','40%')
+	questiond1.style('height','15%')
+	questiond1.style('textAlign','center')
+	questiond1.style("position",'absolute')
+	questiond1.style("zIndex","1500")
+	questiond1.style("borderRadius","10%")
+
+	
+
+	questiond2 = createElement("h2")
+	questiond2.hide()
+	questiond2.style("backgroundColor","rgba(255,255,255,0.5)")
+	questiond2.style("left","53%")
+	questiond2.style("top",'56.2%')
+	questiond2.style('width','40%')
+	questiond2.style('height','15%')
+	questiond2.style('textAlign','center')
+	questiond2.style("position",'absolute')
+	questiond2.style("zIndex","1500")
+	questiond2.style("borderRadius","10%")
+
+	questiond3 = createElement("h2")
+	questiond3.hide()
+	questiond3.style("backgroundColor","rgba(255,255,255,0.5)")
+	questiond3.style("left","7%")
+	questiond3.style("top",'76.2%')
+	questiond3.style('width','40%')
+	questiond3.style('height','15%')
+	questiond3.style('textAlign','center')
+	questiond3.style("position",'absolute')
+	questiond3.style("zIndex","1500")
+	questiond3.style("borderRadius","10%")
+
+	questiond4 = createElement("h2")
+	questiond4.hide()
+	questiond4.style("backgroundColor","rgba(255,255,255,0.5)")
+	questiond4.style("left","53%")
+	questiond4.style("top",'76.2%')
+	questiond4.style('width','40%')
+	questiond4.style('height','15%')
+	questiond4.style('textAlign','center')
+	questiond4.style("position",'absolute')
+	questiond4.style("zIndex","1500")
+	questiond4.style("borderRadius","10%")
 
 }
 

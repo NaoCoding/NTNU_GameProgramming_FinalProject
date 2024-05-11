@@ -1,5 +1,3 @@
-
-
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton

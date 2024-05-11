@@ -1090,8 +1090,8 @@ function CharacterSelectBgini(){
 
 	Character07SelectButton = createImg("image/character.png","character.png")
 	Character07SelectButton.style("height","45%");
-	Character07SelectButton.style("width","39%");
-	Character07SelectButton.style("left","43.88%");
+	Character07SelectButton.style("width","22%");
+	Character07SelectButton.style("left","39%");
 	Character07SelectButton.style("top","51.4%");
 	Character07SelectButton.style("background","transparent");
 	Character07SelectButton.style("color","transparent");
@@ -1102,8 +1102,8 @@ function CharacterSelectBgini(){
 
 	Character08SelectButton = createImg("image/character.png","character.png")
 	Character08SelectButton.style("height","45%");
-	Character08SelectButton.style("width","54.2%");
-	Character08SelectButton.style("left","58.54%");
+	Character08SelectButton.style("width","22%");
+	Character08SelectButton.style("left","54.2%");
 	Character08SelectButton.style("top","51.4%");
 	Character08SelectButton.style("background","transparent");
 	Character08SelectButton.style("color","transparent");
@@ -1217,7 +1217,6 @@ function CharacterSelectButtonshowall(){
 	CharacterChoosenLabelbg04.show()
 
 
-	Character07SelectButton.hide()
 	Character08SelectButton.hide()
 
 }

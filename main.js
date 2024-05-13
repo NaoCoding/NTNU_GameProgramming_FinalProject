@@ -249,7 +249,40 @@ async function roll_the_dice(){
 		eventPOPdiv.attribute("src","image/smallgameappear.jpg")
 		eventPOPdiv.show()
 		await delay(1)
-		eventPOPdiv.hide()
+		eventPOPdiv.show()
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/settingbg.jpg")
+		eventPOPword.style("top","50%")
+		game = (Math.floor(Math.random() * 1) + 1)
+		if(game == 1)eventPOPword.html("小遊戲：Wordle",0)
+		eventPOPword.show()
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.hide()             
+		idleTime = 0;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.removeAttribute("src")
+		if(game == 1){
+			eventPOPdiv.attribute("src","image/wordlbg.jpg")
+			idleTime = 1;
+			var waitCount = 0
+			eventPOPdiv.removeAttribute("onclick")
+			eventPOPdiv.attribute("onclick","idleTime=0;")
+			while(waitCount < 100 && idleTime != 0){
+				await delay(0.05)
+				waitCount += 1
+			}
+			idleTime = 0;
+		}
+
+
+
 	}
 
 	else if([4,6,9,11,15,20,23,27,31,33,37,42].find((e) => e == CharacterPlace[player_now-1]) != undefined){
@@ -325,7 +358,7 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
 		eventPOPword.style("top","50%")
-		eventPOPword.html("踩到特殊格子：<br>回到起點（不增加圈數）",0)
+		eventPOPword.html("踩到特殊格子：回到起點（不增加圈數）",0)
 		eventPOPword.show()
 		await delay(0.35)
 		idleTime = 1;
@@ -353,7 +386,7 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
 		eventPOPword.style("top","50%")
-		eventPOPword.html("踩到特殊格子：<br>移動到右上角",0)
+		eventPOPword.html("踩到特殊格子：移動到右上角",0)
 		eventPOPword.show()
 		await delay(0.35)
 		idleTime = 1;

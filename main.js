@@ -317,7 +317,10 @@ async function roll_the_dice(){
 
 	
 	else if(CharacterPlace[player_now-1] == 22){
-		await delay(0.6)
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/specialappear.jpg")
+		eventPOPdiv.show()
+		await delay(1)
 		eventPOPdiv.show()
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
@@ -342,7 +345,10 @@ async function roll_the_dice(){
 	}
 
 	else if(CharacterPlace[player_now-1] == 8){
-		await delay(0.6)
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/specialappear.jpg")
+		eventPOPdiv.show()
+		await delay(1)
 		eventPOPdiv.show()
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
@@ -368,7 +374,10 @@ async function roll_the_dice(){
 
 	else if(CharacterPlace[player_now-1] == 30){
 		CharacterWait[player_now-1] = 1
-		await delay(0.6)
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/specialappear.jpg")
+		eventPOPdiv.show()
+		await delay(1)
 		eventPOPdiv.show()
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")

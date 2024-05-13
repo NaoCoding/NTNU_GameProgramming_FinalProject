@@ -12,7 +12,11 @@ let wordleboard = [[],[],[],[],[],[]]
 wordlewordArr = [[],[],[],[],[],[]]
 wordlecolorArr = [[],[],[],[],[],[]]
 idleTime = 0
+wordlecountnow = 0
+wordleanswer = ""
+wordleGuessed = 0
 gamenow = -1
+gamewin = -1
 
 let GameSettingDoneButton , CharacterSelectBg
 let backGroundColor = "rgb(251,229,220)"
@@ -70,9 +74,25 @@ function preload(){
 //chance_fateQuestion.question[1][0]
 
 function KeyPressedConl(e){
+	console.log(e.which)
 	if(gamenow == -1){}
 	else if(gamenow == 1){
-
+		if(e.which >= 65 && e.which <= 90){
+			if(wordlecountnow >= 0 && wordlecountnow < 5){
+				wordlewordArr[wordleGuessed][wordlecountnow] = e.key
+			}
+		}
+		else if(e.which == 8){
+			wordlewordArr[wordleGuessed][wordlecountnow - 1] = 0
+			wordlecountnow -= 1
+		}
+		else if(e.which == 13){
+			if(wordlecountnow == 5){
+				if((wordlewordArr[wordleGuessed]).toString() == wordleanswer) gamewin = 1
+				wordleGuessed += 1
+				wordlecountnow = 0 
+			}
+		}
 	}
 }
 
@@ -444,7 +464,9 @@ async function roll_the_dice(){
 			wordleplayerbg.removeAttribute("src")
 			wordleplayerbg.attribute("src","image/wordled"+(player_now).toString()+".png")
 			wordleGuessed = 0
+			wordlecountnow = 0 
 			wordlewordArr = [[],[],[],[],[],[]]
+			wordleanswer = wordleQuestion[(Math.floor(Math.random() * wordleQuestion.length) + 1)]
 			wordlecolorArr = [[],[],[],[],[],[]]
 			for(var i=0;i<6;i++){
 				for(var j=0;j<5;j++){
@@ -1700,4 +1722,4 @@ function SettingButtonInitialize(){
 	
 }
 
-document.body.addEventListener('keydown', KeyPressedConl ,false) 
+document.onkeydown = KeyPressedConl

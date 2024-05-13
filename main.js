@@ -8,7 +8,12 @@ let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
 let setting_github
 let questiond1,questiond2,questiond3,questiond4
+let wordleboard = [[],[],[],[],[],[]]
+wordlewordArr = [[],[],[],[],[],[]]
+wordlecolorArr = [[],[],[],[],[],[]]
 idleTime = 0
+gamenow = -1
+
 let GameSettingDoneButton , CharacterSelectBg
 let backGroundColor = "rgb(251,229,220)"
 let StartGameTitleColor = "rgb(196,165,0)"
@@ -24,7 +29,8 @@ let CharacterSelectBox
 let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
 let chance_fateQuestion, knowledgeQuestion, questionQuestion
 let wordleQuestion
-let wordleplayerbg,wordleplayerdoll
+let wordleplayerbg,wordleplayerdoll,wordleQA
+
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterWait = [0,0,0,0]
@@ -62,6 +68,13 @@ function preload(){
 
 }
 //chance_fateQuestion.question[1][0]
+
+function KeyPressedConl(e){
+	if(gamenow == -1){}
+	else if(gamenow == 1){
+
+	}
+}
 
 function setup() {
 	
@@ -245,47 +258,7 @@ async function roll_the_dice(){
 		idleTime = 0;
 	}
 
-	else if([3,12,16,24,28,34,38,43].find((e) => e == CharacterPlace[player_now-1]) != undefined){
-		eventPOPdiv.removeAttribute("src")
-		eventPOPdiv.attribute("src","image/smallgameappear.jpg")
-		eventPOPdiv.show()
-		await delay(1)
-		eventPOPdiv.show()
-		eventPOPdiv.removeAttribute("src")
-		eventPOPdiv.attribute("src","image/settingbg.jpg")
-		eventPOPword.style("top","50%")
-		game = (Math.floor(Math.random() * 1) + 1)
-		if(game == 1)eventPOPword.html("小遊戲：Wordle",0)
-		eventPOPword.show()
-		idleTime = 1;
-		eventPOPdiv.removeAttribute("onclick")
-		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
-		var waitCount = 0
-		while(waitCount < 100 && idleTime != 0){
-			await delay(0.05)
-			waitCount += 1
-		}
-		eventPOPword.hide()             
-		idleTime = 0;
-		eventPOPdiv.removeAttribute("onclick")
-		eventPOPdiv.removeAttribute("src")
-		if(game == 1){
-			eventPOPdiv.attribute("src","image/wordlebg.jpg")
-			idleTime = 1;
-			var waitCount = 0
-			eventPOPdiv.removeAttribute("onclick")
-			wordleplayerbg.show()
-			wordleplayerdoll.show()
-			wordleplayerdoll.removeAttribute("src")
-			wordleplayerdoll.attribute("src","image/character0"+(CharacterID[player_now-1]).toString()+".png")
-			wordleplayerbg.removeAttribute("src")
-			wordleplayerbg.attribute("src","image/wordled"+(player_now).toString()+".png")
-
-		}
-
-
-
-	}
+	
 
 	else if([4,6,9,11,15,20,23,27,31,33,37,42].find((e) => e == CharacterPlace[player_now-1]) != undefined){
 		eventPOPdiv.removeAttribute("src")
@@ -433,6 +406,71 @@ async function roll_the_dice(){
 		idleTime = 0;
 	}
 
+	else if([3,12,16,24,28,34,38,43].find((e) => e == CharacterPlace[player_now-1]) != undefined){
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/smallgameappear.jpg")
+		eventPOPdiv.show()
+		await delay(1)
+		eventPOPdiv.show()
+		eventPOPdiv.removeAttribute("src")
+		eventPOPdiv.attribute("src","image/settingbg.jpg")
+		eventPOPword.style("top","25%")
+		game = (Math.floor(Math.random() * 1) + 1)
+		if(game == 1)eventPOPword.html("小遊戲：Wordle<br>遊戲規則：在六次機會內找到隨機的長度為五的英文單字<br>綠色：正確字母正確位置<br>黃色：正確字母錯誤位置<br>灰色：無此字母或字母數量沒這麼多次",0)
+		eventPOPword.show()
+		idleTime = 1;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+		var waitCount = 0
+		while(waitCount < 100 && idleTime != 0){
+			await delay(0.05)
+			waitCount += 1
+		}
+		eventPOPword.style("top","50%")
+		eventPOPword.hide()             
+		idleTime = 0;
+		eventPOPdiv.removeAttribute("onclick")
+		eventPOPdiv.removeAttribute("src")
+		if(game == 1){
+			eventPOPdiv.attribute("src","image/wordlebg.jpg")
+			idleTime = 1;
+			var waitCount = 0
+			eventPOPdiv.removeAttribute("onclick")
+			wordleplayerbg.show()
+			wordleplayerdoll.show()
+			wordleQA.show()
+			wordleplayerdoll.removeAttribute("src")
+			wordleplayerdoll.attribute("src","image/character0"+(CharacterID[player_now-1]).toString()+".png")
+			wordleplayerbg.removeAttribute("src")
+			wordleplayerbg.attribute("src","image/wordled"+(player_now).toString()+".png")
+			wordleGuessed = 0
+			wordlewordArr = [[],[],[],[],[],[]]
+			wordlecolorArr = [[],[],[],[],[],[]]
+			for(var i=0;i<6;i++){
+				for(var j=0;j<5;j++){
+					wordleboard[i][j].show()
+				}
+			}
+			gamenow = 1
+			while(wordleGuessed < 6){
+				await delay(0.002)
+				updateWordleBoard()
+			}
+			wordleplayerbg.hide()
+			wordleplayerdoll.hide()
+			wordleQA.hide()
+			eventPOPdiv.hide()
+			for(var i=0;i<6;i++){
+				for(var j=0;j<5;j++){
+					wordleboard[i][j].hide()
+				}
+			}
+		}
+
+
+
+	}
+
 	for (let index = 0; index < 4; index++) {
 		if(CharacterPlace[index] < 0){
 			CharacterPlace[index] += 44;
@@ -502,12 +540,33 @@ async function roll_the_dice(){
 }
 
 
+function updateWordleBoard(){
 
+
+
+}
 
 function GameStart(){
  //rbyg
 	
 	diceCanClick = 1
+
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			wordleboard[i][j] = createElement("h2")
+			wordleboard[i][j].style("width","6.64%")
+			wordleboard[i][j].style("height","12%")
+			wordleboard[i][j].style("position","absolute")
+			wordleboard[i][j].style("backgroundColor","rgba(255,255,255,0,5)")
+			wordleboard[i][j].style("left", (24.6 + 6.77 * j).toString()+"%")
+			wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
+			wordleboard[i][j].style("top",(16 + 11.8 * i).toString()+"%")
+			
+			wordleboard[i][j].style("z-index","1001")
+			wordleboard[i][j].hide()
+		}
+	}
+	
 
 	eventPOPdiv = createImg("image/game_bg.jpg","jpg");
 	eventPOPdiv.style("width","100%")
@@ -518,6 +577,19 @@ function GameStart(){
 	eventPOPdiv.style("z-index","1000")
 	eventPOPdiv.hide()
 	eventPOPdiv.attribute("id","eventPOPdiv")
+
+	wordleQA = createElement("h2")
+	wordleQA.style("height","25%");
+	wordleQA.style("textAlign","center");
+	wordleQA.html("<br><br>鍵盤A ~ Z : 輸入字母<br>按下Enter : 確定<br>按下 BackSpace : 刪除字母<br>")
+	wordleQA.style("width","28%");
+	wordleQA.style("left","66%");
+	wordleQA.style("top","50%");
+	wordleQA.style("background","rgba(255,255,255,0.5)");
+	wordleQA.style("borderRadius","10%")
+	wordleQA.style("position","absolute")
+	wordleQA.style("zIndex","100000")
+	wordleQA.hide()
 
 	wordleplayerbg = createImg("image/chooseblue.png","png")
 	wordleplayerbg.style("height","42%");
@@ -1627,3 +1699,5 @@ function SettingButtonInitialize(){
 	
 	
 }
+
+document.body.addEventListener('keydown', KeyPressedConl ,false) 

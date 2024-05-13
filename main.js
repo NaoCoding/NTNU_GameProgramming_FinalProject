@@ -24,6 +24,7 @@ let CharacterSelectBox
 let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
 let chance_fateQuestion, knowledgeQuestion, questionQuestion
 let wordleQuestion
+let wordleplayerbg,wordleplayerdoll
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
 CharacterWait = [0,0,0,0]
@@ -114,7 +115,7 @@ async function roll_the_dice(){
 		
 		if(t==20)clearInterval(q)
 
-		dice_result = Math.floor(Math.random() * 11) + 1
+		dice_result = Math.floor(Math.random() * 12) + 1
 		dice_value_div.html("<br>"+dice_result.toString(),0)
 
 	}, 50);
@@ -146,7 +147,7 @@ async function roll_the_dice(){
 		eventPOPword.html(chance_fateQuestion['question'][(ge).toString()][0],0)
 		eventPOPword.show()
 		if(ge==1){
-			CharacterBeer[player_now-1] -= 1;
+			CharacterBeer[player_now-1] -= 1;	
 			CharacterWait[player_now-1] += 1;
 		}
 		else if(ge==2){
@@ -269,16 +270,17 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("onclick")
 		eventPOPdiv.removeAttribute("src")
 		if(game == 1){
-			eventPOPdiv.attribute("src","image/wordlbg.jpg")
+			eventPOPdiv.attribute("src","image/wordlebg.jpg")
 			idleTime = 1;
 			var waitCount = 0
 			eventPOPdiv.removeAttribute("onclick")
-			eventPOPdiv.attribute("onclick","idleTime=0;")
-			while(waitCount < 100 && idleTime != 0){
-				await delay(0.05)
-				waitCount += 1
-			}
-			idleTime = 0;
+			wordleplayerbg.show()
+			wordleplayerdoll.show()
+			wordleplayerdoll.removeAttribute("src")
+			wordleplayerdoll.attribute("src","image/character0"+(CharacterID[player_now-1]).toString()+".png")
+			wordleplayerbg.removeAttribute("src")
+			wordleplayerbg.attribute("src","image/wordled"+(player_now).toString()+".png")
+
 		}
 
 
@@ -516,6 +518,28 @@ function GameStart(){
 	eventPOPdiv.style("z-index","1000")
 	eventPOPdiv.hide()
 	eventPOPdiv.attribute("id","eventPOPdiv")
+
+	wordleplayerbg = createImg("image/chooseblue.png","png")
+	wordleplayerbg.style("height","42%");
+	wordleplayerbg.style("width","28%");
+	wordleplayerbg.style("left","66%");
+	wordleplayerbg.style("top","3%");
+	wordleplayerbg.style("background","transparent");
+	wordleplayerbg.style("color","transparent");
+	wordleplayerbg.style("position","absolute")
+	wordleplayerbg.style("zIndex","100000")
+	wordleplayerbg.hide()
+
+	wordleplayerdoll = createImg("image/character.png","png")
+	wordleplayerdoll.style("height","40%");
+	wordleplayerdoll.style("width","23%");
+	wordleplayerdoll.style("left","75%");
+	wordleplayerdoll.style("top","3%");
+	wordleplayerdoll.style("background","transparent");
+	wordleplayerdoll.style("color","transparent");
+	wordleplayerdoll.style("position","absolute")
+	wordleplayerdoll.style("zIndex","100001")
+	wordleplayerdoll.hide()
 	
 	eventPOPword = createElement("h1")
 	eventPOPword.attribute("id","eventPOPword")

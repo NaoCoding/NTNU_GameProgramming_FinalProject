@@ -227,7 +227,7 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/knowledgeui.jpg")
 		eventPOPword.style("top","50%")
-		eventPOPword.html(knowledgeQuestion['question'][(Math.floor(Math.random() * 39) + 1).toString()],0)
+		eventPOPword.html(knowledgeQuestion['question'][(Math.floor(Math.random() * 48) + 1).toString()],0)
 		eventPOPword.show()
 		await delay(0.35)
 		idleTime = 1;
@@ -268,7 +268,7 @@ async function roll_the_dice(){
 		questiond2.show()
 		questiond3.show()
 		questiond4.show()
-		var q = (Math.floor(Math.random() * 39) + 1)
+		var q = (Math.floor(Math.random() * 48) + 1)
 		eventPOPword.html(questionQuestion['question'][(q).toString()][0],0)
 		questiond1.html("<br><br>",0)
 		questiond2.html("<br><br>",0)

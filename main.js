@@ -80,21 +80,30 @@ function KeyPressedConl(e){
 		if(e.which >= 65 && e.which <= 90){
 			if(wordlecountnow >= 0 && wordlecountnow < 5){
 				wordlewordArr[wordleGuessed][wordlecountnow] = e.key
+				wordlecountnow += 1
 			}
 		}
 		else if(e.which == 8){
-			wordlewordArr[wordleGuessed][wordlecountnow - 1] = 0
-			wordlecountnow -= 1
+			if(wordlecountnow >= 1){
+				wordlewordArr[wordleGuessed][wordlecountnow - 1] = 0
+				wordlecountnow -= 1
+			}
+			
 		}
 		else if(e.which == 13){
 			if(wordlecountnow == 5){
-				if((wordlewordArr[wordleGuessed]).toString() == wordleanswer) gamewin = 1
+				if((wordlewordArr[wordleGuessed]).join("") == wordleanswer){
+					gamewin = 1
+					idleTime = 0
+				}
 				wordleGuessed += 1
 				wordlecountnow = 0 
+				
 			}
 		}
 	}
 }
+
 
 function setup() {
 	
@@ -148,7 +157,7 @@ async function roll_the_dice(){
 		
 		if(t==20)clearInterval(q)
 
-		dice_result = Math.floor(Math.random() * 12) + 1
+		dice_result = 3 // Math.floor(Math.random() * 12) + 1
 		dice_value_div.html("<br>"+dice_result.toString(),0)
 
 	}, 50);
@@ -468,14 +477,15 @@ async function roll_the_dice(){
 			wordlewordArr = [[],[],[],[],[],[]]
 			wordleanswer = wordleQuestion[(Math.floor(Math.random() * wordleQuestion.length) + 1)]
 			wordlecolorArr = [[],[],[],[],[],[]]
+			gamewin = 0
 			for(var i=0;i<6;i++){
 				for(var j=0;j<5;j++){
 					wordleboard[i][j].show()
 				}
 			}
 			gamenow = 1
-			while(wordleGuessed < 6){
-				await delay(0.002)
+			while(wordleGuessed < 6 && gamewin != 1){
+				await delay(0.05)
 				updateWordleBoard()
 			}
 			wordleplayerbg.hide()
@@ -486,6 +496,48 @@ async function roll_the_dice(){
 				for(var j=0;j<5;j++){
 					wordleboard[i][j].hide()
 				}
+			}
+			if(gamewin == 1){
+				CharacterBeer[player_now-1] -= 1;
+				eventPOPdiv.show()
+				eventPOPdiv.removeAttribute("src")
+				eventPOPdiv.attribute("src","image/settingbg.jpg")
+				eventPOPword.style("top","50%")
+				eventPOPword.html("遊戲獲勝！答案為" + wordleanswer,0)
+				eventPOPword.show()
+				await delay(0.35)
+				idleTime = 1;
+				eventPOPdiv.removeAttribute("onclick")
+				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+				var waitCount = 0
+				while(waitCount < 100 && idleTime != 0){
+					await delay(0.05)
+					waitCount += 1
+				}
+				eventPOPword.hide()
+				eventPOPdiv.hide()
+				idleTime = 0;
+			}
+			else{
+				CharacterBeer[player_now-1] += 1;
+				eventPOPdiv.show()
+				eventPOPdiv.removeAttribute("src")
+				eventPOPdiv.attribute("src","image/settingbg.jpg")
+				eventPOPword.style("top","50%")
+				eventPOPword.html("遊戲失敗！答案為" + wordleanswer,0)
+				eventPOPword.show()
+				await delay(0.35)
+				idleTime = 1;
+				eventPOPdiv.removeAttribute("onclick")
+				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+				var waitCount = 0
+				while(waitCount < 100 && idleTime != 0){
+					await delay(0.05)
+					waitCount += 1
+				}
+				eventPOPword.hide()
+				eventPOPdiv.hide()
+				idleTime = 0;
 			}
 		}
 
@@ -564,7 +616,47 @@ async function roll_the_dice(){
 
 function updateWordleBoard(){
 
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			if(wordlewordArr[i][j] != 0 && wordlewordArr[i][j] != undefined){
+				wordleboard[i][j].html("<br><br><b>" + wordlewordArr[i][j] + "<b>")
+			}
+			else{
+				wordleboard[i][j].html("")
+			}
+		}
+	}	
+	for(var i=0;i<wordleGuessed;i++){
+		counter = [0,0,0,0,0]
+		for(var j=0;j<5;j++){
+			if(wordlewordArr[i][j] == wordleanswer[j]){
+				wordleboard[i][j].style("background","rgba(0,255,0,0.5)")
+				counter[j] = 1
+			}
+			else if((wordleanswer.split("")).find((e) => e == wordlewordArr[i][j]) == undefined){
+				wordleboard[i][j].style("background","rgba(118,118,118,0.5)")
+				counter[j] = -1
+			}
+		}
 
+		for(var j=0;j<5;j++){
+			if(counter[j]!=0)continue
+			count = 0
+			bcount = 0
+			for(var k=0;k<j;k++){
+				if(wordlewordArr[i][k] == wordlewordArr[i][j] && counter[k] == 0) count ++
+			}
+			for(var k=0;k<5;k++){
+				if(wordleanswer[k] == wordlewordArr[i][j] && counter[k] != 1) bcount ++
+			}
+			if(bcount > count)wordleboard[i][j].style("background","rgba(255,255,0,0.5)")
+			else wordleboard[i][j].style("background","rgba(118,118,118,0.5)")
+		}
+		
+	}
+	for(var i = wordleGuessed ; i  < 6; i++){
+		for(var j=0;j<5;j++)wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
+	}
 
 }
 
@@ -579,7 +671,8 @@ function GameStart(){
 			wordleboard[i][j].style("width","6.64%")
 			wordleboard[i][j].style("height","12%")
 			wordleboard[i][j].style("position","absolute")
-			wordleboard[i][j].style("backgroundColor","rgba(255,255,255,0,5)")
+			wordleboard[i][j].style("fontSize","24px")
+			wordleboard[i][j].style("textAlign","center")
 			wordleboard[i][j].style("left", (24.6 + 6.77 * j).toString()+"%")
 			wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
 			wordleboard[i][j].style("top",(16 + 11.8 * i).toString()+"%")

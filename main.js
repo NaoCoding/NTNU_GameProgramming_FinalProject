@@ -86,7 +86,7 @@ function KeyPressedConl(e){
 	else if(gamenow == 1){
 		if(e.which >= 65 && e.which <= 90){
 			if(wordlecountnow >= 0 && wordlecountnow < 5){
-				wordlewordArr[wordleGuessed][wordlecountnow] = e.key
+				wordlewordArr[wordleGuessed][wordlecountnow] = e.key.toLowerCase()
 				wordlecountnow += 1
 			}
 		}
@@ -563,7 +563,7 @@ async function roll_the_dice(){
 			idleTime = 1;
 			var waitCount = 0
 			eventPOPdiv.removeAttribute("onclick")
-			timeleft = 45
+			timeleft = 60
 			cardopened = [[],[],[],[],[],[]]
 			cardans = [[],[],[],[],[],[]]
 			cardclick = [0,0,0]

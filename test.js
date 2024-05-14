@@ -11,11 +11,9 @@ let setting_github
 let questiond1,questiond2,questiond3,questiond4
 let countdownter,dropscorer
 let wordleboard = [[],[],[],[],[],[]]
-let taikobb = []
-taikostatus = [0,0,0,0,0,0,0,0,0,0]
-taikolr = [0,0,0,0,0,0,0,0,0,0]
 let dropperItem = []
 let cardboard = [[],[],[],[],[],[]]
+let taikobb = []
 cardopened = [[],[],[],[],[],[]]
 cardans = [[],[],[],[],[],[]]
 wordlewordArr = [[],[],[],[],[],[]]
@@ -32,8 +30,6 @@ wordleanswer = ""
 wordleGuessed = 0
 gamenow = -1
 gamewin = -1
-taikonext = 0
-taikoready = 0
 
 let GameSettingDoneButton , CharacterSelectBg
 let backGroundColor = "rgb(251,229,220)"
@@ -91,7 +87,49 @@ function preload(){
 }
 //chance_fateQuestion.question[1][0]
 
+function KeyPressedConl(e){
+	//console.log(e.which)
+	if(gamenow == -1){}
+	else if(gamenow == 1){
+		if(e.which >= 65 && e.which <= 90){
+			if(wordlecountnow >= 0 && wordlecountnow < 5){
+				wordlewordArr[wordleGuessed][wordlecountnow] = e.key.toLowerCase()
+				wordlecountnow += 1
+			}
+		}
+		else if(e.which == 8){
+			if(wordlecountnow >= 1){
+				wordlewordArr[wordleGuessed][wordlecountnow - 1] = 0
+				wordlecountnow -= 1
+			}
+			
+		}
+		else if(e.which == 13){
+			if(wordlecountnow == 5){
+				if((wordlewordArr[wordleGuessed]).join("") == wordleanswer){
+					gamewin = 1
+					idleTime = 0
+				}
+				wordleGuessed += 1
+				wordlecountnow = 0 
+				
+			}
+		}
+	}
+	else if(gamenow == 3){
+		if(e.which == 37 || e.which == 65){
+			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
+			if(q - 3 > 0)document.getElementById("wordleplayerdoll").style.left = (q - 3).toString() + "%" 
+			document.getElementById("wordleplayerdoll").style.transform = ""
+		}
+		if(e.which == 39 || e.which == 68){
+			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
+			if(q+3+parseFloat(document.getElementById("wordleplayerdoll").style.width) < 100) document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
+			document.getElementById("wordleplayerdoll").style.transform = "rotateY(180deg)"
 
+		}
+	}
+}
 
 
 function setup() {
@@ -642,7 +680,7 @@ async function roll_the_dice(){
 				}
 				eventPOPword.hide()
 				eventPOPdiv.hide()
-				idleTime = 0
+				idleTime = 0;
 			}
 			
 		}
@@ -730,87 +768,19 @@ async function roll_the_dice(){
 			eventPOPdiv.removeAttribute("onclick")
 			taiko.show()
 			countdownter.show()
-			taikostatus = [0,0,0,0,0,0,0,0,0,0]
-			taikolr = [0,0,0,0,0,0,0,0,0,0]
 			timeleft = 30
-			bbnext = Math.random() + 0.3
-			taikonext = 0
-			gamenow = 4
-			taikoready = 0
-			cardleft = 5
-			while(timeleft > 0 && cardleft > 0){
+			bbnext = Math.random() + 0.005
+			while(timeleft > 0){
 				await delay(0.033)
 				timeleft -= 0.033
-				bbnext -= 0.033
 				countdownter.html((Math.floor(timeleft)).toString())
+				bbnext -= 0.033
 				if(bbnext <= 0){
-					bbnext = Math.random() + 0.3
-					taikostatus[taikonext] = 1
-					taikobb[taikonext].style("left","90%")
-					taikobb[taikonext].style("top","50%")
-					taikobb[taikonext].show()
-					taikolr[taikonext] = Math.random() 
-					taikonext += 1
-					if(taikonext > 9)taikonext = 0
-				}
-				for(var i=0;i<10;i++){
-					if(taikostatus[i] == 1){
-						var q = document.getElementById("taikobb" + (i).toString())
-						q.style.left = (parseFloat(q.style.left) - 1).toString() + "%"
-						
-					}
-					if(taikolr[i] < 0.5){
-						document.getElementById("taikobb" + (i).toString()).src = "image/taikod1.png" 
-					}
-					else document.getElementById("taikobb" + (i).toString()).src = "image/taikod2.png" 
+					bbnext = Math.random() + 0.005
 				}
 			}
 			taiko.hide()
 			countdownter.hide()
-			if(cardleft > 0){
-				CharacterBeer[player_now-1] += 1;
-				eventPOPdiv.show()
-				eventPOPdiv.removeAttribute("src")
-				eventPOPdiv.attribute("src","image/settingbg.jpg")
-				eventPOPword.style("top","50%")
-				eventPOPword.html("遊戲勝利！",0)
-				eventPOPword.show()
-				await delay(0.35)
-				idleTime = 1;
-				eventPOPdiv.removeAttribute("onclick")
-				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
-				var waitCount = 0
-				while(waitCount < 100 && idleTime != 0){
-					await delay(0.05)
-					waitCount += 1
-				}
-				eventPOPword.hide()
-				eventPOPdiv.hide()
-				idleTime = 0;
-			}
-			else{
-				CharacterBeer[player_now-1] += 1;
-				eventPOPdiv.show()
-				eventPOPdiv.removeAttribute("src")
-				eventPOPdiv.attribute("src","image/settingbg.jpg")
-				eventPOPword.style("top","50%")
-				eventPOPword.html("遊戲失敗！",0)
-				eventPOPword.show()
-				await delay(0.35)
-				idleTime = 1;
-				eventPOPdiv.removeAttribute("onclick")
-				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
-				var waitCount = 0
-				while(waitCount < 100 && idleTime != 0){
-					await delay(0.05)
-					waitCount += 1
-				}
-				eventPOPword.hide()
-				eventPOPdiv.hide()
-				dropscorer.hide()
-				idleTime = 0;
-			}
-			
 		}
 
 
@@ -885,13 +855,45 @@ async function roll_the_dice(){
 
 }
 
-async function taiko_man(m){
 
-	
+
+function dropperGame(){
+
+	countdownter.html((Math.floor(timeleft)).toString())
+	dropscorer.html((Math.floor(25- cardleft).toString()))
+	if(dropperTick % 25	 == 1){
+		dropperActive[dropperNext - 1] = 1
+		dropperItem[dropperNext - 1].style("left",(10 + (Math.floor(Math.random() * 70) + 1)).toString() + "%")
+		dropperItem[dropperNext - 1].style("top","0%")
+		dropperNext += 1
+		if(dropperNext > 8 )dropperNext = 1
+	}
+	for(var i=0;i<8;i++){
+		if(dropperActive[i] == 1){
+			dropperItem[i].show()
+			document.getElementById("dropperItem" + (i).toString()).style.top = (parseFloat(document.getElementById("dropperItem" + (i).toString()).style.top) +  1.2).toString() + "%"
+			if((parseFloat(document.getElementById("dropperItem" + (i).toString()).style.top)) > 85){
+				dropperActive[i] = 0
+			}
+			rect1 = document.getElementById("dropperItem" + (i).toString()).getBoundingClientRect()	
+			rect2 = document.getElementById("wordleplayerdoll").getBoundingClientRect()
+			if(!(
+				rect1.top > rect2.bottom ||
+				rect1.right < rect2.left ||
+				rect1.bottom < rect2.top ||
+				rect1.left > rect2.right
+			  )){
+				cardleft -= 1;
+				dropperActive[i] = 0
+			  }
+		}
+		else{
+			dropperItem[i].hide()
+			
+		}
+	}
 
 }
-
-
 
 
 
@@ -901,13 +903,13 @@ function GameStart(){
 	diceCanClick = 1
 
 	for(var i=0;i<10;i++){
-		taikobb[i] = createImg("image/taikod1.png","png")
-		taikobb[i].style("width","7%")
+		taikobb[i] = createImg("image/taikod1.png")
+		taikobb[i].style("width","10%")
 		taikobb[i].style("height","12%")
 		taikobb[i].style("position","absolute")
 		taikobb[i].style("z-index","1001")
-		taikobb[i].attribute("id","taikobb" + (i).toString())
-		taikobb[i].hide()
+		taikobb[i].attribute("id","dropperItem" + (i).toString())
+		dropperItem[i].hide()
 	}
 
 	for(var i=0;i<8;i++){
@@ -931,6 +933,7 @@ function GameStart(){
 			wordleboard[i][j].style("left", (24.6 + 6.77 * j).toString()+"%")
 			wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
 			wordleboard[i][j].style("top",(16 + 11.8 * i).toString()+"%")
+			
 			wordleboard[i][j].style("z-index","1001")
 			wordleboard[i][j].hide()
 		}
@@ -2216,97 +2219,6 @@ function updateWordleBoard(){
 	}
 	for(var i = wordleGuessed ; i  < 6; i++){
 		for(var j=0;j<5;j++)wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
-	}
-
-}
-
-function KeyPressedConl(e){
-	//console.log(e.which)
-	if(gamenow == -1){}
-	else if(gamenow == 1){
-		if(e.which >= 65 && e.which <= 90){
-			if(wordlecountnow >= 0 && wordlecountnow < 5){
-				wordlewordArr[wordleGuessed][wordlecountnow] = e.key.toLowerCase()
-				wordlecountnow += 1
-			}
-		}
-		else if(e.which == 8){
-			if(wordlecountnow >= 1){
-				wordlewordArr[wordleGuessed][wordlecountnow - 1] = 0
-				wordlecountnow -= 1
-			}
-			
-		}
-		else if(e.which == 13){
-			if(wordlecountnow == 5){
-				if((wordlewordArr[wordleGuessed]).join("") == wordleanswer){
-					gamewin = 1
-					idleTime = 0
-				}
-				wordleGuessed += 1
-				wordlecountnow = 0 
-				
-			}
-		}
-	}
-	else if(gamenow == 3){
-		if(e.which == 37 || e.which == 65){
-			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
-			if(q - 3 > 0)document.getElementById("wordleplayerdoll").style.left = (q - 3).toString() + "%" 
-			document.getElementById("wordleplayerdoll").style.transform = ""
-		}
-		if(e.which == 39 || e.which == 68){
-			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
-			if(q+3+parseFloat(document.getElementById("wordleplayerdoll").style.width) < 100) document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
-			document.getElementById("wordleplayerdoll").style.transform = "rotateY(180deg)"
-
-		}
-	}
-	else if(gamenow == 4){
-		if(e.which == 37 || e.which == 65){
-			taiko_man(1)
-		}
-		if(e.which == 39 || e.which == 68){
-			taiko_man(2)
-
-		}
-	}
-}
-
-function dropperGame(){
-
-	countdownter.html((Math.floor(timeleft)).toString())
-	dropscorer.html((Math.floor(25- cardleft).toString()))
-	if(dropperTick % 25	 == 1){
-		dropperActive[dropperNext - 1] = 1
-		dropperItem[dropperNext - 1].style("left",(10 + (Math.floor(Math.random() * 70) + 1)).toString() + "%")
-		dropperItem[dropperNext - 1].style("top","0%")
-		dropperNext += 1
-		if(dropperNext > 8 )dropperNext = 1
-	}
-	for(var i=0;i<8;i++){
-		if(dropperActive[i] == 1){
-			dropperItem[i].show()
-			document.getElementById("dropperItem" + (i).toString()).style.top = (parseFloat(document.getElementById("dropperItem" + (i).toString()).style.top) +  1.2).toString() + "%"
-			if((parseFloat(document.getElementById("dropperItem" + (i).toString()).style.top)) > 85){
-				dropperActive[i] = 0
-			}
-			rect1 = document.getElementById("dropperItem" + (i).toString()).getBoundingClientRect()	
-			rect2 = document.getElementById("wordleplayerdoll").getBoundingClientRect()
-			if(!(
-				rect1.top > rect2.bottom ||
-				rect1.right < rect2.left ||
-				rect1.bottom < rect2.top ||
-				rect1.left > rect2.right
-			  )){
-				cardleft -= 1;
-				dropperActive[i] = 0
-			  }
-		}
-		else{
-			dropperItem[i].hide()
-			
-		}
 	}
 
 }

@@ -8,7 +8,7 @@ let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
 let setting_github
 let questiond1,questiond2,questiond3,questiond4
-let countdownter
+let countdownter,dropscorer
 let wordleboard = [[],[],[],[],[],[]]
 let dropperItem = []
 let cardboard = [[],[],[],[],[],[]]
@@ -16,6 +16,7 @@ cardopened = [[],[],[],[],[],[]]
 cardans = [[],[],[],[],[],[]]
 wordlewordArr = [[],[],[],[],[],[]]
 wordlecolorArr = [[],[],[],[],[],[]]
+dropperActive = [0,0,0,0,0,0,0,0]
 dropperNext = 0
 dropperTick = 0
 idleTime = 0
@@ -113,6 +114,18 @@ function KeyPressedConl(e){
 			}
 		}
 	}
+	else if(gamenow == 3){
+		if(e.which == 37 || e.which == 65){
+			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
+			document.getElementById("wordleplayerdoll").style.left = (q - 3).toString() + "%"
+			document.getElementById("wordleplayerdoll").style.transform = ""
+		}
+		if(e.which == 39 || e.which == 68){
+			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
+			document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
+			document.getElementById("wordleplayerdoll").style.transform = "rotateY(180deg)"
+		}
+	}
 }
 
 
@@ -171,7 +184,7 @@ async function roll_the_dice(){
 		
 		if(t==20)clearInterval(q)
 
-		dice_result =  3 // Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
+		dice_result =  Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
 		dice_value_div.html("<br>"+dice_result.toString(),0)
 
 	}, 50);
@@ -458,10 +471,10 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
 		eventPOPword.style("top","25%")
-		game = 1 //(Math.floor(Math.random() * 2) + 1)
+		game = (Math.floor(Math.random() * 3) + 1) //(Math.floor(Math.random() * 2) + 1)
 		if(game == 1)eventPOPword.html("小遊戲：Wordle<br>遊戲規則：在六次機會內找到隨機的長度為五的英文單字<br>綠色：正確字母正確位置<br>黃色：正確字母錯誤位置<br>灰色：無此字母或字母數量沒這麼多次",0)
 		else if(game == 2)eventPOPword.html("小遊戲：記憶翻牌<br>遊戲規則：在三十秒內透過記憶力點擊同樣圖案的<br>卡片即可消除卡片<br>",0)
-		else if(game == 3)eventPOPword.html("小遊戲：居酒屋接接樂<br>遊戲規則：在三十秒內接到20個以上的道具即成功<br>反之則失敗<br>",0)
+		else if(game == 3)eventPOPword.html("小遊戲：居酒屋接接樂<br>遊戲規則：在三十秒內接到25個以上的道具即成功<br>反之則失敗<br>",0)
 
 		eventPOPword.show()
 		idleTime = 1;
@@ -482,6 +495,7 @@ async function roll_the_dice(){
 			idleTime = 1;
 			var waitCount = 0
 			eventPOPdiv.removeAttribute("onclick")
+			wordleplayerdoll.style("transform","")
 			wordleplayerbg.show()
 			wordleplayerdoll.show()
 			wordleQA.show()
@@ -567,9 +581,9 @@ async function roll_the_dice(){
 		}
 
 		else if(game == 2){
-			eventPOPdiv.attribute("src","image/smallgamebg.jpg")
 			idleTime = 1;
 			var waitCount = 0
+			eventPOPdiv.attribute("src","image/smallgamebg.jpg")
 			eventPOPdiv.removeAttribute("onclick")
 			timeleft = 60
 			cardopened = [[],[],[],[],[],[]]
@@ -667,14 +681,27 @@ async function roll_the_dice(){
 			
 		}
 		else if(game == 3){
+			eventPOPdiv.attribute("src","image/smallgamebg.jpg")
+			eventPOPdiv.removeAttribute("onclick")
+			eventPOPdiv.show()
+			countdownter.show()
+			wordleplayerdoll.removeAttribute("src")
+			wordleplayerdoll.style("height","40%");
+			wordleplayerdoll.style("width","23%");
+			wordleplayerdoll.style("top","60%")
+			wordleplayerdoll.style("left","37%")
+			wordleplayerdoll.attribute("src","image/character0" + (CharacterID[player_now-1]).toString() + ".png")
+			dropscorer.show()
+			wordleplayerdoll.show()
 			timeleft = 30
-			cardleft = 20
+			cardleft = 25
+			gamenow = 3
 			dropperTick = 0
 			dropperNext = Math.floor(Math.random() * 8) + 1
+			dropperActive = [0,0,0,0,0,0,0,0]
 
 
-
-			while(timeleft > 0 && cardleft != 0){
+			while(timeleft > 0 && cardleft > 0){
 				await delay(0.033)
 				timeleft -= 0.033
 				dropperTick += 1
@@ -682,9 +709,13 @@ async function roll_the_dice(){
 			}
 
 
+			countdownter.hide()
+			dropscorer.hide()
+			wordleplayerdoll.hide()
+			gamenow = -1
+			for(var i=0;i<8;i++) dropperItem[i].hide()
 
-
-			if(cardleft == 0){
+			if(cardleft <= 0){
 				CharacterBeer[player_now-1] += 1;
 				eventPOPdiv.show()
 				eventPOPdiv.removeAttribute("src")
@@ -724,6 +755,7 @@ async function roll_the_dice(){
 				}
 				eventPOPword.hide()
 				eventPOPdiv.hide()
+				dropscorer.hide()
 				idleTime = 0;
 			}
 		}
@@ -804,9 +836,38 @@ async function roll_the_dice(){
 
 function dropperGame(){
 
-	if(DropperTick % 5 == 0){
-		dropperItem[dropperNext - 1].show()
+	countdownter.html((Math.floor(timeleft)).toString())
+	dropscorer.html((Math.floor(25- cardleft).toString()))
+	if(dropperTick % 25	 == 1){
+		dropperActive[dropperNext - 1] = 1
 		dropperItem[dropperNext - 1].style("left",(10 + (Math.floor(Math.random() * 70) + 1)).toString() + "%")
+		dropperItem[dropperNext - 1].style("top","0%")
+		dropperNext += 1
+		if(dropperNext > 8 )dropperNext = 1
+	}
+	for(var i=0;i<8;i++){
+		if(dropperActive[i] == 1){
+			dropperItem[i].show()
+			document.getElementById("dropperItem" + (i).toString()).style.top = (parseFloat(document.getElementById("dropperItem" + (i).toString()).style.top) +  1.2).toString() + "%"
+			if((parseFloat(document.getElementById("dropperItem" + (i).toString()).style.top)) > 85){
+				dropperActive[i] = 0
+			}
+			rect1 = document.getElementById("dropperItem" + (i).toString()).getBoundingClientRect()	
+			rect2 = document.getElementById("wordleplayerdoll").getBoundingClientRect()
+			if(!(
+				rect1.top > rect2.bottom ||
+				rect1.right < rect2.left ||
+				rect1.bottom < rect2.top ||
+				rect1.left > rect2.right
+			  )){
+				cardleft -= 1;
+				dropperActive[i] = 0
+			  }
+		}
+		else{
+			dropperItem[i].hide()
+			
+		}
 	}
 
 }
@@ -820,9 +881,11 @@ function GameStart(){
 
 	for(var i=0;i<8;i++){
 		dropperItem[i] = createImg("image/smallgamed" + (i+1).toString() + ".png","png")
-		dropperItem[i].style("width","8%")
-		dropperItem[i].style("height","8%")
+		dropperItem[i].style("width","10%")
+		dropperItem[i].style("height","12%")
 		dropperItem[i].style("position","absolute")
+		dropperItem[i].style("z-index","1001")
+		dropperItem[i].attribute("id","dropperItem" + (i).toString())
 		dropperItem[i].hide()
 	}
 
@@ -858,6 +921,8 @@ function GameStart(){
 			cardboard[i][j].hide()
 		}
 	}
+
+	
 	
 	countdownter = createElement("h1")
 	countdownter.style("height","5%");
@@ -870,6 +935,18 @@ function GameStart(){
 	countdownter.style("position","absolute")
 	countdownter.style("zIndex","100000")
 	countdownter.hide()
+
+	dropscorer = createElement("h1")
+	dropscorer.style("height","5%");
+	dropscorer.style("width","10%");
+	dropscorer.style("left","85%");
+	dropscorer.style("top","5%");
+	dropscorer.style("textAlign","center")
+	dropscorer.style("background","rgba(255,255,255,0.5)");
+	dropscorer.style("color","black");
+	dropscorer.style("position","absolute")
+	dropscorer.style("zIndex","100000")
+	dropscorer.hide()
 
 	eventPOPdiv = createImg("image/game_bg.jpg","jpg");
 	eventPOPdiv.style("width","100%")
@@ -905,6 +982,7 @@ function GameStart(){
 	wordleplayerbg.style("zIndex","100000")
 	wordleplayerbg.hide()
 
+
 	wordleplayerdoll = createImg("image/character.png","png")
 	wordleplayerdoll.style("height","40%");
 	wordleplayerdoll.style("width","23%");
@@ -914,6 +992,7 @@ function GameStart(){
 	wordleplayerdoll.style("color","transparent");
 	wordleplayerdoll.style("position","absolute")
 	wordleplayerdoll.style("zIndex","100001")
+	wordleplayerdoll.attribute("id","wordleplayerdoll")
 	wordleplayerdoll.hide()
 
 	

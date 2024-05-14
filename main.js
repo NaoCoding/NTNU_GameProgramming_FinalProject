@@ -185,7 +185,7 @@ async function roll_the_dice(){
 		
 		if(t==20)clearInterval(q)
 
-		dice_result =  Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
+		dice_result =  Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1 // Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
 		dice_value_div.html("<br>"+dice_result.toString(),0)
 
 	}, 50);

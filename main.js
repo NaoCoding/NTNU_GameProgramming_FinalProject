@@ -474,7 +474,7 @@ async function roll_the_dice(){
 		game = (Math.floor(Math.random() * 3) + 1) //(Math.floor(Math.random() * 2) + 1)
 		if(game == 1)eventPOPword.html("小遊戲：Wordle<br>遊戲規則：在六次機會內找到隨機的長度為五的英文單字<br>綠色：正確字母正確位置<br>黃色：正確字母錯誤位置<br>灰色：無此字母或字母數量沒這麼多次",0)
 		else if(game == 2)eventPOPword.html("小遊戲：記憶翻牌<br>遊戲規則：在三十秒內透過記憶力點擊同樣圖案的<br>卡片即可消除卡片<br>",0)
-		else if(game == 3)eventPOPword.html("小遊戲：居酒屋接接樂<br>遊戲規則：在三十秒內接到25個以上的道具即成功<br>反之則失敗<br>",0)
+		else if(game == 3)eventPOPword.html("小遊戲：居酒屋接接樂<br>遊戲規則：在三十秒內接到25個以上的道具即成功<br>AD或左右方向鍵皆可操控人物<br>",0)
 
 		eventPOPword.show()
 		idleTime = 1;

@@ -76,7 +76,7 @@ function preload(){
 	questionQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/question.json")
 	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
 	wordleQuestion = loadStrings("https://raw.githubusercontent.com/tabatkins/wordle-list/main/words")
-
+	
 }
 //chance_fateQuestion.question[1][0]
 
@@ -119,6 +119,9 @@ function setup() {
 	wWidth = windowWidth / wWidth
 	wHeight = windowHeight / wHeight
 	FullScreen = fullscreen()
+	for(var i=0;i<wordleQuestion.length;i++){
+		wordleQuestion[i] = wordleQuestion[i].toLowerCase()
+	}
 	StartGameTitleCmd()
 	
 	

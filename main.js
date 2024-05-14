@@ -10,11 +10,14 @@ let setting_github
 let questiond1,questiond2,questiond3,questiond4
 let countdownter
 let wordleboard = [[],[],[],[],[],[]]
+let dropperItem = []
 let cardboard = [[],[],[],[],[],[]]
 cardopened = [[],[],[],[],[],[]]
 cardans = [[],[],[],[],[],[]]
 wordlewordArr = [[],[],[],[],[],[]]
 wordlecolorArr = [[],[],[],[],[],[]]
+dropperNext = 0
+dropperTick = 0
 idleTime = 0
 timeleft = 0
 cardleft = 0
@@ -41,6 +44,7 @@ let Game_movingdoll1,Game_movingdoll2,Game_movingdoll3,Game_movingdoll4
 let chance_fateQuestion, knowledgeQuestion, questionQuestion
 let wordleQuestion
 let wordleplayerbg,wordleplayerdoll,wordleQA
+
 
 CharacterID = [0,0,0,0]
 CharacterAmount = 0
@@ -75,7 +79,7 @@ function preload(){
 	knowledgeQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/knowledge.json")
 	questionQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/question.json")
 	chance_fateQuestion = loadJSON("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/change_fate.json")
-	wordleQuestion = loadStrings("https://raw.githubusercontent.com/tabatkins/wordle-list/main/words")
+	wordleQuestion = loadStrings("https://naocoding.github.io/NTNU_GameProgramming_FinalProject/question/wordle.txt")
 	
 }
 //chance_fateQuestion.question[1][0]
@@ -167,7 +171,7 @@ async function roll_the_dice(){
 		
 		if(t==20)clearInterval(q)
 
-		dice_result =  Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
+		dice_result =  3 // Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
 		dice_value_div.html("<br>"+dice_result.toString(),0)
 
 	}, 50);
@@ -454,10 +458,11 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
 		eventPOPword.style("top","25%")
-		game = (Math.floor(Math.random() * 2) + 1)//(Math.floor(Math.random() * 1) + 1)
+		game = 1 //(Math.floor(Math.random() * 2) + 1)
 		if(game == 1)eventPOPword.html("小遊戲：Wordle<br>遊戲規則：在六次機會內找到隨機的長度為五的英文單字<br>綠色：正確字母正確位置<br>黃色：正確字母錯誤位置<br>灰色：無此字母或字母數量沒這麼多次",0)
 		else if(game == 2)eventPOPword.html("小遊戲：記憶翻牌<br>遊戲規則：在三十秒內透過記憶力點擊同樣圖案的<br>卡片即可消除卡片<br>",0)
-		
+		else if(game == 3)eventPOPword.html("小遊戲：居酒屋接接樂<br>遊戲規則：在三十秒內接到20個以上的道具即成功<br>反之則失敗<br>",0)
+
 		eventPOPword.show()
 		idleTime = 1;
 		eventPOPdiv.removeAttribute("onclick")
@@ -661,6 +666,67 @@ async function roll_the_dice(){
 			}
 			
 		}
+		else if(game == 3){
+			timeleft = 30
+			cardleft = 20
+			dropperTick = 0
+			dropperNext = Math.floor(Math.random() * 8) + 1
+
+
+
+			while(timeleft > 0 && cardleft != 0){
+				await delay(0.033)
+				timeleft -= 0.033
+				dropperTick += 1
+				dropperGame()
+			}
+
+
+
+
+			if(cardleft == 0){
+				CharacterBeer[player_now-1] += 1;
+				eventPOPdiv.show()
+				eventPOPdiv.removeAttribute("src")
+				eventPOPdiv.attribute("src","image/settingbg.jpg")
+				eventPOPword.style("top","50%")
+				eventPOPword.html("遊戲勝利！",0)
+				eventPOPword.show()
+				await delay(0.35)
+				idleTime = 1;
+				eventPOPdiv.removeAttribute("onclick")
+				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+				var waitCount = 0
+				while(waitCount < 100 && idleTime != 0){
+					await delay(0.05)
+					waitCount += 1
+				}
+				eventPOPword.hide()
+				eventPOPdiv.hide()
+				idleTime = 0;
+			}
+			else{
+				CharacterBeer[player_now-1] += 1;
+				eventPOPdiv.show()
+				eventPOPdiv.removeAttribute("src")
+				eventPOPdiv.attribute("src","image/settingbg.jpg")
+				eventPOPword.style("top","50%")
+				eventPOPword.html("遊戲失敗！",0)
+				eventPOPword.show()
+				await delay(0.35)
+				idleTime = 1;
+				eventPOPdiv.removeAttribute("onclick")
+				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+				var waitCount = 0
+				while(waitCount < 100 && idleTime != 0){
+					await delay(0.05)
+					waitCount += 1
+				}
+				eventPOPword.hide()
+				eventPOPdiv.hide()
+				idleTime = 0;
+			}
+		}
 
 
 
@@ -760,6 +826,15 @@ async function cardclicked(i,j){
 
 }
 
+function dropperGame(){
+
+	if(DropperTick % 5 == 0){
+		dropperItem[dropperNext - 1].show()
+		dropperItem[dropperNext - 1].style("left",(10 + (Math.floor(Math.random() * 70) + 1)).toString() + "%")
+	}
+
+}
+
 function card_totalcount(a){
 	var total = 0
 	for(var i=0;i<6;i++){
@@ -838,6 +913,14 @@ function GameStart(){
  //rbyg
 	
 	diceCanClick = 1
+
+	for(var i=0;i<8;i++){
+		dropperItem[i] = createImg("image/smallgamed" + (i+1).toString() + ".png","png")
+		dropperItem[i].style("width","8%")
+		dropperItem[i].style("height","8%")
+		dropperItem[i].style("position","absolute")
+		dropperItem[i].hide()
+	}
 
 	for(var i=0;i<6;i++){
 		for(var j=0;j<5;j++){

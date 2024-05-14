@@ -122,7 +122,7 @@ function KeyPressedConl(e){
 		}
 		if(e.which == 39 || e.which == 68){
 			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
-			if(q+3 < 50) document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
+			if(q+3+parseFloat(document.getElementById("wordleplayerdoll").style.width) < 100) document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
 			document.getElementById("wordleplayerdoll").style.transform = "rotateY(180deg)"
 
 		}
@@ -144,7 +144,7 @@ function setup() {
 	
 	
 }
-
+ 
 
 
 async function roll_the_dice(){

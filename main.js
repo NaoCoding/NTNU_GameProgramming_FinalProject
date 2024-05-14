@@ -8,10 +8,17 @@ let AuthorPageDiv,settingDiv
 let WindowSizeSlider 
 let setting_github
 let questiond1,questiond2,questiond3,questiond4
+let countdownter
 let wordleboard = [[],[],[],[],[],[]]
+let cardboard = [[],[],[],[],[],[]]
+cardopened = [[],[],[],[],[],[]]
+cardans = [[],[],[],[],[],[]]
 wordlewordArr = [[],[],[],[],[],[]]
 wordlecolorArr = [[],[],[],[],[],[]]
 idleTime = 0
+timeleft = 0
+cardleft = 0
+cardclick = [0,0,0]
 wordlecountnow = 0
 wordleanswer = ""
 wordleGuessed = 0
@@ -74,7 +81,7 @@ function preload(){
 //chance_fateQuestion.question[1][0]
 
 function KeyPressedConl(e){
-	console.log(e.which)
+	//console.log(e.which)
 	if(gamenow == -1){}
 	else if(gamenow == 1){
 		if(e.which >= 65 && e.which <= 90){
@@ -157,7 +164,7 @@ async function roll_the_dice(){
 		
 		if(t==20)clearInterval(q)
 
-		dice_result = Math.floor(Math.random() * 12) + 1 // 
+		dice_result =  Math.floor(Math.random() * 12) + 1 // Math.floor(Math.random() * 12) + 1 //3 
 		dice_value_div.html("<br>"+dice_result.toString(),0)
 
 	}, 50);
@@ -444,8 +451,10 @@ async function roll_the_dice(){
 		eventPOPdiv.removeAttribute("src")
 		eventPOPdiv.attribute("src","image/settingbg.jpg")
 		eventPOPword.style("top","25%")
-		game = (Math.floor(Math.random() * 1) + 1)
+		game = (Math.floor(Math.random() * 2) + 1)//(Math.floor(Math.random() * 1) + 1)
 		if(game == 1)eventPOPword.html("小遊戲：Wordle<br>遊戲規則：在六次機會內找到隨機的長度為五的英文單字<br>綠色：正確字母正確位置<br>黃色：正確字母錯誤位置<br>灰色：無此字母或字母數量沒這麼多次",0)
+		else if(game == 2)eventPOPword.html("小遊戲：記憶翻牌<br>遊戲規則：在三十秒內透過記憶力點擊同樣圖案的<br>卡片即可消除卡片<br>",0)
+		
 		eventPOPword.show()
 		idleTime = 1;
 		eventPOPdiv.removeAttribute("onclick")
@@ -468,6 +477,14 @@ async function roll_the_dice(){
 			wordleplayerbg.show()
 			wordleplayerdoll.show()
 			wordleQA.show()
+			wordleplayerbg.style("height","42%");
+			wordleplayerbg.style("width","28%");
+			wordleplayerbg.style("left","66%");
+			wordleplayerbg.style("top","3%");
+			wordleplayerdoll.style("height","40%");
+			wordleplayerdoll.style("width","23%");
+			wordleplayerdoll.style("left","75%");
+			wordleplayerdoll.style("top","3%");
 			wordleplayerdoll.removeAttribute("src")
 			wordleplayerdoll.attribute("src","image/character0"+(CharacterID[player_now-1]).toString()+".png")
 			wordleplayerbg.removeAttribute("src")
@@ -539,6 +556,107 @@ async function roll_the_dice(){
 				eventPOPdiv.hide()
 				idleTime = 0;
 			}
+		}
+
+		else if(game == 2){
+			eventPOPdiv.attribute("src","image/smallgamebg.jpg")
+			idleTime = 1;
+			var waitCount = 0
+			eventPOPdiv.removeAttribute("onclick")
+			timeleft = 45
+			cardopened = [[],[],[],[],[],[]]
+			cardans = [[],[],[],[],[],[]]
+			cardclick = [0,0,0]
+			for(var i=0;i<6;i++){
+				for(var j=0;j<5;j++){
+					cardopened[i][j] = 0
+					cardans[i][j] = (Math.floor(Math.random() * 8) + 1)
+				}
+			}
+			for(var i=0;i<6;i++){
+				for(var j=0;j<5;j++){
+					while(card_totalcount(cardans[i][j])%2 == 1){
+						cardans[i][j] = (Math.floor(Math.random() * 8) + 1)
+					}
+				}
+			}
+			cardleft = 30
+			wordleplayerbg.show()
+			countdownter.show()
+			wordleplayerdoll.show()
+			wordleplayerbg.style("height","42%");
+			wordleplayerbg.style("width","28%");
+			wordleplayerbg.style("left","66%");
+			wordleplayerbg.style("top","30%");
+			wordleplayerdoll.style("height","40%");
+			wordleplayerdoll.style("width","23%");
+			wordleplayerdoll.style("left","75%");
+			wordleplayerdoll.style("top","30%");
+			wordleplayerdoll.removeAttribute("src")
+			wordleplayerdoll.attribute("src","image/character0"+(CharacterID[player_now-1]).toString()+".png")
+			wordleplayerbg.removeAttribute("src")
+			wordleplayerbg.attribute("src","image/wordled"+(player_now).toString()+".png")
+			for(var i=0;i<6;i++){
+				for(var j=0;j<5;j++){
+					cardboard[i][j].show()
+				}
+			}
+			while(timeleft > 0 && cardleft != 0){
+				await delay(0.033)
+				timeleft -= 0.033
+				updateCardStatus()
+			}
+			wordleplayerdoll.hide()
+			countdownter.hide()
+			wordleplayerbg.hide()
+			for(var i=0;i<6;i++){
+				for(var j=0;j<5;j++){
+					cardboard[i][j].hide()
+				}
+			}
+			if(cardleft > 0){
+				CharacterBeer[player_now-1] += 1;
+				eventPOPdiv.show()
+				eventPOPdiv.removeAttribute("src")
+				eventPOPdiv.attribute("src","image/settingbg.jpg")
+				eventPOPword.style("top","50%")
+				eventPOPword.html("遊戲失敗！",0)
+				eventPOPword.show()
+				await delay(0.35)
+				idleTime = 1;
+				eventPOPdiv.removeAttribute("onclick")
+				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+				var waitCount = 0
+				while(waitCount < 100 && idleTime != 0){
+					await delay(0.05)
+					waitCount += 1
+				}
+				eventPOPword.hide()
+				eventPOPdiv.hide()
+				idleTime = 0;
+			}
+			else{
+				CharacterBeer[player_now-1] += 1;
+				eventPOPdiv.show()
+				eventPOPdiv.removeAttribute("src")
+				eventPOPdiv.attribute("src","image/settingbg.jpg")
+				eventPOPword.style("top","50%")
+				eventPOPword.html("遊戲勝利！",0)
+				eventPOPword.show()
+				await delay(0.35)
+				idleTime = 1;
+				eventPOPdiv.removeAttribute("onclick")
+				eventPOPdiv.attribute("onclick","document.getElementById(\"eventPOPdiv\").style.display = \"None\";document.getElementById(\"eventPOPword\").style.display = \"None\";idleTime=0;")
+				var waitCount = 0
+				while(waitCount < 100 && idleTime != 0){
+					await delay(0.05)
+					waitCount += 1
+				}
+				eventPOPword.hide()
+				eventPOPdiv.hide()
+				idleTime = 0;
+			}
+			
 		}
 
 
@@ -613,6 +731,59 @@ async function roll_the_dice(){
 
 }
 
+async function cardclicked(i,j){
+
+	if(cardopened[i][j] != 0) return
+	cardopened[i][j] = 1
+	if(cardclick[2] == 0){
+		cardclick[0] = i
+		cardclick[1] = j
+		cardclick[2] = 1
+	}
+	else if(cardclick[2] == 1){
+		if(cardans[i][j] == cardans[cardclick[0]][cardclick[1]]){
+			cardleft -= 2
+			cardopened[i][j] = 2
+			cardopened[cardclick[0]][cardclick[1]] = 2
+		}
+		else{
+			await delay(0.5)
+			cardopened[i][j] = 0
+			cardopened[cardclick[0]][cardclick[1]] = 0
+		}
+		cardclick[2] = 0
+		
+	}
+
+}
+
+function card_totalcount(a){
+	var total = 0
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			if(cardans[i][j] == a){
+				total += 1
+			}
+		}
+	}
+	return total
+}
+
+function updateCardStatus(){
+
+	countdownter.html((Math.floor(timeleft)).toString())
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			if(cardopened[i][j] == 0){
+				cardboard[i][j].attribute("src","image/cardback.png")
+			}
+			else{
+				cardboard[i][j].attribute("src","image/card" + (cardans[i][j]).toString() + ".png")
+			}
+		}
+	}
+
+}
 
 function updateWordleBoard(){
 
@@ -681,7 +852,34 @@ function GameStart(){
 			wordleboard[i][j].hide()
 		}
 	}
+
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			cardboard[i][j] = createImg("image/card1.png")
+			cardboard[i][j].style("width","6.64%")
+			cardboard[i][j].style("height","12%")
+			cardboard[i][j].style("position","absolute")
+			cardboard[i][j].style("fontSize","24px")
+			cardboard[i][j].style("textAlign","center")
+			cardboard[i][j].style("left", (16 + 8 * i).toString()+"%")
+			cardboard[i][j].style("top",(13 + 15 * j).toString()+"%")
+			cardboard[i][j].attribute("onclick","cardclicked("+(i).toString()+","+(j).toString()+")")
+			cardboard[i][j].style("z-index","1001")
+			cardboard[i][j].hide()
+		}
+	}
 	
+	countdownter = createElement("h1")
+	countdownter.style("height","5%");
+	countdownter.style("width","10%");
+	countdownter.style("left","72%");
+	countdownter.style("top","5%");
+	countdownter.style("textAlign","center")
+	countdownter.style("background","rgba(255,255,255,0.5)");
+	countdownter.style("color","black");
+	countdownter.style("position","absolute")
+	countdownter.style("zIndex","100000")
+	countdownter.hide()
 
 	eventPOPdiv = createImg("image/game_bg.jpg","jpg");
 	eventPOPdiv.style("width","100%")
@@ -727,6 +925,8 @@ function GameStart(){
 	wordleplayerdoll.style("position","absolute")
 	wordleplayerdoll.style("zIndex","100001")
 	wordleplayerdoll.hide()
+
+	
 	
 	eventPOPword = createElement("h1")
 	eventPOPword.attribute("id","eventPOPword")

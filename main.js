@@ -117,13 +117,14 @@ function KeyPressedConl(e){
 	else if(gamenow == 3){
 		if(e.which == 37 || e.which == 65){
 			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
-			document.getElementById("wordleplayerdoll").style.left = (q - 3).toString() + "%"
+			if(q - 3 > 0)document.getElementById("wordleplayerdoll").style.left = (q - 3).toString() + "%" 
 			document.getElementById("wordleplayerdoll").style.transform = ""
 		}
 		if(e.which == 39 || e.which == 68){
 			var q = parseFloat(document.getElementById("wordleplayerdoll").style.left)
-			document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
+			if(q+3 < 50) document.getElementById("wordleplayerdoll").style.left = (q + 3).toString() + "%"
 			document.getElementById("wordleplayerdoll").style.transform = "rotateY(180deg)"
+
 		}
 	}
 }

@@ -800,31 +800,7 @@ async function roll_the_dice(){
 
 }
 
-async function cardclicked(i,j){
 
-	if(cardopened[i][j] != 0) return
-	cardopened[i][j] = 1
-	if(cardclick[2] == 0){
-		cardclick[0] = i
-		cardclick[1] = j
-		cardclick[2] = 1
-	}
-	else if(cardclick[2] == 1){
-		if(cardans[i][j] == cardans[cardclick[0]][cardclick[1]]){
-			cardleft -= 2
-			cardopened[i][j] = 2
-			cardopened[cardclick[0]][cardclick[1]] = 2
-		}
-		else{
-			await delay(0.5)
-			cardopened[i][j] = 0
-			cardopened[cardclick[0]][cardclick[1]] = 0
-		}
-		cardclick[2] = 0
-		
-	}
-
-}
 
 function dropperGame(){
 
@@ -835,79 +811,7 @@ function dropperGame(){
 
 }
 
-function card_totalcount(a){
-	var total = 0
-	for(var i=0;i<6;i++){
-		for(var j=0;j<5;j++){
-			if(cardans[i][j] == a){
-				total += 1
-			}
-		}
-	}
-	return total
-}
 
-function updateCardStatus(){
-
-	countdownter.html((Math.floor(timeleft)).toString())
-	for(var i=0;i<6;i++){
-		for(var j=0;j<5;j++){
-			if(cardopened[i][j] == 0){
-				cardboard[i][j].attribute("src","image/cardback.png")
-			}
-			else{
-				cardboard[i][j].attribute("src","image/card" + (cardans[i][j]).toString() + ".png")
-			}
-		}
-	}
-
-}
-
-function updateWordleBoard(){
-
-	for(var i=0;i<6;i++){
-		for(var j=0;j<5;j++){
-			if(wordlewordArr[i][j] != 0 && wordlewordArr[i][j] != undefined){
-				wordleboard[i][j].html("<br><br><b>" + wordlewordArr[i][j] + "<b>")
-			}
-			else{
-				wordleboard[i][j].html("")
-			}
-		}
-	}	
-	for(var i=0;i<wordleGuessed;i++){
-		counter = [0,0,0,0,0]
-		for(var j=0;j<5;j++){
-			if(wordlewordArr[i][j] == wordleanswer[j]){
-				wordleboard[i][j].style("background","rgba(0,255,0,0.5)")
-				counter[j] = 1
-			}
-			else if((wordleanswer.split("")).find((e) => e == wordlewordArr[i][j]) == undefined){
-				wordleboard[i][j].style("background","rgba(118,118,118,0.5)")
-				counter[j] = -1
-			}
-		}
-
-		for(var j=0;j<5;j++){
-			if(counter[j]!=0)continue
-			count = 0
-			bcount = 0
-			for(var k=0;k<j;k++){
-				if(wordlewordArr[i][k] == wordlewordArr[i][j] && counter[k] == 0) count ++
-			}
-			for(var k=0;k<5;k++){
-				if(wordleanswer[k] == wordlewordArr[i][j] && counter[k] != 1) bcount ++
-			}
-			if(bcount > count)wordleboard[i][j].style("background","rgba(255,255,0,0.5)")
-			else wordleboard[i][j].style("background","rgba(118,118,118,0.5)")
-		}
-		
-	}
-	for(var i = wordleGuessed ; i  < 6; i++){
-		for(var j=0;j<5;j++)wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
-	}
-
-}
 
 function GameStart(){
  //rbyg
@@ -2097,6 +2001,106 @@ function SettingButtonInitialize(){
 	SettingButton.mouseClicked(SettingPageCmd)
 	
 	
+}
+
+async function cardclicked(i,j){
+
+	if(cardopened[i][j] != 0) return
+	cardopened[i][j] = 1
+	if(cardclick[2] == 0){
+		cardclick[0] = i
+		cardclick[1] = j
+		cardclick[2] = 1
+	}
+	else if(cardclick[2] == 1){
+		if(cardans[i][j] == cardans[cardclick[0]][cardclick[1]]){
+			cardleft -= 2
+			cardopened[i][j] = 2
+			cardopened[cardclick[0]][cardclick[1]] = 2
+		}
+		else{
+			await delay(0.5)
+			cardopened[i][j] = 0
+			cardopened[cardclick[0]][cardclick[1]] = 0
+		}
+		cardclick[2] = 0
+		
+	}
+
+}
+
+function card_totalcount(a){
+	var total = 0
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			if(cardans[i][j] == a){
+				total += 1
+			}
+		}
+	}
+	return total
+}
+
+function updateCardStatus(){
+
+	countdownter.html((Math.floor(timeleft)).toString())
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			if(cardopened[i][j] == 0){
+				cardboard[i][j].attribute("src","image/cardback.png")
+			}
+			else{
+				cardboard[i][j].attribute("src","image/card" + (cardans[i][j]).toString() + ".png")
+			}
+		}
+	}
+
+}
+
+function updateWordleBoard(){
+
+	for(var i=0;i<6;i++){
+		for(var j=0;j<5;j++){
+			if(wordlewordArr[i][j] != 0 && wordlewordArr[i][j] != undefined){
+				wordleboard[i][j].html("<br><br><b>" + wordlewordArr[i][j] + "<b>")
+			}
+			else{
+				wordleboard[i][j].html("")
+			}
+		}
+	}	
+	for(var i=0;i<wordleGuessed;i++){
+		counter = [0,0,0,0,0]
+		for(var j=0;j<5;j++){
+			if(wordlewordArr[i][j] == wordleanswer[j]){
+				wordleboard[i][j].style("background","rgba(0,255,0,0.5)")
+				counter[j] = 1
+			}
+			else if((wordleanswer.split("")).find((e) => e == wordlewordArr[i][j]) == undefined){
+				wordleboard[i][j].style("background","rgba(118,118,118,0.5)")
+				counter[j] = -1
+			}
+		}
+
+		for(var j=0;j<5;j++){
+			if(counter[j]!=0)continue
+			count = 0
+			bcount = 0
+			for(var k=0;k<j;k++){
+				if(wordlewordArr[i][k] == wordlewordArr[i][j] && counter[k] == 0) count ++
+			}
+			for(var k=0;k<5;k++){
+				if(wordleanswer[k] == wordlewordArr[i][j] && counter[k] != 1) bcount ++
+			}
+			if(bcount > count)wordleboard[i][j].style("background","rgba(255,255,0,0.5)")
+			else wordleboard[i][j].style("background","rgba(118,118,118,0.5)")
+		}
+		
+	}
+	for(var i = wordleGuessed ; i  < 6; i++){
+		for(var j=0;j<5;j++)wordleboard[i][j].style("background","rgba(255,255,255,0.5)")
+	}
+
 }
 
 document.onkeydown = KeyPressedConl

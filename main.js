@@ -120,7 +120,7 @@ function setup() {
 	wHeight = windowHeight / wHeight
 	FullScreen = fullscreen()
 	for(var i=0;i<wordleQuestion.length;i++){
-		wordleQuestion[i] = wordleQuestion[i].toLowerCase()
+		wordleQuestion[i] = wordleQuestion[i].toLowerCase()	
 	}
 	StartGameTitleCmd()
 	
@@ -1670,8 +1670,6 @@ function CharacterSelectButtonshowall(){
 	CharacterChoosenLabelbg03.show()
 	CharacterChoosenLabelbg04.show()
 
-
-	Character08SelectButton.hide()
 
 }
 

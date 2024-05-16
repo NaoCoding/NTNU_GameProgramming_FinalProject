@@ -1,8 +1,5 @@
 ## Game Programming Final Project
 
-* The course isn't ended
-* Therefore, this repo may still update frequently
-* The game may be imcomplete before the sememster ended
 * No Commercial Use 
 
 [Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/) <br>

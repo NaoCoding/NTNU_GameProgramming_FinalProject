@@ -92,6 +92,71 @@ function preload(){
 //chance_fateQuestion.question[1][0]
 
 
+function RankGame(){
+
+	winner = 0
+	for(var i=0;i<4;i++){
+		if(CharacterRound[i] == 2){
+			winner = i
+			break
+		}
+	}
+
+	secondWinner = [0,-1]
+	for(var i=0;i<4;i++){
+		if(i == winner)continue
+		if(secondWinner[1] < CharacterRound[i] * 44 + CharacterPlace[i]){
+			secondWinner[0] = i
+			secondWinner[1] = CharacterRound[i] * 44 + CharacterPlace[i]
+		}
+	}
+
+	thirdWinner = [0,-1,0]
+	for(var i=0;i<4;i++){
+		if(i==winner || i == secondWinner[0])continue;
+		if(thirdWinner[1] < CharacterRound[i] * 44 + CharacterPlace[i]){
+			thirdWinner[0] = i
+			thirdWinner[1] = CharacterRound[i] * 44 + CharacterPlace[i]
+		}
+		else{
+			thirdWinner[2] = i
+			break
+		}
+	}
+
+	return [winner,secondWinner[0] , thirdWinner[0] , thirdWinner[2]]
+
+}
+
+function game_over(){
+
+	resultbg = createImg("image/resultbg.jpg","result")
+	resultbg.style("position:absolute;top:0px;left:0px;width:100%;height:100%;")
+	resultbg.style("zIndex:10000000")
+	resultbg.show()
+
+	var p = RankGame()
+
+	resultMan = [0,0,0,0]
+	resultBG = [0,0,0,0]
+
+	for(var i=0;i<4;i++){
+		resultMan[i] = createImg("image/character0"+(CharacterID[p[i]]).toString()+".png","png")
+		resultMan[i].style("position:absolute;zIndex:10000002")
+		resultMan[i].style("top:"+(5+[0,10,18,23][i]).toString()+"%")
+		resultMan[i].style("left:"+(15+i*15).toString()+"%")
+		resultMan[i].style("height:45%;width:23%")
+		resultMan[i].show()
+		resultBG[i] = createImg("image/result"+["red","blue","yellow","green"][p[i]]+".png","png")
+		resultBG[i].style("position:absolute;zIndex:10000001")
+		resultBG[i].style("top:"+(13+[0,10,18,23][i]).toString()+"%")
+		resultBG[i].style("left:"+(19+i*15).toString()+"%")
+		resultBG[i].style("height:30%;width:14%")
+		resultBG[i].show()
+	}
+	
+
+}
 
 
 function setup() {
@@ -161,7 +226,10 @@ async function roll_the_dice(){
 		if(CharacterPlace[player_now-1] > 43){
 			CharacterPlace[player_now-1] = 0
 			CharacterRound[player_now-1] += 1
-			if(CharacterRound[player_now-1] == 2) return;
+			if(CharacterRound[player_now-1] == 2){
+				game_over();
+				return;
+			}
 		}
 		update_place()
 		dice_result -= 1

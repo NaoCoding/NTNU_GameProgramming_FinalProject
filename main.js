@@ -154,6 +154,14 @@ function game_over(){
 		resultBG[i].style("height:30%;width:14%")
 		resultBG[i].show()
 	}
+	if(player_count < 3){
+		resultMan[2].hide()
+		resultBG[2].hide()
+	}
+	if(player_count < 4){
+		resultMan[3].hide()
+		resultBG[3].hide()
+	}
 	
 
 }

@@ -27,7 +27,7 @@ function GameBGM(){
 function chooseBGM(){
 
     document.getElementById("ChooseBG").volume = 0.5
-    document.getElementById("ChooseBG").currentTime = 0
+    document.getElementById("ChooseBG").currentTime = 2
     document.getElementById("ChooseBG").play();
     document.getElementById("ChooseBG").loop = "True"
 }

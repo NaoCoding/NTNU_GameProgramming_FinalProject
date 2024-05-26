@@ -130,6 +130,8 @@ function RankGame(){
 
 function game_over(){
 
+	document.getElementById("GameBG").pause();
+	chooseBGM()
 	resultbg = createImg("image/resultbg.jpg","result")
 	resultbg.style("position:absolute;top:0px;left:0px;width:100%;height:100%;")
 	resultbg.style("zIndex:10000000")
@@ -178,6 +180,7 @@ function setup() {
 		wordleQuestion[i] = wordleQuestion[i].toLowerCase()	
 	}
 	StartGameTitleCmd()
+	BtnSuccess_SoundSetup()
 	
 	
 }
@@ -975,6 +978,8 @@ function GameStart(){
  //rbyg
 	
 	diceCanClick = 1
+	GameBGM()
+	document.getElementById("ChooseBG").pause();
 
 	for(var i=0;i<10;i++){
 		taikobb[i] = createImg("image/taikod1.png","png")
@@ -1937,6 +1942,7 @@ function AuthorPageCmd(){
 	LeaveStartGameMenuCmd()
 	AuthorPageDiv.show()
 	BackToMenuButton.show()
+	buttonClickBGM()
 
 	
 	
@@ -1988,11 +1994,13 @@ function BackToMenuCmd(){
 	SettingButton.show()
 	BackToMenuButton.hide()
 	setting_github.hide()
+	buttonClickBGM()
 	
 }
 
 function SettingPageCmd(){
 	
+	buttonClickBGM()
 	BackToMenuButton.show()
 	setting_github.show()
 	LeaveStartGameMenuCmd()
@@ -2008,8 +2016,8 @@ function StartGameCmd(){
 	SettingButton.hide()
 	BackToMenuButton.hide()
 	setting_github.hide()
-
-
+	chooseBGM()
+	buttonClickBGM()
 	GameSettingCmd()
 	
 	
@@ -2025,6 +2033,7 @@ function GameSettingCmd(){
 	BackToMenuButton.hide()
 
 
+
 }
 
 function GameSettingDoneCmd(){
@@ -2035,6 +2044,7 @@ function GameSettingDoneCmd(){
 	CharacterSelectBackButton.hide()
 	BackToMenuButton.hide()
 	GameStart()
+	buttonClickBGM()
 }
 
 
@@ -2099,6 +2109,7 @@ function setting_githubINI(){
 	setting_github.hide()
 }
 function redirectToGithub(){
+	buttonClickBGM()
 	window.open("https://github.com/NaoCoding/NTNU_GameProgramming_FinalProject",'')
 }
 

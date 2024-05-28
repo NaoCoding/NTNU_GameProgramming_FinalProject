@@ -116,9 +116,9 @@ function RankGame(){
 	thirdWinner = [0,-1,0]
 	for(var i=0;i<4;i++){
 		if(i==winner || i == secondWinner[0])continue;
-		if(thirdWinner[1] > ChracterBeer[i] || thirdWinner[1] == -1){
+		if(thirdWinner[1] > CharacterBeer[i] || thirdWinner[1] == -1){
 			thirdWinner[0] = i
-			thirdWinner[1] = ChracterBeer[i]
+			thirdWinner[1] = CharacterBeer[i]
 		}
 		else{
 			thirdWinner[2] = i

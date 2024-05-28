@@ -96,27 +96,29 @@ function RankGame(){
 
 	winner = 0
 	for(var i=0;i<4;i++){
-		if(CharacterRound[i] == 2){
+		if(CharacterBeer[i] < CharacterBeer[winner]){
 			winner = i
-			break
 		}
 	}
 
 	secondWinner = [0,-1]
 	for(var i=0;i<4;i++){
 		if(i == winner)continue
-		if(secondWinner[1] < CharacterRound[i] * 44 + CharacterPlace[i]){
-			secondWinner[0] = i
-			secondWinner[1] = CharacterRound[i] * 44 + CharacterPlace[i]
+		if(secondWinner[1] == -1)secondWinner[0] = i;
+		else{
+			if(CharacterBeer[i] < secondWinner[1]){
+				secondWinner[0] = i
+				secondWinner[1] = CharacterBeer[i]
+			}
 		}
 	}
 
 	thirdWinner = [0,-1,0]
 	for(var i=0;i<4;i++){
 		if(i==winner || i == secondWinner[0])continue;
-		if(thirdWinner[1] < CharacterRound[i] * 44 + CharacterPlace[i]){
+		if(thirdWinner[1] > ChracterBeer[i] || thirdWinner[1] == -1){
 			thirdWinner[0] = i
-			thirdWinner[1] = CharacterRound[i] * 44 + CharacterPlace[i]
+			thirdWinner[1] = ChracterBeer[i]
 		}
 		else{
 			thirdWinner[2] = i

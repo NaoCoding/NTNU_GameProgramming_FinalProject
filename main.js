@@ -476,7 +476,7 @@ async function roll_the_dice(){
 		}
 		eventPOPword.hide()
 		eventPOPdiv.hide()
-		idleTime = 0;
+		idleTime = 0; 
 		CharacterPlace[player_now-1] = 22
 		update_place()
 		await delay(0.6)

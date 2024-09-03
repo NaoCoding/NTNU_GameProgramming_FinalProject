@@ -2,7 +2,7 @@
 
 * No Commercial Use 
 
-[Online Game](https://naocoding.github.io/NTNU_GameProgramming_FinalProject/) <br>
+[Online Game](https://github.andy-lu.dev/NTNU_GameProgramming_FinalProject/) <br>
 
 
 ### Overview

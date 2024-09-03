@@ -1,7 +1,7 @@
 let scene = 0
 let StartGameButton
 let SettingButton,BackToMenuButton
-let beerd1,beerd2,beerd3,beerd4
+let beerd1,beerd2,beerd3,beerd4 
 let head1,head2,head3,head4
 let AuthorButton
 let AuthorPageDiv,settingDiv

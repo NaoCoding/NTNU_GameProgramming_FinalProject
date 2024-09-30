@@ -34,7 +34,6 @@ Orange : Quiz
 (The color may be different from the usual game, however, the setting remain the same)
 ```
 
-![image](https://github.com/NaoCoding/NTNU_GameProgramming_FinalProject/assets/86964895/f94387dd-8f93-438f-93ea-8634c1501158)
 
 
 ### Contributors

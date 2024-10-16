@@ -83,10 +83,10 @@ player_now = 1
 
 function preload(){
 
-	knowledgeQuestion = loadJSON("https://github.andy-lu.dev/NTNU_GameProgramming_FinalProject/question/knowledge.json")
-	questionQuestion = loadJSON("https://github.andy-lu.dev/NTNU_GameProgramming_FinalProject/question/question.json")
-	chance_fateQuestion = loadJSON("https://github.andy-lu.dev/NTNU_GameProgramming_FinalProject/question/change_fate.json")
-	wordleQuestion = loadStrings("https://github.andy-lu.dev/NTNU_GameProgramming_FinalProject/question/wordle.txt")
+	knowledgeQuestion = loadJSON("./question/knowledge.json")
+	questionQuestion = loadJSON("./question/question.json")
+	chance_fateQuestion = loadJSON("./question/change_fate.json")
+	wordleQuestion = loadStrings("./question/wordle.txt")
 	
 }
 //chance_fateQuestion.question[1][0]
